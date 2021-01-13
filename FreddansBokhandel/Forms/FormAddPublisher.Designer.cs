@@ -56,7 +56,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "Lägg till";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.buttonAddPublisher_Click);
             // 
             // textBoxName
             // 
@@ -147,7 +147,9 @@
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxAddress);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormAddPublisher";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lägg till förlag";

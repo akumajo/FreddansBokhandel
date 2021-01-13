@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace FreddansBokhandel
@@ -20,10 +21,37 @@ namespace FreddansBokhandel
             numberOfEmployees = _numberOfEmployees;
         }
 
-        private void FormAddEmployee_Load(object sender, EventArgs e)
+        private bool CheckIfEmployeeCanBeAdded()
         {
-            PopulateRoleComboBox();
-            PopulateStoreComboBox();
+            Regex reg = new Regex("^[0-9]+$");
+
+            if (textBoxSurName.Text.Trim() == "") { return false; }
+            if (textBoxLastName.Text.Trim() == "") { return false; }
+            if (dateTimePicker1.Value == null) { return false; }
+            if (textBoxAddress.Text.Trim() == "") { return false; }
+            if (textBoxPostalNo.Text.Trim() == "") { return false; }
+            if (textBoxPostAddress.Text.Trim() == "") { return false; }
+            if (textBoxEmail.Text.Trim() == "") { return false; }
+            if (textBoxTelephone.Text.Trim() == "" || reg.IsMatch(textBoxTelephone.Text) == false) { return false; }
+            if (comboBoxRole.SelectedItem == null) { return false; }
+            if (comboBoxStores.SelectedItem == null) { return false; }
+            if (EmailIsValid(textBoxEmail.Text.Trim()) == false) { return false; }
+
+            return true;
+        }
+
+        private bool EmailIsValid(string email)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(email);
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
 
         private void PopulateRoleComboBox()
@@ -47,47 +75,13 @@ namespace FreddansBokhandel
             }
         }
 
-        private bool CheckIfEmployeeCanBeAdded()
-        {
-            if (textBoxSurName.Text.Trim() == "") { return false; }
-            if (textBoxLastName.Text.Trim() == "") { return false; }
-            if (dateTimePicker1.Value == null) { return false; }
-            if (textBoxAddress.Text.Trim() == "") { return false; }
-            if (textBoxPostalNo.Text.Trim() == "") { return false; }
-            if (textBoxPostAddress.Text.Trim() == "") { return false; }
-            if (textBoxEmail.Text.Trim() == "") { return false; }
-            if (textBoxTelephone.Text.Trim() == "") { return false; }
-            if (comboBoxRole.SelectedItem == null) { return false; }
-            if (comboBoxStores.SelectedItem == null) { return false; }
-            if (EmailIsValid(textBoxEmail.Text.Trim()) == false) { return false; }
-
-            return true;
-        }
-
-        private bool EmailIsValid(string email)
-        {
-            try
-            {
-                MailAddress m = new MailAddress(email);
-
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AddNewEmployee();
-        }
-
         private void AddNewEmployee()
         {
+
             var store = comboBoxStores.SelectedItem as Butiker;
 
-            if (CheckIfEmployeeCanBeAdded() == false) { MessageBox.Show("Ett eller flera fält är tomma. Fyll i och försök igen."); return; }
+            if (CheckIfEmployeeCanBeAdded() == false) { MessageBox.Show("Ett eller flera fält är tomma eller i fel format. Försök igen."); return; }
+
 
             using (var db = new FreddansBokhandelContext())
             {
@@ -116,17 +110,15 @@ namespace FreddansBokhandel
             }
         }
 
-        private void textBoxTelephone_KeyPress(object sender, KeyPressEventArgs e)
+        private void FormAddEmployee_Load(object sender, EventArgs e)
         {
-            if (e.KeyChar != '-')
-            {
-                if (e.KeyChar != '\b')
-                {
-                    e.Handled = !char.IsNumber(e.KeyChar);
-                }
-            }
+            PopulateRoleComboBox();
+            PopulateStoreComboBox();
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AddNewEmployee();
+        }
     }
 }

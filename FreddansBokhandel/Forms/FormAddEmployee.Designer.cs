@@ -201,7 +201,6 @@
             this.textBoxTelephone.Name = "textBoxTelephone";
             this.textBoxTelephone.Size = new System.Drawing.Size(204, 23);
             this.textBoxTelephone.TabIndex = 7;
-            this.textBoxTelephone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTelephone_KeyPress);
             // 
             // label9
             // 
@@ -274,8 +273,11 @@
             this.Controls.Add(this.textBoxAddress);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxLastName);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormAddEmployee";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lägg till anställd";
             this.Load += new System.EventHandler(this.FormAddEmployee_Load);

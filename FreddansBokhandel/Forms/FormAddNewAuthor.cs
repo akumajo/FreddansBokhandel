@@ -14,9 +14,16 @@ namespace FreddansBokhandel
             authors = _authors;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private DateTime? CheckAuthorBirthday()
         {
-            AddAuthor();
+            if (checkBoxUnknownBirthDate.Checked)
+            {
+                return null;
+            }
+            else
+            {
+                return dateTimePicker1.Value;
+            }
         }
 
         private bool DoesAuthorExists()
@@ -29,18 +36,6 @@ namespace FreddansBokhandel
                 }
             }
             return false;
-        }
-
-        private DateTime? CheckAuthorBirthday()
-        {
-            if (checkBoxUnknownBirthDate.Checked)
-            {
-                return null;
-            }
-            else
-            {
-                return dateTimePicker1.Value;
-            }
         }
 
         private void AddAuthor()
@@ -65,6 +60,11 @@ namespace FreddansBokhandel
                     Close();
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AddAuthor();
         }
     }
 }

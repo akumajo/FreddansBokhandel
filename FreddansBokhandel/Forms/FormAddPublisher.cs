@@ -17,11 +17,6 @@ namespace FreddansBokhandel
             publishers = _publishers;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AddPublishers();
-        }
-
         private bool DoesPublisherExists()
         {
             foreach (var publisher in publishers)
@@ -64,6 +59,11 @@ namespace FreddansBokhandel
                     Close();
                 }
             }
+        }
+
+        private void buttonAddPublisher_Click(object sender, EventArgs e)
+        {
+            AddPublishers();
         }
     }
 }

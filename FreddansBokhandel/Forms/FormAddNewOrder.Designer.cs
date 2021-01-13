@@ -59,7 +59,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.listBoxCart = new System.Windows.Forms.ListBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonResetCart = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -195,7 +195,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.listBoxCart);
             this.splitContainer2.Panel2.Controls.Add(this.button4);
-            this.splitContainer2.Panel2.Controls.Add(this.button3);
+            this.splitContainer2.Panel2.Controls.Add(this.buttonResetCart);
             this.splitContainer2.Size = new System.Drawing.Size(419, 443);
             this.splitContainer2.SplitterDistance = 225;
             this.splitContainer2.TabIndex = 0;
@@ -393,15 +393,15 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.buttonCreateOrder_Click);
             // 
-            // button3
+            // buttonResetCart
             // 
-            this.button3.Location = new System.Drawing.Point(3, 175);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(104, 34);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "Töm korgen";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonResetCart.Location = new System.Drawing.Point(3, 175);
+            this.buttonResetCart.Name = "buttonResetCart";
+            this.buttonResetCart.Size = new System.Drawing.Size(104, 34);
+            this.buttonResetCart.TabIndex = 11;
+            this.buttonResetCart.Text = "Töm korgen";
+            this.buttonResetCart.UseVisualStyleBackColor = true;
+            this.buttonResetCart.Click += new System.EventHandler(this.buttonResetCart_Click);
             // 
             // FormAddNewOrder
             // 
@@ -410,11 +410,14 @@
             this.ClientSize = new System.Drawing.Size(822, 443);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.button1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormAddNewOrder";
+            this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "NewOrder";
+            this.Text = "Skapa ny order";
             this.Load += new System.EventHandler(this.NewOrder_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -444,7 +447,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBoxBooks;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonResetCart;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label labelAmount;
         private System.Windows.Forms.Label label5;

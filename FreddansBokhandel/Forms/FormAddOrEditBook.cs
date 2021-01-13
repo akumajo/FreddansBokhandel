@@ -25,16 +25,12 @@ namespace FreddansBokhandel
             InitializeComponent();
             books = _books;
             selectedBook = _selectedBook;
-        }
-
-        private void AddBook_Load(object sender, EventArgs e)
-        {
-            PopulateComboboxes();
 
             if (selectedBook != null)
             {
-                InsertBookInfoFromSelectedBook();
+                this.Text = "Ändra bok";
             }
+
         }
 
         private void InsertBookInfoFromSelectedBook()
@@ -94,11 +90,6 @@ namespace FreddansBokhandel
                     comboBoxPublisher.Items.Add(publisher);
                 }
             }
-        }
-
-        private void buttonAddBook_Click(object sender, EventArgs e)
-        {
-            AddBookToDatabase();
         }
 
         private void AddBookToDatabase()
@@ -220,6 +211,21 @@ namespace FreddansBokhandel
                 return false;
             }
             return true;
+        }
+
+        private void AddBook_Load(object sender, EventArgs e)
+        {
+            PopulateComboboxes();
+
+            if (selectedBook != null)
+            {
+                InsertBookInfoFromSelectedBook();
+            }
+        }
+
+        private void buttonAddBook_Click(object sender, EventArgs e)
+        {
+            AddBookToDatabase();
         }
 
         private void buttonRemoveAuthor1_Click(object sender, EventArgs e)

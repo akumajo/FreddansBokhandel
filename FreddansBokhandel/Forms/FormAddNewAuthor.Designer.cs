@@ -33,7 +33,7 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this.textBoxSurName = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonAddAuthor = new System.Windows.Forms.Button();
             this.textBoxCountry = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxLastName = new System.Windows.Forms.TextBox();
@@ -82,15 +82,15 @@
             this.textBoxSurName.Size = new System.Drawing.Size(203, 23);
             this.textBoxSurName.TabIndex = 1;
             // 
-            // button1
+            // buttonAddAuthor
             // 
-            this.button1.Location = new System.Drawing.Point(484, 76);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 34);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Lägg till";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAddAuthor.Location = new System.Drawing.Point(484, 76);
+            this.buttonAddAuthor.Name = "buttonAddAuthor";
+            this.buttonAddAuthor.Size = new System.Drawing.Size(100, 34);
+            this.buttonAddAuthor.TabIndex = 6;
+            this.buttonAddAuthor.Text = "Lägg till";
+            this.buttonAddAuthor.UseVisualStyleBackColor = true;
+            this.buttonAddAuthor.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBoxCountry
             // 
@@ -134,14 +134,17 @@
             this.Controls.Add(this.textBoxLastName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxCountry);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonAddAuthor);
             this.Controls.Add(this.textBoxSurName);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.labelName);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormAddNewAuthor";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lägg till författare";
             this.ResumeLayout(false);
@@ -156,8 +159,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBoxSurName;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Button buttonAddAuthor;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxLastName;
         private System.Windows.Forms.CheckBox checkBoxUnknownBirthDate;

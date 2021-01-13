@@ -114,7 +114,7 @@
             this.buttonAddAuthor.TabIndex = 0;
             this.buttonAddAuthor.Text = "Lägg till";
             this.buttonAddAuthor.UseVisualStyleBackColor = true;
-            this.buttonAddAuthor.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAddAuthor.Click += new System.EventHandler(this.buttonAddAuthor_Click);
             // 
             // UserControlAuthors
             // 

@@ -24,18 +24,7 @@ namespace FreddansBokhandel
             form1.EnterOrdersTab += Form1_EnterOrdersTab;
         }
 
-        private void Form1_EnterOrdersTab(object sender, EventArgs e)
-        {
-            LoadFromDatabase();
-            PopulateTreeNodeOrders(orders);
-        }
-
-        private void Form1_LeaveOrdersTab(object sender, EventArgs e)
-        {
-            db.Dispose();
-        }
-
-        private void LoadFromDatabase()
+        private void LoadOrdersFromDatabase()
         {
             db = new FreddansBokhandelContext();
 
@@ -63,6 +52,24 @@ namespace FreddansBokhandel
             }
         }
 
+        private void PopulateDataGridView()
+        {
+            dataGridView2.Rows.Clear();
+            var orderDetails = treeViewOrders.SelectedNode.Tag as Ordrar;
+            int totalPris = 0;
+
+            foreach (var book in orderDetails.Orderhuvud)
+            {
+                int rowIndex = dataGridView2.Rows.Add();
+                dataGridView2.Rows[rowIndex].Cells["columnIsbn"].Value = book.Isbn;
+                dataGridView2.Rows[rowIndex].Cells["columnPris"].Value = book.Pris;
+                dataGridView2.Rows[rowIndex].Cells["columnKvantitet"].Value = book.Kvantitet;
+                dataGridView2.Rows[rowIndex].Cells["columnTitel"].Value = book.IsbnNavigation.Titel;
+
+                totalPris += book.Pris * book.Kvantitet;
+            }
+        }
+
         private void PopulateTreeNodeOrders(List<Ordrar> orders)
         {
             treeViewOrders.Nodes.Clear();
@@ -83,16 +90,6 @@ namespace FreddansBokhandel
                 orderDate.Text = $"{orderDate.Text} ({orderDate.Nodes.Count})";
                 treeViewOrders.Nodes.Add(orderDate);
             }
-        }
-
-        private void treeViewOrders_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            SelectingANode();
-        }
-
-        private void buttonSearch_Click(object sender, EventArgs e)
-        {
-            SearchOrders();
         }
 
         private void SearchOrders()
@@ -143,39 +140,53 @@ namespace FreddansBokhandel
             }
         }
 
-        private void PopulateDataGridView()
-        {
-            dataGridView2.Rows.Clear();
-            var bajs = treeViewOrders.SelectedNode.Tag as Ordrar;
-            int totalPris = 0;
-
-            foreach (var balance in bajs.Orderhuvud)
-            {
-                int rowIndex = dataGridView2.Rows.Add();
-                dataGridView2.Rows[rowIndex].Cells["columnIsbn"].Value = balance.Isbn;
-                dataGridView2.Rows[rowIndex].Cells["columnPris"].Value = balance.Pris;
-                dataGridView2.Rows[rowIndex].Cells["columnKvantitet"].Value = balance.Kvantitet;
-                dataGridView2.Rows[rowIndex].Cells["columnTitel"].Value = balance.IsbnNavigation.Titel;
-
-                totalPris += balance.Pris * balance.Kvantitet;
-            }
-        }
-
-        private void buttonCreateOrder_Click(object sender, EventArgs e)
+        private void CreateNewOrder()
         {
             FormAddNewOrder order = new FormAddNewOrder();
 
             order.ShowDialog();
-            LoadFromDatabase();
+            LoadOrdersFromDatabase();
+        }
+
+        private void RemoveSelectedOrder()
+        {
+            db.Remove(selectedOrder);
+            db.SaveChanges();
+            LoadOrdersFromDatabase();
+        }
+        
+        private void Form1_EnterOrdersTab(object sender, EventArgs e)
+        {
+            LoadOrdersFromDatabase();
+            PopulateTreeNodeOrders(orders);
+        }
+
+        private void Form1_LeaveOrdersTab(object sender, EventArgs e)
+        {
+            db.Dispose();
+        }
+
+        private void buttonCreateOrder_Click(object sender, EventArgs e)
+        {
+            CreateNewOrder();
             PopulateTreeNodeOrders(orders);
         }
 
         private void buttonRemoveOrder_Click(object sender, EventArgs e)
         {
-            db.Remove(selectedOrder);
-            db.SaveChanges();
-            LoadFromDatabase();
+            RemoveSelectedOrder();
             PopulateTreeNodeOrders(orders);
         }
+
+        private void treeViewOrders_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            SelectingANode();
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            SearchOrders();
+        }
+
     }
 }

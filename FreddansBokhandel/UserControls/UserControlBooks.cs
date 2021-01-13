@@ -24,19 +24,7 @@ namespace FreddansBokhandel
             form1.EnterBooksTab += Form1_EnterBooksTab;
         }
 
-        private void Form1_EnterBooksTab(object sender, EventArgs e)
-        {
-            LoadFromDatabase();
-            PopulateListBox();
-        }
-
-        private void Form1_LeaveTabPage(object sender, EventArgs e)
-        {
-            DisableButtons();
-            ClearBookInfo();
-            db.Dispose();
-        }
-        public void LoadFromDatabase()
+        private void LoadBooksFromDatabase()
         {
             db = new FreddansBokhandelContext();
             if (db.Database.CanConnect())
@@ -50,8 +38,13 @@ namespace FreddansBokhandel
                      .Include(o => o.Orderhuvud)
                      .ToList();
             }
+            else
+            {
+                MessageBox.Show("Kunde inte koppla upp mot databasen.");
+            }
         }
-        public void PopulateListBox()
+
+        private void PopulateListBox()
         {
             selectedBook = null;
             listBox1.Items.Clear();
@@ -62,16 +55,14 @@ namespace FreddansBokhandel
             }
         }
 
-        private void buttonAddBook_Click(object sender, EventArgs e)
+        private void AddNewBook()
         {
             selectedBook = null;
             var addBook = new FormAddOrEditBook(books, selectedBook);
             addBook.ShowDialog();
-            LoadFromDatabase();
-            PopulateListBox();
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void BookIsSelected()
         {
             selectedStoreRow = 0;
             selectedBook = listBox1.SelectedItem as Böcker;
@@ -143,13 +134,13 @@ namespace FreddansBokhandel
             dataGridViewOverview.CurrentCell = dataGridViewOverview[0, selectedStoreRow];
         }
 
-        private void buttonUpdateBook_Click(object sender, EventArgs e)
+        private void UpdateBook()
         {
             var updateBook = new FormAddOrEditBook(books, selectedBook);
             updateBook.ShowDialog();
         }
 
-        private void buttonAddBookToStock_Click(object sender, EventArgs e)
+        private void AddBookToStock()
         {
             selectedStoreRow = dataGridViewOverview.CurrentCell.RowIndex;
             var selectedStore = dataGridViewOverview[0, selectedStoreRow].Value as Butiker;
@@ -163,7 +154,7 @@ namespace FreddansBokhandel
             ShowStoreBalance(selectedBook);
         }
 
-        private void buttonFilterBooks_Click(object sender, EventArgs e)
+        private void FilterBooks()
         {
             string filter = textBoxFilter.Text;
             listBox1.Items.Clear();
@@ -186,7 +177,7 @@ namespace FreddansBokhandel
             }
         }
 
-        private void buttonDeleteBook_Click(object sender, EventArgs e)
+        private void DeleteBook()
         {
             DialogResult dr = MessageBox.Show("Vill du ta bort den här boken ur systemet?\nObservera att det inte går att ta bort böcker som redan har sålts.", "Ta bort bok", MessageBoxButtons.YesNo);
 
@@ -203,10 +194,55 @@ namespace FreddansBokhandel
                     MessageBox.Show($"Boken togs bort. {book.Isbn}");
                     db.Remove(book);
                     db.SaveChanges();
-                    LoadFromDatabase();
+                    LoadBooksFromDatabase();
                     PopulateListBox();
                 }
             }
+        }
+
+        private void buttonDeleteBook_Click(object sender, EventArgs e)
+        {
+            DeleteBook();
+        }
+
+        private void buttonFilterBooks_Click(object sender, EventArgs e)
+        {
+            FilterBooks();
+        }
+
+        private void buttonAddBookToStock_Click(object sender, EventArgs e)
+        {
+            AddBookToStock();
+        }
+
+        private void buttonUpdateBook_Click(object sender, EventArgs e)
+        {
+            UpdateBook();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BookIsSelected();
+        }
+
+        private void buttonAddBook_Click(object sender, EventArgs e)
+        {
+            AddNewBook();
+            LoadBooksFromDatabase();
+            PopulateListBox();
+        }
+
+        private void Form1_EnterBooksTab(object sender, EventArgs e)
+        {
+            LoadBooksFromDatabase();
+            PopulateListBox();
+        }
+
+        private void Form1_LeaveTabPage(object sender, EventArgs e)
+        {
+            DisableButtons();
+            ClearBookInfo();
+            db.Dispose();
         }
     }
 }
