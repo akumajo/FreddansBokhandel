@@ -7,56 +7,56 @@ namespace FreddansBokhandel
 {
     public partial class FreddansBokhandelContext
     {
-        public class AnställdaEntityTypeConfiguration : IEntityTypeConfiguration<Anställda>
+        public class EmployeeEntityTypeConfiguration : IEntityTypeConfiguration<Employee>
         {
-            public void Configure(EntityTypeBuilder<Anställda> builder)
+            public void Configure(EntityTypeBuilder<Employee> builder)
             {
                 builder.Property(e => e.Id)
                    .ValueGeneratedNever()
                    .HasColumnName("ID");
 
-                builder.Property(e => e.Adress)
+                builder.Property(e => e.Address)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                builder.Property(e => e.Anställningsdatum).HasColumnType("date");
+                builder.Property(e => e.HireDate).HasColumnType("date");
 
-                builder.Property(e => e.Efternamn)
+                builder.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 builder.Property(e => e.Email).HasMaxLength(100);
 
-                builder.Property(e => e.Födelsedatum).HasColumnType("date");
+                builder.Property(e => e.DateOfBirth).HasColumnType("date");
 
-                builder.Property(e => e.Förnamn)
+                builder.Property(e => e.FirstName)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                builder.Property(e => e.Postnummer)
+                builder.Property(e => e.ZipCode)
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                builder.Property(e => e.Postort)
+                builder.Property(e => e.PostalAdress)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                builder.Property(e => e.Roll)
+                builder.Property(e => e.Role)
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                builder.Property(e => e.Telefon)
+                builder.Property(e => e.Telephone)
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
-                builder.HasOne(d => d.Butiker)
-                    .WithMany(p => p.Anställda)
-                    .HasForeignKey(d => d.Butik)
+                builder.HasOne(d => d.Stores)
+                    .WithMany(p => p.Employees)
+                    .HasForeignKey(d => d.Store)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Anställda_Butiker");
             }

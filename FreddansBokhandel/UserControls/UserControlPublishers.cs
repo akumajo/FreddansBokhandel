@@ -12,7 +12,7 @@ namespace FreddansBokhandel
 {
     public partial class UserControlPublishers : UserControl
     {
-        List<Förlag> publishers;
+        List<Publisher> publishers;
 
         public UserControlPublishers()
         {
@@ -43,11 +43,11 @@ namespace FreddansBokhandel
             {
                 int rowIndex = dataGridViewPublishers.Rows.Add();
                 dataGridViewPublishers.Rows[rowIndex].Cells["ID"].Value = publisher.Id;
-                dataGridViewPublishers.Rows[rowIndex].Cells["Namn"].Value = publisher.Namn;
-                dataGridViewPublishers.Rows[rowIndex].Cells["Adress"].Value = publisher.Adress;
-                dataGridViewPublishers.Rows[rowIndex].Cells["Postnr"].Value = publisher.Postnummer;
-                dataGridViewPublishers.Rows[rowIndex].Cells["Postort"].Value = publisher.Postort;
-                dataGridViewPublishers.Rows[rowIndex].Cells["Land"].Value = publisher.Land;
+                dataGridViewPublishers.Rows[rowIndex].Cells["Namn"].Value = publisher.Name;
+                dataGridViewPublishers.Rows[rowIndex].Cells["Adress"].Value = publisher.Address;
+                dataGridViewPublishers.Rows[rowIndex].Cells["Postnr"].Value = publisher.ZipCode;
+                dataGridViewPublishers.Rows[rowIndex].Cells["Postort"].Value = publisher.PostalAddress;
+                dataGridViewPublishers.Rows[rowIndex].Cells["Land"].Value = publisher.Country;
             }
         }
 

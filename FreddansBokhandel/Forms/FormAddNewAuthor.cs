@@ -6,9 +6,9 @@ namespace FreddansBokhandel
 {
     public partial class FormAddNewAuthor : Form
     {
-        List<Författare> authors;
+        List<Author> authors;
 
-        public FormAddNewAuthor(List<Författare> _authors)
+        public FormAddNewAuthor(List<Author> _authors)
         {
             InitializeComponent();
             authors = _authors;
@@ -30,7 +30,7 @@ namespace FreddansBokhandel
         {
             foreach (var author in authors)
             {
-                if (textBoxSurName.Text.Trim() == author.Förnamn && textBoxLastName.Text == author.Efternamn)
+                if (textBoxSurName.Text.Trim() == author.FirstName && textBoxLastName.Text == author.LastName)
                 {
                     return true;
                 }
@@ -46,13 +46,13 @@ namespace FreddansBokhandel
             {
                 if (db.Database.CanConnect())
                 {
-                    var newAuthor = new Författare
+                    var newAuthor = new Author
                     {
                         Id = authors.Count + 1,
-                        Förnamn = textBoxSurName.Text.Trim(),
-                        Efternamn = textBoxLastName.Text.Trim(),
-                        Födelsedatum = CheckAuthorBirthday(),
-                        Land = textBoxCountry.Text.Trim()
+                        FirstName = textBoxSurName.Text.Trim(),
+                        LastName = textBoxLastName.Text.Trim(),
+                        DateOfBirth = CheckAuthorBirthday(),
+                        Country = textBoxCountry.Text.Trim()
                     };
 
                     db.Add(newAuthor);

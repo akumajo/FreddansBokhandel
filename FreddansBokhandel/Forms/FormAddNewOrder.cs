@@ -12,30 +12,30 @@ namespace FreddansBokhandel
 {
     public partial class FormAddNewOrder : Form
     {
-        private List<Böcker> books;
-        private List<Butiker> stores;
-        private List<Ordrar> orders;
+        private List<Book> books;
+        private List<Store> stores;
+        private List<Order> orders;
         private FreddansBokhandelContext db;
-        List<Böcker> booksInCart = new List<Böcker>();
+        List<Book> booksInCart = new List<Book>();
 
         public FormAddNewOrder()
         {
             InitializeComponent();
         }
 
-        private Butiker SelectedStore()
+        private Store SelectedStore()
         {
-            return comboBoxStores.SelectedItem as Butiker;
+            return comboBoxStores.SelectedItem as Store;
         }
 
-        private Böcker SelectedBook()
+        private Book SelectedBook()
         {
-            return listBoxBooks.SelectedItem as Böcker;
+            return listBoxBooks.SelectedItem as Book;
         }
 
-        private Anställda SelectedEmployee()
+        private Employee SelectedEmployee()
         {
-            return comboBoxSeller.SelectedItem as Anställda;
+            return comboBoxSeller.SelectedItem as Employee;
         }
 
         private DateTime SetShippingDate()
@@ -49,11 +49,11 @@ namespace FreddansBokhandel
 
         private bool CheckIfBookIsInStock()
         {
-            foreach (var balance in SelectedBook().Lagersaldo)
+            foreach (var balance in SelectedBook().StockBalance)
             {
-                if (SelectedStore().Id == balance.ButikId)
+                if (SelectedStore().Id == balance.StoreID)
                 {
-                    if (balance.Antal < 1) { MessageBox.Show("Den här boken finns inte i lager i den valda butiken."); return false; }
+                    if (balance.Balance < 1) { MessageBox.Show("Den här boken finns inte i lager i den valda butiken."); return false; }
                 }
             }
             return true;
@@ -78,33 +78,33 @@ namespace FreddansBokhandel
 
         private void CreateNewOrder()
         {
-            Ordrar newOrder = null;
+            Order newOrder = null;
             if (SelectedStore().Id == 1)
             {
-                newOrder = new Ordrar
+                newOrder = new Order
                 {
                     Id = Convert.ToInt32(textBoxOrderID.Text),
-                    AnställningsId = SelectedEmployee().Id,
-                    ButikId = SelectedStore().Id,
-                    Beställningsdatum = dateTimePicker1.Value,
-                    SkickatDatum = SetShippingDate(),
-                    MottagareFörnamn = textBoxSurName.Text.Trim(),
-                    MottagareEfternamn = textBoxLastName.Text.Trim(),
-                    MottagarePostnummer = textBoxPostalNumber.Text.Trim(),
-                    MottagareAdress = textBoxAdress.Text.Trim(),
-                    MottagarePostort = textBoxPostalAdress.Text.Trim(),
-                    MottagareLand = textBoxCountry.Text.Trim()
+                    EmployeeID = SelectedEmployee().Id,
+                    StoreID = SelectedStore().Id,
+                    OrderDate = dateTimePicker1.Value,
+                    SentDate = SetShippingDate(),
+                    RecipientFirstName = textBoxSurName.Text.Trim(),
+                    RecipientLastName = textBoxLastName.Text.Trim(),
+                    RecipientZipCode = textBoxPostalNumber.Text.Trim(),
+                    RecipientAddress = textBoxAdress.Text.Trim(),
+                    RecipientPostalAddress = textBoxPostalAdress.Text.Trim(),
+                    RecipientCountry = textBoxCountry.Text.Trim()
                 };
             }
             else
             {
-                newOrder = new Ordrar
+                newOrder = new Order
                 {
                     Id = Convert.ToInt32(textBoxOrderID.Text),
-                    AnställningsId = SelectedEmployee().Id,
-                    ButikId = SelectedStore().Id,
-                    Beställningsdatum = dateTimePicker1.Value,
-                    SkickatDatum = SetShippingDate()
+                    EmployeeID = SelectedEmployee().Id,
+                    StoreID = SelectedStore().Id,
+                    OrderDate = dateTimePicker1.Value,
+                    SentDate = SetShippingDate()
                 };
             }
             db.Add(newOrder);
@@ -112,7 +112,7 @@ namespace FreddansBokhandel
 
         private void CreateOrderDetails()
         {
-            var sortedBooks = booksInCart.OrderBy(t => t.Titel).ToList();
+            var sortedBooks = booksInCart.OrderBy(t => t.Title).ToList();
 
             for (int j = 0; j < sortedBooks.Count; j++)
             {
@@ -126,13 +126,13 @@ namespace FreddansBokhandel
                     }
                 }
 
-                var newOrderDetails = new Orderhuvud
+                var newOrderDetails = new OrderDetail
                 {
                     Id = $"{textBoxOrderID.Text}/{j + 1}",
                     OrderId = Convert.ToInt32(textBoxOrderID.Text),
                     Isbn = sortedBooks[j].Isbn,
-                    Pris = sortedBooks[j].Pris,
-                    Kvantitet = quantity
+                    Price = sortedBooks[j].Price,
+                    Quantity = quantity
                 };
 
                 db.Add(newOrderDetails);
@@ -177,18 +177,18 @@ namespace FreddansBokhandel
                 listBoxBooks.Items.Clear();
 
                 books = db.Böcker
-                     .Include(a => a.BöckerFörfattare)
-                     .ThenInclude(b => b.Författare)
-                     .Include(b => b.Lagersaldo)
-                     .ThenInclude(b => b.Butik)
-                     .Include(b => b.Förlag)
-                     .Include(o => o.Orderhuvud)
+                     .Include(a => a.BooksAuthors)
+                     .ThenInclude(b => b.Author)
+                     .Include(b => b.StockBalance)
+                     .ThenInclude(b => b.Store)
+                     .Include(b => b.Publisher)
+                     .Include(o => o.OrderDetails)
                      .ToList();
 
                 stores = db.Butiker
-                    .Include(ls => ls.LagerSaldo)
+                    .Include(ls => ls.StockBalance)
                     .ThenInclude(s => s.IsbnNavigation)
-                    .Include(a => a.Anställda)
+                    .Include(a => a.Employees)
                     .ToList();
 
                 orders = db.Ordrar.ToList();
@@ -207,7 +207,7 @@ namespace FreddansBokhandel
         private void AddEmployeesToComboBox()
         {
             comboBoxSeller.Items.Clear();
-            foreach (var employee in SelectedStore().Anställda)
+            foreach (var employee in SelectedStore().Employees)
             {
                 comboBoxSeller.Items.Add(employee);
             }
@@ -225,11 +225,11 @@ namespace FreddansBokhandel
         {
             if (SelectedBook() == null) { return; }
 
-            foreach (var balance in SelectedBook().Lagersaldo)
+            foreach (var balance in SelectedBook().StockBalance)
             {
-                if (SelectedStore().Id == balance.ButikId)
+                if (SelectedStore().Id == balance.StoreID)
                 {
-                    labelAmount.Text = balance.Antal.ToString();
+                    labelAmount.Text = balance.Balance.ToString();
                 }
             }
         }
@@ -250,11 +250,11 @@ namespace FreddansBokhandel
             listBoxCart.Items.Add(SelectedBook());
             booksInCart.Add(SelectedBook());
 
-            foreach (var balance in SelectedBook().Lagersaldo)
+            foreach (var balance in SelectedBook().StockBalance)
             {
-                if (SelectedStore().Id == balance.ButikId)
+                if (SelectedStore().Id == balance.StoreID)
                 {
-                    balance.Antal = balance.Antal - 1;
+                    balance.Balance = balance.Balance - 1;
                 }
             }
 

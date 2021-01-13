@@ -13,8 +13,8 @@ namespace FreddansBokhandel
     public partial class UserControlBooks : UserControl
     {
         int selectedStoreRow = 0;
-        private List<Böcker> books;
-        Böcker selectedBook;
+        private List<Book> books;
+        Book selectedBook;
         FreddansBokhandelContext db;
 
         public UserControlBooks(FormMain form1)
@@ -30,12 +30,12 @@ namespace FreddansBokhandel
             if (db.Database.CanConnect())
             {
                 books = db.Böcker
-                     .Include(a => a.BöckerFörfattare)
-                     .ThenInclude(b => b.Författare)
-                     .Include(b => b.Lagersaldo)
-                     .ThenInclude(b => b.Butik)
-                     .Include(b => b.Förlag)
-                     .Include(o => o.Orderhuvud)
+                     .Include(a => a.BooksAuthors)
+                     .ThenInclude(b => b.Author)
+                     .Include(b => b.StockBalance)
+                     .ThenInclude(b => b.Store)
+                     .Include(b => b.Publisher)
+                     .Include(o => o.OrderDetails)
                      .ToList();
             }
             else
@@ -65,7 +65,7 @@ namespace FreddansBokhandel
         private void BookIsSelected()
         {
             selectedStoreRow = 0;
-            selectedBook = listBox1.SelectedItem as Böcker;
+            selectedBook = listBox1.SelectedItem as Book;
             EnableButtons();
             ShowBookInfo();
         }
@@ -87,18 +87,18 @@ namespace FreddansBokhandel
         private void ShowBookInfo()
         {
             textBoxAuthor.Text = null;
-            textBoxTitle.Text = selectedBook.Titel;
-            textBoxPrice.Text = selectedBook.Pris.ToString();
+            textBoxTitle.Text = selectedBook.Title;
+            textBoxPrice.Text = selectedBook.Price.ToString();
             textBoxISBN.Text = selectedBook.Isbn;
-            textBoxLanguage.Text = selectedBook.Språk;
-            textBoxPages.Text = selectedBook.AntalSidor.ToString();
+            textBoxLanguage.Text = selectedBook.Language;
+            textBoxPages.Text = selectedBook.Pages.ToString();
             textBoxFormat.Text = selectedBook.Format;
-            textBoxPublisher.Text = selectedBook.Förlag.Namn;
-            textBoxReleaseDate.Text = selectedBook.Utgivningsdatum.ToString("yyyy-MM-dd");
+            textBoxPublisher.Text = selectedBook.Publisher.Name;
+            textBoxReleaseDate.Text = selectedBook.ReleaseDate.ToString("yyyy-MM-dd");
 
-            foreach (var author in selectedBook.BöckerFörfattare)
+            foreach (var author in selectedBook.BooksAuthors)
             {
-                textBoxAuthor.Text += $"{author.Författare.Förnamn} {author.Författare.Efternamn}, ";
+                textBoxAuthor.Text += $"{author.Author.FirstName} {author.Author.LastName}, ";
             }
 
             textBoxAuthor.Text = textBoxAuthor.Text.Remove(textBoxAuthor.Text.Length - 2, 2);
@@ -119,16 +119,16 @@ namespace FreddansBokhandel
             dataGridViewOverview.Rows.Clear();
         }
 
-        private void ShowStoreBalance(Böcker book)
+        private void ShowStoreBalance(Book book)
         {
             dataGridViewOverview.Rows.Clear();
 
-            foreach (var balance in book.Lagersaldo)
+            foreach (var balance in book.StockBalance)
             {
                 int rowIndex = dataGridViewOverview.Rows.Add();
-                dataGridViewOverview.Rows[rowIndex].Cells["Butik"].Value = balance.Butik;
-                dataGridViewOverview.Rows[rowIndex].Cells["Antal"].Value = balance.Antal;
-                dataGridViewOverview.Rows[rowIndex].Cells["Lagervärde"].Value = (balance.Antal * book.Pris).ToString("C");
+                dataGridViewOverview.Rows[rowIndex].Cells["Butik"].Value = balance.Store;
+                dataGridViewOverview.Rows[rowIndex].Cells["Antal"].Value = balance.Balance;
+                dataGridViewOverview.Rows[rowIndex].Cells["Lagervärde"].Value = (balance.Balance * book.Price).ToString("C");
             }
 
             dataGridViewOverview.CurrentCell = dataGridViewOverview[0, selectedStoreRow];
@@ -143,12 +143,12 @@ namespace FreddansBokhandel
         private void AddBookToStock()
         {
             selectedStoreRow = dataGridViewOverview.CurrentCell.RowIndex;
-            var selectedStore = dataGridViewOverview[0, selectedStoreRow].Value as Butiker;
+            var selectedStore = dataGridViewOverview[0, selectedStoreRow].Value as Store;
 
-            foreach (var item in selectedBook.Lagersaldo)
+            foreach (var item in selectedBook.StockBalance)
             {
-                if (selectedStore.Id == item.ButikId)
-                    item.Antal += 1;
+                if (selectedStore.Id == item.StoreID)
+                    item.Balance += 1;
             }
             db.SaveChanges();
             ShowStoreBalance(selectedBook);
@@ -162,7 +162,7 @@ namespace FreddansBokhandel
             {
                 foreach (var book in books)
                 {
-                    if (book.Titel.ToLower().Contains(filter.Trim().ToLower()))
+                    if (book.Title.ToLower().Contains(filter.Trim().ToLower()))
                     {
                         listBox1.Items.Add(book);
                     }
@@ -183,9 +183,9 @@ namespace FreddansBokhandel
 
             if (dr == DialogResult.Yes)
             {
-                var book = listBox1.SelectedItem as Böcker;
+                var book = listBox1.SelectedItem as Book;
 
-                if (book.Orderhuvud.Count > 1)
+                if (book.OrderDetails.Count > 1)
                 {
                     MessageBox.Show($"Boken fanns bland ordrar och kunde inte tas bort.");
                 }

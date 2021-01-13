@@ -15,8 +15,8 @@ namespace FreddansBokhandel
     {
         List<DateTime> orderDates = new List<DateTime>();
         FreddansBokhandelContext db;
-        Ordrar selectedOrder;
-        List<Ordrar> orders;
+        Order selectedOrder;
+        List<Order> orders;
         public UserControlOrders(FormMain form1)
         {
             InitializeComponent();
@@ -31,17 +31,17 @@ namespace FreddansBokhandel
             if (db.Database.CanConnect())
             {
                 orders = db.Ordrar
-                      .Include(o => o.Orderhuvud)
-                      .Include(a => a.AnställningsID)
-                      .Include(b => b.Butik)
-                      .ThenInclude(ls => ls.LagerSaldo)
+                      .Include(o => o.OrderDetails)
+                      .Include(a => a.EmployeeIDs)
+                      .Include(b => b.Stores)
+                      .ThenInclude(ls => ls.StockBalance)
                       .ThenInclude(i => i.IsbnNavigation)
-                      .OrderBy(b => b.Beställningsdatum)
+                      .OrderBy(b => b.OrderDate)
                       .ToList();
 
                 foreach (var date in orders)
                 {
-                    orderDates.Add(date.Beställningsdatum);
+                    orderDates.Add(date.OrderDate);
                 }
 
                 orderDates = orderDates.Distinct().ToList();
@@ -55,22 +55,22 @@ namespace FreddansBokhandel
         private void PopulateDataGridView()
         {
             dataGridView2.Rows.Clear();
-            var orderDetails = treeViewOrders.SelectedNode.Tag as Ordrar;
+            var orderDetails = treeViewOrders.SelectedNode.Tag as Order;
             int totalPris = 0;
 
-            foreach (var book in orderDetails.Orderhuvud)
+            foreach (var book in orderDetails.OrderDetails)
             {
                 int rowIndex = dataGridView2.Rows.Add();
                 dataGridView2.Rows[rowIndex].Cells["columnIsbn"].Value = book.Isbn;
-                dataGridView2.Rows[rowIndex].Cells["columnPris"].Value = book.Pris;
-                dataGridView2.Rows[rowIndex].Cells["columnKvantitet"].Value = book.Kvantitet;
-                dataGridView2.Rows[rowIndex].Cells["columnTitel"].Value = book.IsbnNavigation.Titel;
+                dataGridView2.Rows[rowIndex].Cells["columnPris"].Value = book.Price;
+                dataGridView2.Rows[rowIndex].Cells["columnKvantitet"].Value = book.Quantity;
+                dataGridView2.Rows[rowIndex].Cells["columnTitel"].Value = book.IsbnNavigation.Title;
 
-                totalPris += book.Pris * book.Kvantitet;
+                totalPris += book.Price * book.Quantity;
             }
         }
 
-        private void PopulateTreeNodeOrders(List<Ordrar> orders)
+        private void PopulateTreeNodeOrders(List<Order> orders)
         {
             treeViewOrders.Nodes.Clear();
 
@@ -80,7 +80,7 @@ namespace FreddansBokhandel
 
                 foreach (var order in orders)
                 {
-                    if (orderDate.Text == order.Beställningsdatum.ToString("yyyy-MM-dd"))
+                    if (orderDate.Text == order.OrderDate.ToString("yyyy-MM-dd"))
                     {
                         var orderNode = orderDate.Nodes.Add(order.Id.ToString());
                         orderNode.Tag = order;
@@ -117,22 +117,22 @@ namespace FreddansBokhandel
 
             if (treeViewOrders.SelectedNode.Tag == null) { return; }
 
-            selectedOrder = treeViewOrders.SelectedNode.Tag as Ordrar;
+            selectedOrder = treeViewOrders.SelectedNode.Tag as Order;
 
             textBoxOrderID.Text = selectedOrder.Id.ToString();
-            textBoxOrderDate.Text = selectedOrder.Beställningsdatum.ToString();
-            textBoxOrderSent.Text = selectedOrder.SkickatDatum.ToString();
-            textBoxButik.Text = selectedOrder.Butik.Namn;
-            textBoxSeller.Text = selectedOrder.AnställningsID.Förnamn;
+            textBoxOrderDate.Text = selectedOrder.OrderDate.ToString();
+            textBoxOrderSent.Text = selectedOrder.SentDate.ToString();
+            textBoxButik.Text = selectedOrder.Stores.Name;
+            textBoxSeller.Text = selectedOrder.EmployeeIDs.FirstName;
 
             PopulateDataGridView();
 
-            if (selectedOrder.MottagareFörnamn != null)
+            if (selectedOrder.RecipientFirstName != null)
             {
-                textBoxBuyerInfo.Text = $"{selectedOrder.MottagareFörnamn} {selectedOrder.MottagareEfternamn}{Environment.NewLine}" +
-                    $"{selectedOrder.MottagareAdress}{Environment.NewLine}" +
-                    $"{selectedOrder.MottagarePostnummer} {selectedOrder.MottagarePostort}{Environment.NewLine}" +
-                    $"{selectedOrder.MottagareLand}";
+                textBoxBuyerInfo.Text = $"{selectedOrder.RecipientFirstName} {selectedOrder.RecipientLastName}{Environment.NewLine}" +
+                    $"{selectedOrder.RecipientAddress}{Environment.NewLine}" +
+                    $"{selectedOrder.RecipientZipCode} {selectedOrder.RecipientPostalAddress}{Environment.NewLine}" +
+                    $"{selectedOrder.RecipientCountry}";
             }
             else
             {

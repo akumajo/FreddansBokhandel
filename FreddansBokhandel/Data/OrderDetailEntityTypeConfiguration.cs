@@ -7,11 +7,11 @@ namespace FreddansBokhandel
 {
     public partial class FreddansBokhandelContext
     {
-        public class OrderhuvudEntityTypeConfiguration : IEntityTypeConfiguration<Orderhuvud>
+        public class OrderDetailEntityTypeConfiguration : IEntityTypeConfiguration<OrderDetail>
         {
-            public void Configure(EntityTypeBuilder<Orderhuvud> builder)
+            public void Configure(EntityTypeBuilder<OrderDetail> builder)
             {
-                builder.ToTable("Orderhuvud");
+                builder.ToTable("Orderdetaljer");
 
                 builder.Property(e => e.Id)
                     .HasMaxLength(40)
@@ -26,15 +26,15 @@ namespace FreddansBokhandel
                 builder.Property(e => e.OrderId).HasColumnName("OrderID");
 
                 builder.HasOne(d => d.IsbnNavigation)
-                    .WithMany(p => p.Orderhuvud)
+                    .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.Isbn)
-                    .HasConstraintName("FK_Orderhuvud_Böcker");
+                    .HasConstraintName("FK_Orderdetaljer_Böcker");
 
                 builder.HasOne(d => d.Order)
-                    .WithMany(p => p.Orderhuvud)
+                    .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Orderhuvud_Ordrar");
+                    .HasConstraintName("FK_Orderdetaljer_Ordrar");
             }
         }
     }

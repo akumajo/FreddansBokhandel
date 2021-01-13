@@ -14,7 +14,7 @@ namespace FreddansBokhandel
     public partial class FormAddEmployee : Form
     {
         int numberOfEmployees = 0;
-        List<Butiker> stores;
+        List<Store> stores;
         public FormAddEmployee(int _numberOfEmployees)
         {
             InitializeComponent();
@@ -78,7 +78,7 @@ namespace FreddansBokhandel
         private void AddNewEmployee()
         {
 
-            var store = comboBoxStores.SelectedItem as Butiker;
+            var store = comboBoxStores.SelectedItem as Store;
 
             if (CheckIfEmployeeCanBeAdded() == false) { MessageBox.Show("Ett eller flera fält är tomma eller i fel format. Försök igen."); return; }
 
@@ -87,20 +87,20 @@ namespace FreddansBokhandel
             {
                 if (db.Database.CanConnect())
                 {
-                    var newEmployee = new Anställda
+                    var newEmployee = new Employee
                     {
                         Id = numberOfEmployees + 1,
-                        Förnamn = textBoxSurName.Text.Trim(),
-                        Efternamn = textBoxLastName.Text.Trim(),
-                        Födelsedatum = dateTimePicker1.Value,
-                        Adress = textBoxAddress.Text.Trim(),
-                        Postnummer = textBoxPostalNo.Text.Trim(),
-                        Postort = textBoxPostAddress.Text.Trim(),
-                        Anställningsdatum = dateTimePicker2.Value,
+                        FirstName = textBoxSurName.Text.Trim(),
+                        LastName = textBoxLastName.Text.Trim(),
+                        DateOfBirth = dateTimePicker1.Value,
+                        Address = textBoxAddress.Text.Trim(),
+                        ZipCode = textBoxPostalNo.Text.Trim(),
+                        PostalAdress = textBoxPostAddress.Text.Trim(),
+                        HireDate = dateTimePicker2.Value,
                         Email = textBoxEmail.Text.Trim(),
-                        Telefon = textBoxTelephone.Text.Trim(),
-                        Butik = store.Id,
-                        Roll = comboBoxRole.SelectedItem.ToString()
+                        Telephone = textBoxTelephone.Text.Trim(),
+                        Store = store.Id,
+                        Role = comboBoxRole.SelectedItem.ToString()
                     };
 
                     db.Add(newEmployee);

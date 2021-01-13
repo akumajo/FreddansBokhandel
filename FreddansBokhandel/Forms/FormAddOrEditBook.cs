@@ -12,15 +12,15 @@ namespace FreddansBokhandel
 {
     public partial class FormAddOrEditBook : Form
     {
-        private List<Böcker> books;
-        private List<Butiker> stores;
-        private Böcker selectedBook;
+        private List<Book> books;
+        private List<Store> stores;
+        private Book selectedBook;
         private FreddansBokhandelContext db = new FreddansBokhandelContext();
         private object remove;
         private object remove2;
         private object remove3;
 
-        public FormAddOrEditBook(List<Böcker> _books, Böcker _selectedBook)
+        public FormAddOrEditBook(List<Book> _books, Book _selectedBook)
         {
             InitializeComponent();
             books = _books;
@@ -38,18 +38,18 @@ namespace FreddansBokhandel
             List<string> selectedBookAuthors = new List<string>();
 
             textBoxISBN.Enabled = false;
-            textBoxPrice.Text = selectedBook.Pris.ToString();
-            textBoxPages.Text = selectedBook.AntalSidor.ToString();
-            textBoxTitle.Text = selectedBook.Titel;
+            textBoxPrice.Text = selectedBook.Price.ToString();
+            textBoxPages.Text = selectedBook.Pages.ToString();
+            textBoxTitle.Text = selectedBook.Title;
             textBoxISBN.Text = selectedBook.Isbn;
-            dateTimePicker1.Value = selectedBook.Utgivningsdatum;
-            comboBoxLanguage.SelectedIndex = comboBoxLanguage.FindString(selectedBook.Språk);
+            dateTimePicker1.Value = selectedBook.ReleaseDate;
+            comboBoxLanguage.SelectedIndex = comboBoxLanguage.FindString(selectedBook.Language);
             comboBoxFormat.SelectedIndex = comboBoxFormat.FindString(selectedBook.Format);
-            comboBoxPublisher.SelectedIndex = comboBoxPublisher.FindString(selectedBook.Förlag.Namn);
+            comboBoxPublisher.SelectedIndex = comboBoxPublisher.FindString(selectedBook.Publisher.Name);
 
-            foreach (var item in selectedBook.BöckerFörfattare)
+            foreach (var item in selectedBook.BooksAuthors)
             {
-                selectedBookAuthors.Add($"{item.Författare.Förnamn} {item.Författare.Efternamn}");
+                selectedBookAuthors.Add($"{item.Author.FirstName} {item.Author.LastName}");
             }
 
             comboBoxAuthor.SelectedIndex = comboBoxAuthor.FindString($"{selectedBookAuthors[0]}");
@@ -101,7 +101,7 @@ namespace FreddansBokhandel
 
                 for (int i = 0; i < stores.Count; i++)
                 {
-                    var saldo = new LagerSaldo { ButikId = i + 1, Antal = 0, Isbn = newBook.Isbn };
+                    var saldo = new StockBalance { StoreID = i + 1, Balance = 0, Isbn = newBook.Isbn };
 
                     if (selectedBook == null) { db.Add(saldo); }
                     else { db.Update(saldo); }
@@ -111,7 +111,7 @@ namespace FreddansBokhandel
                 {
                     if (authors[i] != null)
                     {
-                        var bookAndAuthor = new BöckerFörfattare { Isbn = newBook.Isbn, FörfattarId = authors[i].Id };
+                        var bookAndAuthor = new BooksAuthors { Isbn = newBook.Isbn, AuthorId = authors[i].Id };
 
                         if (selectedBook == null) { db.Add(bookAndAuthor); }
                         else { db.Update(bookAndAuthor); }
@@ -124,29 +124,29 @@ namespace FreddansBokhandel
             }
         }
 
-        private List<Författare> ComboboxAuthors()
+        private List<Author> ComboboxAuthors()
         {
-            List<Författare> authors = new List<Författare>();
-            authors.Add(comboBoxAuthor.SelectedItem as Författare);
-            authors.Add(comboBoxAuthor2.SelectedItem as Författare);
-            authors.Add(comboBoxAuthor3.SelectedItem as Författare);
+            List<Author> authors = new List<Author>();
+            authors.Add(comboBoxAuthor.SelectedItem as Author);
+            authors.Add(comboBoxAuthor2.SelectedItem as Author);
+            authors.Add(comboBoxAuthor3.SelectedItem as Author);
 
             return authors;
         }
 
-        private Böcker CreateBook()
+        private Book CreateBook()
         {
-            var publisher = comboBoxPublisher.SelectedItem as Förlag;
-            var newBook = new Böcker
+            var publisher = comboBoxPublisher.SelectedItem as Publisher;
+            var newBook = new Book
             {
                 Isbn = textBoxISBN.Text,
-                Titel = textBoxTitle.Text.Trim(),
-                Språk = comboBoxLanguage.SelectedItem.ToString(),
-                Pris = Convert.ToInt32(textBoxPrice.Text),
-                Utgivningsdatum = dateTimePicker1.Value,
-                AntalSidor = Convert.ToInt32(textBoxPages.Text),
+                Title = textBoxTitle.Text.Trim(),
+                Language = comboBoxLanguage.SelectedItem.ToString(),
+                Price = Convert.ToInt32(textBoxPrice.Text),
+                ReleaseDate = dateTimePicker1.Value,
+                Pages = Convert.ToInt32(textBoxPages.Text),
                 Format = comboBoxFormat.SelectedItem.ToString(),
-                FörlagId = publisher.Id
+                PublisherId = publisher.Id
             };
 
             if (selectedBook == null) { db.Add(newBook); }

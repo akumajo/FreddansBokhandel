@@ -11,7 +11,7 @@ namespace FreddansBokhandel
 {
     public partial class UserControlAuthors : UserControl
     {
-        List<Författare> authors;
+        List<Author> authors;
 
         public UserControlAuthors()
         {
@@ -40,16 +40,16 @@ namespace FreddansBokhandel
             {
                 int rowIndex = dataGridViewAuthors.Rows.Add();
                 dataGridViewAuthors.Rows[rowIndex].Cells["ID"].Value = author.Id;
-                dataGridViewAuthors.Rows[rowIndex].Cells["Namn"].Value = $"{author.Förnamn} {author.Efternamn}";
-                if (author.Födelsedatum == null)
+                dataGridViewAuthors.Rows[rowIndex].Cells["Namn"].Value = $"{author.FirstName} {author.LastName}";
+                if (author.DateOfBirth == null)
                 {
                     dataGridViewAuthors.Rows[rowIndex].Cells["Födelsedatum"].Value = "-";
                 }
                 else
                 {
-                    dataGridViewAuthors.Rows[rowIndex].Cells["Födelsedatum"].Value = Convert.ToDateTime(author.Födelsedatum).ToShortDateString();
+                    dataGridViewAuthors.Rows[rowIndex].Cells["Födelsedatum"].Value = Convert.ToDateTime(author.DateOfBirth).ToShortDateString();
                 }
-                dataGridViewAuthors.Rows[rowIndex].Cells["Land"].Value = author.Land;
+                dataGridViewAuthors.Rows[rowIndex].Cells["Land"].Value = author.Country;
             }
         }
 

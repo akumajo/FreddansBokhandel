@@ -17,15 +17,15 @@ namespace FreddansBokhandel
         {
         }
 
-        public virtual DbSet<Anställda> Anställda { get; set; }
-        public virtual DbSet<Butiker> Butiker { get; set; }
-        public virtual DbSet<Böcker> Böcker { get; set; }
-        public virtual DbSet<BöckerFörfattare> BöckerFörfattare { get; set; }
-        public virtual DbSet<Författare> Författare { get; set; }
-        public virtual DbSet<Förlag> Förlag { get; set; }
-        public virtual DbSet<LagerSaldo> LagerSaldo { get; set; }
-        public virtual DbSet<Orderhuvud> Orderhuvud { get; set; }
-        public virtual DbSet<Ordrar> Ordrar { get; set; }
+        public virtual DbSet<Employee> Anställda { get; set; }
+        public virtual DbSet<Store> Butiker { get; set; }
+        public virtual DbSet<Book> Böcker { get; set; }
+        public virtual DbSet<BooksAuthors> BöckerFörfattare { get; set; }
+        public virtual DbSet<Author> Författare { get; set; }
+        public virtual DbSet<Publisher> Förlag { get; set; }
+        public virtual DbSet<StockBalance> LagerSaldo { get; set; }
+        public virtual DbSet<OrderDetail> Orderdetaljer { get; set; }
+        public virtual DbSet<Order> Ordrar { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -37,15 +37,15 @@ namespace FreddansBokhandel
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            new AnställdaEntityTypeConfiguration().Configure(modelBuilder.Entity<Anställda>());
-            new BöckerEntityTypeConfiguration().Configure(modelBuilder.Entity<Böcker>());
-            new ButikerEntityTypeConfiguration().Configure(modelBuilder.Entity<Butiker>());
-            new BöckerFörfattareEntityTypeConfiguration().Configure(modelBuilder.Entity<BöckerFörfattare>());
-            new FörfattareEntityTypeConfiguration().Configure(modelBuilder.Entity<Författare>());
-            new FörlagEntityTypeConfiguration().Configure(modelBuilder.Entity<Förlag>());
-            new LagerSaldoEntityTypeConfiguration().Configure(modelBuilder.Entity<LagerSaldo>());
-            new OrdrarEntityTypeConfiguration().Configure(modelBuilder.Entity<Ordrar>());
-            new OrderhuvudEntityTypeConfiguration().Configure(modelBuilder.Entity<Orderhuvud>());
+            new EmployeeEntityTypeConfiguration().Configure(modelBuilder.Entity<Employee>());
+            new BookEntityTypeConfiguration().Configure(modelBuilder.Entity<Book>());
+            new StoreEntityTypeConfiguration().Configure(modelBuilder.Entity<Store>());
+            new BooksAuthorsEntityTypeConfiguration().Configure(modelBuilder.Entity<BooksAuthors>());
+            new AuthorEntityTypeConfiguration().Configure(modelBuilder.Entity<Author>());
+            new PublisherEntityTypeConfiguration().Configure(modelBuilder.Entity<Publisher>());
+            new StockBalanceEntityTypeConfiguration().Configure(modelBuilder.Entity<StockBalance>());
+            new OrderEntityTypeConfiguration().Configure(modelBuilder.Entity<Order>());
+            new OrderDetailEntityTypeConfiguration().Configure(modelBuilder.Entity<OrderDetail>());
 
             OnModelCreatingPartial(modelBuilder);
         }

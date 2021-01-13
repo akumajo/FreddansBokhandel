@@ -7,9 +7,9 @@ namespace FreddansBokhandel
 {
     public partial class FreddansBokhandelContext
     {
-        public class ButikerEntityTypeConfiguration : IEntityTypeConfiguration<Butiker>
+        public class StoreEntityTypeConfiguration : IEntityTypeConfiguration<Store>
         {
-            public void Configure(EntityTypeBuilder<Butiker> builder)
+            public void Configure(EntityTypeBuilder<Store> builder)
             {
                 builder.ToTable("Butiker");
 
@@ -17,19 +17,19 @@ namespace FreddansBokhandel
                     .ValueGeneratedNever()
                     .HasColumnName("ID");
 
-                builder.Property(e => e.Adress)
+                builder.Property(e => e.Address)
                     .IsRequired()
                     .HasMaxLength(100);
 
-                builder.Property(e => e.Land).HasMaxLength(20);
+                builder.Property(e => e.Country).HasMaxLength(20);
 
-                builder.Property(e => e.Namn)
+                builder.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                builder.Property(e => e.Postadress).HasMaxLength(50);
+                builder.Property(e => e.PostalAddress).HasMaxLength(50);
 
-                builder.Property(e => e.Postnr).HasMaxLength(20);
+                builder.Property(e => e.ZipCode).HasMaxLength(20);
             }
         }
     }

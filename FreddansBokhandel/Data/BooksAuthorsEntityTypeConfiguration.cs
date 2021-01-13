@@ -7,11 +7,11 @@ namespace FreddansBokhandel
 {
     public partial class FreddansBokhandelContext
     {
-        public class BöckerFörfattareEntityTypeConfiguration : IEntityTypeConfiguration<BöckerFörfattare>
+        public class BooksAuthorsEntityTypeConfiguration : IEntityTypeConfiguration<BooksAuthors>
         {
-            public void Configure(EntityTypeBuilder<BöckerFörfattare> builder)
+            public void Configure(EntityTypeBuilder<BooksAuthors> builder)
             {
-                builder.HasKey(e => new { e.Isbn, e.FörfattarId });
+                builder.HasKey(e => new { e.Isbn, e.AuthorId });
 
                 builder.ToTable("BöckerFörfattare");
 
@@ -20,16 +20,16 @@ namespace FreddansBokhandel
                     .IsUnicode(false)
                     .HasColumnName("ISBN");
 
-                builder.Property(e => e.FörfattarId).HasColumnName("FörfattarID");
+                builder.Property(e => e.AuthorId).HasColumnName("FörfattarID");
 
-                builder.HasOne(d => d.Författare)
-                    .WithMany(p => p.BöckerFörfattare)
-                    .HasForeignKey(d => d.FörfattarId)
+                builder.HasOne(d => d.Author)
+                    .WithMany(p => p.BooksAuthors)
+                    .HasForeignKey(d => d.AuthorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_BöckerFörfattare_Författare");
 
                 builder.HasOne(d => d.IsbnNavigation)
-                    .WithMany(p => p.BöckerFörfattare)
+                    .WithMany(p => p.BooksAuthors)
                     .HasForeignKey(d => d.Isbn)
                     .HasConstraintName("FK_BöckerFörfattare_Böcker");
             }

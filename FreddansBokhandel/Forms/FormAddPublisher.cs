@@ -10,8 +10,8 @@ namespace FreddansBokhandel
 {
     public partial class FormAddPublisher : Form
     {
-        List<Förlag> publishers;
-        public FormAddPublisher(List<Förlag> _publishers)
+        List<Publisher> publishers;
+        public FormAddPublisher(List<Publisher> _publishers)
         {
             InitializeComponent();
             publishers = _publishers;
@@ -21,7 +21,7 @@ namespace FreddansBokhandel
         {
             foreach (var publisher in publishers)
             {
-                if (textBoxName.Text.Trim() == publisher.Namn)
+                if (textBoxName.Text.Trim() == publisher.Name)
                 {
                     return false;
                 }
@@ -44,14 +44,14 @@ namespace FreddansBokhandel
             {
                 if (db.Database.CanConnect())
                 {
-                    var newPublisher = new Förlag
+                    var newPublisher = new Publisher
                     {
                         Id = publishers.Count + 1,
-                        Namn = textBoxName.Text.Trim(),
-                        Adress = textBoxAddress.Text.Trim(),
-                        Postnummer = textBoxPostNo.Text.Trim(),
-                        Postort = textBoxPostalAdress.Text.Trim(),
-                        Land = textBoxCountry.Text.Trim()
+                        Name = textBoxName.Text.Trim(),
+                        Address = textBoxAddress.Text.Trim(),
+                        ZipCode = textBoxPostNo.Text.Trim(),
+                        PostalAddress = textBoxPostalAdress.Text.Trim(),
+                        Country = textBoxCountry.Text.Trim()
                     };
 
                     db.Add(newPublisher);

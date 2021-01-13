@@ -7,9 +7,9 @@ namespace FreddansBokhandel
 {
     public partial class FreddansBokhandelContext
     {
-        public class FörlagEntityTypeConfiguration : IEntityTypeConfiguration<Förlag>
+        public class PublisherEntityTypeConfiguration : IEntityTypeConfiguration<Publisher>
         {
-            public void Configure(EntityTypeBuilder<Förlag> builder)
+            public void Configure(EntityTypeBuilder<Publisher> builder)
             {
                 builder.ToTable("Förlag");
 
@@ -17,17 +17,17 @@ namespace FreddansBokhandel
                     .ValueGeneratedNever()
                     .HasColumnName("ID");
 
-                builder.Property(e => e.Adress).HasMaxLength(100);
+                builder.Property(e => e.Address).HasMaxLength(100);
 
-                builder.Property(e => e.Land).HasMaxLength(20);
+                builder.Property(e => e.Country).HasMaxLength(20);
 
-                builder.Property(e => e.Namn)
+                builder.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                builder.Property(e => e.Postnummer).HasMaxLength(20);
+                builder.Property(e => e.ZipCode).HasMaxLength(20);
 
-                builder.Property(e => e.Postort).HasMaxLength(50);
+                builder.Property(e => e.PostalAddress).HasMaxLength(50);
             }
         }
     }

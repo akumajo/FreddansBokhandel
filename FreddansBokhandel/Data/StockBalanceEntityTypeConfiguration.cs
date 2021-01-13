@@ -7,29 +7,29 @@ namespace FreddansBokhandel
 {
     public partial class FreddansBokhandelContext
     {
-        public class LagerSaldoEntityTypeConfiguration : IEntityTypeConfiguration<LagerSaldo>
+        public class StockBalanceEntityTypeConfiguration : IEntityTypeConfiguration<StockBalance>
         {
-            public void Configure(EntityTypeBuilder<LagerSaldo> builder)
+            public void Configure(EntityTypeBuilder<StockBalance> builder)
             {
-                builder.HasKey(e => new { e.ButikId, e.Isbn });
+                builder.HasKey(e => new { e.StoreID, e.Isbn });
 
                 builder.ToTable("LagerSaldo");
 
-                builder.Property(e => e.ButikId).HasColumnName("ButikID");
+                builder.Property(e => e.StoreID).HasColumnName("ButikID");
 
                 builder.Property(e => e.Isbn)
                     .HasMaxLength(13)
                     .IsUnicode(false)
                     .HasColumnName("ISBN");
 
-                builder.HasOne(d => d.Butik)
-                    .WithMany(p => p.LagerSaldo)
-                    .HasForeignKey(d => d.ButikId)
+                builder.HasOne(d => d.Store)
+                    .WithMany(p => p.StockBalance)
+                    .HasForeignKey(d => d.StoreID)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_LagerSaldo_Butiker");
 
                 builder.HasOne(d => d.IsbnNavigation)
-                    .WithMany(p => p.Lagersaldo)
+                    .WithMany(p => p.StockBalance)
                     .HasForeignKey(d => d.Isbn)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_LagerSaldo_Böcker");
