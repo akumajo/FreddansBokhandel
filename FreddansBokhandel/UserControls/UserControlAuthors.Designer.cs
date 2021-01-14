@@ -34,6 +34,7 @@
             this.Namn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Födelsedatum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Land = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Böcker = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.buttonAddAuthor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -63,7 +64,7 @@
             this.splitContainer1.TabIndex = 0;
             this.splitContainer1.Text = "splitContainer1";
             // 
-            // dataGridView1
+            // dataGridViewAuthors
             // 
             this.dataGridViewAuthors.AllowUserToAddRows = false;
             this.dataGridViewAuthors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -72,12 +73,14 @@
             this.ID,
             this.Namn,
             this.Födelsedatum,
-            this.Land});
+            this.Land,
+            this.Böcker});
             this.dataGridViewAuthors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewAuthors.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridViewAuthors.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewAuthors.Name = "dataGridView1";
-            this.dataGridViewAuthors.ReadOnly = true;
+            this.dataGridViewAuthors.Name = "dataGridViewAuthors";
             this.dataGridViewAuthors.RowHeadersVisible = false;
+            this.dataGridViewAuthors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewAuthors.Size = new System.Drawing.Size(1076, 540);
             this.dataGridViewAuthors.TabIndex = 0;
             this.dataGridViewAuthors.Text = "dataGridView1";
@@ -87,24 +90,35 @@
             this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
+            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Namn
             // 
             this.Namn.HeaderText = "Namn";
             this.Namn.Name = "Namn";
             this.Namn.ReadOnly = true;
+            this.Namn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Födelsedatum
             // 
             this.Födelsedatum.HeaderText = "Födelsedatum";
             this.Födelsedatum.Name = "Födelsedatum";
             this.Födelsedatum.ReadOnly = true;
+            this.Födelsedatum.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Land
             // 
             this.Land.HeaderText = "Land";
             this.Land.Name = "Land";
             this.Land.ReadOnly = true;
+            this.Land.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Böcker
+            // 
+            this.Böcker.HeaderText = "Böcker";
+            this.Böcker.Name = "Böcker";
+            this.Böcker.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Böcker.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // buttonAddAuthor
             // 
@@ -137,10 +151,11 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView dataGridViewAuthors;
+        private System.Windows.Forms.Button buttonAddAuthor;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Namn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Födelsedatum;
         private System.Windows.Forms.DataGridViewTextBoxColumn Land;
-        private System.Windows.Forms.Button buttonAddAuthor;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Böcker;
     }
 }

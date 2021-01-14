@@ -36,6 +36,7 @@ namespace FreddansBokhandel
             tabPageBooks.Controls.Add(books);
             EnterBooksTab?.Invoke(this, null);
         }
+
         private void tabPageEmployees_Enter(object sender, EventArgs e)
         {
             var employees = new UserControlEmployees() { Dock = DockStyle.Fill };

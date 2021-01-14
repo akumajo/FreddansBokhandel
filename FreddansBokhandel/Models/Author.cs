@@ -26,7 +26,7 @@ namespace FreddansBokhandel
         [Column("Land")]
         public string Country { get; set; }
 
-        public virtual ICollection<BooksAuthors> BooksAuthors { get; set; } //BöckerFörfattare
+        public virtual ICollection<BooksAuthors> BooksAuthors { get; set; }
 
         public override string ToString()
         {

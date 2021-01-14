@@ -147,13 +147,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSearch.Location = new System.Drawing.Point(1, 5);
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(208, 23);
+            this.textBoxSearch.Size = new System.Drawing.Size(216, 23);
             this.textBoxSearch.TabIndex = 1;
             // 
             // buttonSearch
             // 
             this.buttonSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSearch.Location = new System.Drawing.Point(218, 5);
+            this.buttonSearch.Location = new System.Drawing.Point(223, 5);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(75, 23);
             this.buttonSearch.TabIndex = 0;
@@ -228,9 +228,9 @@
             // 
             // buttonRemoveOrder
             // 
-            this.buttonRemoveOrder.Location = new System.Drawing.Point(565, 163);
+            this.buttonRemoveOrder.Location = new System.Drawing.Point(546, 163);
             this.buttonRemoveOrder.Name = "buttonRemoveOrder";
-            this.buttonRemoveOrder.Size = new System.Drawing.Size(100, 34);
+            this.buttonRemoveOrder.Size = new System.Drawing.Size(119, 34);
             this.buttonRemoveOrder.TabIndex = 3;
             this.buttonRemoveOrder.Text = "Ta bort order";
             this.buttonRemoveOrder.UseVisualStyleBackColor = true;

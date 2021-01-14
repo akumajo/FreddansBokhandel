@@ -81,6 +81,7 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
@@ -93,7 +94,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer1.Size = new System.Drawing.Size(976, 485);
-            this.splitContainer1.SplitterDistance = 488;
+            this.splitContainer1.SplitterDistance = 400;
             this.splitContainer1.TabIndex = 0;
             this.splitContainer1.Text = "splitContainer1";
             // 
@@ -113,7 +114,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer2.Size = new System.Drawing.Size(488, 485);
+            this.splitContainer2.Size = new System.Drawing.Size(400, 485);
             this.splitContainer2.SplitterDistance = 34;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.Text = "splitContainer2";
@@ -121,7 +122,7 @@
             // buttonFilterBooks
             // 
             this.buttonFilterBooks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFilterBooks.Location = new System.Drawing.Point(410, 5);
+            this.buttonFilterBooks.Location = new System.Drawing.Point(317, 5);
             this.buttonFilterBooks.Name = "buttonFilterBooks";
             this.buttonFilterBooks.Size = new System.Drawing.Size(75, 23);
             this.buttonFilterBooks.TabIndex = 1;
@@ -135,7 +136,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFilter.Location = new System.Drawing.Point(1, 5);
             this.textBoxFilter.Name = "textBoxFilter";
-            this.textBoxFilter.Size = new System.Drawing.Size(400, 23);
+            this.textBoxFilter.Size = new System.Drawing.Size(312, 23);
             this.textBoxFilter.TabIndex = 0;
             // 
             // splitContainer4
@@ -153,7 +154,7 @@
             // 
             this.splitContainer4.Panel2.Controls.Add(this.buttonDeleteBook);
             this.splitContainer4.Panel2.Controls.Add(this.buttonAddBook);
-            this.splitContainer4.Size = new System.Drawing.Size(488, 447);
+            this.splitContainer4.Size = new System.Drawing.Size(400, 447);
             this.splitContainer4.SplitterDistance = 400;
             this.splitContainer4.TabIndex = 0;
             this.splitContainer4.Text = "splitContainer4";
@@ -167,7 +168,7 @@
             this.listBox1.ItemHeight = 15;
             this.listBox1.Location = new System.Drawing.Point(1, 1);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(479, 394);
+            this.listBox1.Size = new System.Drawing.Size(391, 394);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -197,6 +198,7 @@
             // splitContainer3
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer3.IsSplitterFixed = true;
             this.splitContainer3.Location = new System.Drawing.Point(0, 0);
             this.splitContainer3.Name = "splitContainer3";
@@ -226,7 +228,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.dataGridViewOverview);
-            this.splitContainer3.Size = new System.Drawing.Size(484, 485);
+            this.splitContainer3.Size = new System.Drawing.Size(572, 485);
             this.splitContainer3.SplitterDistance = 241;
             this.splitContainer3.TabIndex = 0;
             this.splitContainer3.Text = "splitContainer3";
@@ -271,9 +273,8 @@
             // 
             // buttonAddBookToStock
             // 
-            this.buttonAddBookToStock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonAddBookToStock.Enabled = false;
-            this.buttonAddBookToStock.Location = new System.Drawing.Point(237, 206);
+            this.buttonAddBookToStock.Location = new System.Drawing.Point(321, 204);
             this.buttonAddBookToStock.Name = "buttonAddBookToStock";
             this.buttonAddBookToStock.Size = new System.Drawing.Size(119, 34);
             this.buttonAddBookToStock.TabIndex = 3;
@@ -283,9 +284,8 @@
             // 
             // buttonUpdateBook
             // 
-            this.buttonUpdateBook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonUpdateBook.Enabled = false;
-            this.buttonUpdateBook.Location = new System.Drawing.Point(362, 206);
+            this.buttonUpdateBook.Location = new System.Drawing.Point(446, 204);
             this.buttonUpdateBook.Name = "buttonUpdateBook";
             this.buttonUpdateBook.Size = new System.Drawing.Size(119, 34);
             this.buttonUpdateBook.TabIndex = 3;
@@ -422,7 +422,7 @@
             this.dataGridViewOverview.ReadOnly = true;
             this.dataGridViewOverview.RowHeadersVisible = false;
             this.dataGridViewOverview.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewOverview.Size = new System.Drawing.Size(484, 240);
+            this.dataGridViewOverview.Size = new System.Drawing.Size(572, 240);
             this.dataGridViewOverview.TabIndex = 0;
             this.dataGridViewOverview.Text = "dataGridView1";
             // 
@@ -444,12 +444,12 @@
             this.Lagervärde.Name = "Lagervärde";
             this.Lagervärde.ReadOnly = true;
             // 
-            // Books
+            // UserControlBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer1);
-            this.Name = "Books";
+            this.Name = "UserControlBooks";
             this.Size = new System.Drawing.Size(976, 485);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

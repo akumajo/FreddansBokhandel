@@ -19,7 +19,7 @@ namespace FreddansBokhandel
             InitializeComponent();
         }
 
-        public void LoadPublishersFromDatabase()
+        private void LoadPublishersFromDatabase()
         {
             using (var db = new FreddansBokhandelContext())
             {
@@ -35,7 +35,7 @@ namespace FreddansBokhandel
             }
         }
 
-        public void PopulateDataGridPublishers()
+        private void PopulateDataGridPublishers()
         {
             dataGridViewPublishers.Rows.Clear();
 

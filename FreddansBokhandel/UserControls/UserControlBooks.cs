@@ -148,7 +148,9 @@ namespace FreddansBokhandel
             foreach (var item in selectedBook.StockBalance)
             {
                 if (selectedStore.Id == item.StoreID)
-                    item.Balance += 1;
+                { 
+                    item.Balance += 1; 
+                }  
             }
             db.SaveChanges();
             ShowStoreBalance(selectedBook);

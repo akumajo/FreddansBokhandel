@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace FreddansBokhandel
 {
@@ -18,13 +19,21 @@ namespace FreddansBokhandel
             InitializeComponent();
         }
 
+        private string ReturnAuthorBirthdate(Author author)
+        {
+            if (author.DateOfBirth == null) { return "-"; }
+            return Convert.ToDateTime(author.DateOfBirth).ToShortDateString();
+        }
+
         private void LoadAuthorsFromDatabase()
         {
             using (var db = new FreddansBokhandelContext())
             {
                 if (db.Database.CanConnect())
                 {
-                    authors = db.Författare.ToList();
+                    authors = db.Författare.Include(b => b.BooksAuthors)
+                        .ThenInclude(i => i.IsbnNavigation)
+                        .ToList();
                 }
                 else
                 {
@@ -33,23 +42,25 @@ namespace FreddansBokhandel
             }
         }
 
-        public void PopulateDataGridAuthors()
+        private void PopulateDataGridAuthors()
         {
             dataGridViewAuthors.Rows.Clear();
             foreach (var author in authors)
             {
                 int rowIndex = dataGridViewAuthors.Rows.Add();
+                var comboBoxCell = dataGridViewAuthors.Rows[rowIndex].Cells["Böcker"] as DataGridViewComboBoxCell;
+
                 dataGridViewAuthors.Rows[rowIndex].Cells["ID"].Value = author.Id;
                 dataGridViewAuthors.Rows[rowIndex].Cells["Namn"].Value = $"{author.FirstName} {author.LastName}";
-                if (author.DateOfBirth == null)
-                {
-                    dataGridViewAuthors.Rows[rowIndex].Cells["Födelsedatum"].Value = "-";
-                }
-                else
-                {
-                    dataGridViewAuthors.Rows[rowIndex].Cells["Födelsedatum"].Value = Convert.ToDateTime(author.DateOfBirth).ToShortDateString();
-                }
                 dataGridViewAuthors.Rows[rowIndex].Cells["Land"].Value = author.Country;
+                dataGridViewAuthors.Rows[rowIndex].Cells["Födelsedatum"].Value = ReturnAuthorBirthdate(author);
+
+                foreach (var book in author.BooksAuthors)
+                {
+                    comboBoxCell.Items.Add(book.IsbnNavigation.Title);
+                }
+
+                comboBoxCell.ToolTipText = $"{comboBoxCell.Items.Count} stycken böcker i sortimentet";
             }
         }
 

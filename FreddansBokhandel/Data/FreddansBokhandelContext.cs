@@ -27,6 +27,7 @@ namespace FreddansBokhandel
         public virtual DbSet<OrderDetail> Orderdetaljer { get; set; }
         public virtual DbSet<Order> Ordrar { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
