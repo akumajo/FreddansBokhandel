@@ -39,6 +39,7 @@ namespace FreddansBokhandel
         public virtual ICollection<BooksAuthors> BooksAuthors { get; set; } //BöckerFörfattare
         public virtual ICollection<StockBalance> StockBalance { get; set; } //Lagersaldo
         public virtual ICollection<OrderDetail> OrderDetails { get; set; } //Orderhuvud
+        public virtual Image Image { get; set; }
 
         public override string ToString()
         {

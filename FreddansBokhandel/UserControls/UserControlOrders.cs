@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace FreddansBokhandel
 {
@@ -50,6 +51,7 @@ namespace FreddansBokhandel
             {
                 MessageBox.Show("Kunde inte ladda in från databasen.");
             }
+
         }
 
         private void PopulateDataGridView()
@@ -143,7 +145,6 @@ namespace FreddansBokhandel
         private void CreateNewOrder()
         {
             FormAddNewOrder order = new FormAddNewOrder();
-
             order.ShowDialog();
             LoadOrdersFromDatabase();
         }
@@ -154,7 +155,7 @@ namespace FreddansBokhandel
             db.SaveChanges();
             LoadOrdersFromDatabase();
         }
-        
+
         private void Form1_EnterOrdersTab(object sender, EventArgs e)
         {
             LoadOrdersFromDatabase();

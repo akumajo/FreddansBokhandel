@@ -26,6 +26,7 @@ namespace FreddansBokhandel
         public virtual DbSet<StockBalance> LagerSaldo { get; set; }
         public virtual DbSet<OrderDetail> Orderdetaljer { get; set; }
         public virtual DbSet<Order> Ordrar { get; set; }
+        public virtual DbSet<Image> Bilder { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -47,6 +48,7 @@ namespace FreddansBokhandel
             new StockBalanceEntityTypeConfiguration().Configure(modelBuilder.Entity<StockBalance>());
             new OrderEntityTypeConfiguration().Configure(modelBuilder.Entity<Order>());
             new OrderDetailEntityTypeConfiguration().Configure(modelBuilder.Entity<OrderDetail>());
+            new ImageEntityTypeConfiguration().Configure(modelBuilder.Entity<Image>());
 
             OnModelCreatingPartial(modelBuilder);
         }

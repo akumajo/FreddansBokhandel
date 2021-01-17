@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace FreddansBokhandel
 {
@@ -16,6 +18,7 @@ namespace FreddansBokhandel
         private List<Book> books;
         Book selectedBook;
         FreddansBokhandelContext db;
+        int selectedBookIndex = 0;
 
         public UserControlBooks(FormMain form1)
         {
@@ -27,6 +30,7 @@ namespace FreddansBokhandel
         private void LoadBooksFromDatabase()
         {
             db = new FreddansBokhandelContext();
+
             if (db.Database.CanConnect())
             {
                 books = db.Böcker
@@ -36,6 +40,7 @@ namespace FreddansBokhandel
                      .ThenInclude(b => b.Store)
                      .Include(b => b.Publisher)
                      .Include(o => o.OrderDetails)
+                     .Include(i => i.Image)
                      .ToList();
             }
             else
@@ -66,8 +71,29 @@ namespace FreddansBokhandel
         {
             selectedStoreRow = 0;
             selectedBook = listBox1.SelectedItem as Book;
+            selectedBookIndex = listBox1.SelectedIndex;
             EnableButtons();
             ShowBookInfo();
+        }
+
+        private void LoadImage()
+        {
+            if (selectedBook.Image == null)
+            {
+                pictureBox1.Image = null;
+                buttonLoadImage.BringToFront();
+                return;
+            }
+
+            byte[] imageSource = selectedBook.Image.ImageArray;
+            Bitmap image;
+            using (MemoryStream stream = new MemoryStream(imageSource))
+            {
+                image = new Bitmap(stream);
+            }
+
+            pictureBox1.Image = image;
+            buttonLoadImage.SendToBack();
         }
 
         private void EnableButtons()
@@ -75,6 +101,7 @@ namespace FreddansBokhandel
             buttonAddBookToStock.Enabled = true;
             buttonUpdateBook.Enabled = true;
             buttonDeleteBook.Enabled = true;
+            buttonLoadImage.Enabled = true;
         }
 
         private void DisableButtons()
@@ -82,10 +109,12 @@ namespace FreddansBokhandel
             buttonAddBookToStock.Enabled = false;
             buttonUpdateBook.Enabled = false;
             buttonDeleteBook.Enabled = false;
+            buttonLoadImage.Enabled = false;
         }
 
         private void ShowBookInfo()
         {
+            LoadImage();
             textBoxAuthor.Text = null;
             textBoxTitle.Text = selectedBook.Title;
             textBoxPrice.Text = selectedBook.Price.ToString();
@@ -134,6 +163,12 @@ namespace FreddansBokhandel
             dataGridViewOverview.CurrentCell = dataGridViewOverview[0, selectedStoreRow];
         }
 
+        private void AfterAddedImage()
+        {
+            selectedBook = listBox1.Items[selectedBookIndex] as Book;
+            listBox1.SelectedItem = listBox1.Items[selectedBookIndex];
+        }
+
         private void UpdateBook()
         {
             var updateBook = new FormAddOrEditBook(books, selectedBook);
@@ -148,9 +183,9 @@ namespace FreddansBokhandel
             foreach (var item in selectedBook.StockBalance)
             {
                 if (selectedStore.Id == item.StoreID)
-                { 
-                    item.Balance += 1; 
-                }  
+                {
+                    item.Balance += 1;
+                }
             }
             db.SaveChanges();
             ShowStoreBalance(selectedBook);
@@ -196,6 +231,7 @@ namespace FreddansBokhandel
                     MessageBox.Show($"Boken togs bort. {book.Isbn}");
                     db.Remove(book);
                     db.SaveChanges();
+
                     LoadBooksFromDatabase();
                     PopulateListBox();
                 }
@@ -236,6 +272,8 @@ namespace FreddansBokhandel
 
         private void Form1_EnterBooksTab(object sender, EventArgs e)
         {
+            selectedBookIndex = 0;
+
             LoadBooksFromDatabase();
             PopulateListBox();
         }
@@ -249,8 +287,18 @@ namespace FreddansBokhandel
 
         private void buttonLoadImage_Click(object sender, EventArgs e)
         {
-            Class1 img = new Class1(selectedBook.Isbn);
-            img.yeah();
+            FetchImageFromWeb();
+            buttonLoadImage.Enabled = false;
+            LoadBooksFromDatabase();
+            PopulateListBox();
+            AfterAddedImage();
+            ShowBookInfo();
+        }
+
+        private void FetchImageFromWeb()
+        {
+            WebScraperLite img = new WebScraperLite(selectedBook.Isbn);
+            img.SaveImageToDatabase();
         }
     }
 }
