@@ -39,6 +39,7 @@ namespace FreddansBokhandel
                 {
                     MessageBox.Show("Kunde inte koppla upp mot databasen.");
                 }
+                db.Dispose();
             }
         }
 

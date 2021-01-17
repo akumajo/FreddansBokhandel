@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FreddansBokhandel
 {
@@ -22,14 +23,22 @@ namespace FreddansBokhandel
         {
             using (var db = new FreddansBokhandelContext())
             {
-                if (db.Database.CanConnect())
+                try
                 {
-                    employees = db.Anställda.Include(b => b.Stores).ToList();
+                    if (db.Database.CanConnect())
+                    {
+                        employees = db.Anställda.Include(b => b.Stores).ToList();
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("Kunde inte koppla upp mot databasen.");
+                    }
                 }
 
-                else
+                catch
                 {
-                    MessageBox.Show("Kunde inte koppla upp mot databasen.");
+                    return;
                 }
             }
         }

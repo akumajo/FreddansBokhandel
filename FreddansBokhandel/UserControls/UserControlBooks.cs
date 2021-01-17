@@ -31,21 +31,29 @@ namespace FreddansBokhandel
         {
             db = new FreddansBokhandelContext();
 
-            if (db.Database.CanConnect())
+            try
             {
-                books = db.Böcker
-                     .Include(a => a.BooksAuthors)
-                     .ThenInclude(b => b.Author)
-                     .Include(b => b.StockBalance)
-                     .ThenInclude(b => b.Store)
-                     .Include(b => b.Publisher)
-                     .Include(o => o.OrderDetails)
-                     .Include(i => i.Image)
-                     .ToList();
+                if (db.Database.CanConnect())
+                {
+                    books = db.Böcker
+                         .Include(a => a.BooksAuthors)
+                         .ThenInclude(b => b.Author)
+                         .Include(b => b.StockBalance)
+                         .ThenInclude(b => b.Store)
+                         .Include(b => b.Publisher)
+                         .Include(o => o.OrderDetails)
+                         .Include(i => i.Image)
+                         .ToList();
+                }
+                else
+                {
+                    MessageBox.Show("Kunde inte koppla upp mot databasen.");
+                }
             }
-            else
+
+            catch
             {
-                MessageBox.Show("Kunde inte koppla upp mot databasen.");
+                return;
             }
         }
 
@@ -282,7 +290,7 @@ namespace FreddansBokhandel
         {
             DisableButtons();
             ClearBookInfo();
-            db.Dispose();
+            if (db != null) { db.Dispose(); }
         }
 
         private void buttonLoadImage_Click(object sender, EventArgs e)

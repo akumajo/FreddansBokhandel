@@ -69,6 +69,5 @@ namespace FreddansBokhandel
             LoadPublishersFromDatabase();
             PopulateDataGridPublishers();
         }
-
     }
 }

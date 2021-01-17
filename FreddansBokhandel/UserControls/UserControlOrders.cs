@@ -29,29 +29,35 @@ namespace FreddansBokhandel
         {
             db = new FreddansBokhandelContext();
 
-            if (db.Database.CanConnect())
+            try
             {
-                orders = db.Ordrar
-                      .Include(o => o.OrderDetails)
-                      .Include(a => a.EmployeeIDs)
-                      .Include(b => b.Stores)
-                      .ThenInclude(ls => ls.StockBalance)
-                      .ThenInclude(i => i.IsbnNavigation)
-                      .OrderBy(b => b.OrderDate)
-                      .ToList();
-
-                foreach (var date in orders)
+                if (db.Database.CanConnect())
                 {
-                    orderDates.Add(date.OrderDate);
+                    orders = db.Ordrar
+                          .Include(o => o.OrderDetails)
+                          .Include(a => a.EmployeeIDs)
+                          .Include(b => b.Stores)
+                          .ThenInclude(ls => ls.StockBalance)
+                          .ThenInclude(i => i.IsbnNavigation)
+                          .OrderBy(b => b.OrderDate)
+                          .ToList();
+
+                    foreach (var date in orders)
+                    {
+                        orderDates.Add(date.OrderDate);
+                    }
+
+                    orderDates = orderDates.Distinct().ToList();
                 }
-
-                orderDates = orderDates.Distinct().ToList();
+                else
+                {
+                    MessageBox.Show("Kunde inte ladda in från databasen.");
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("Kunde inte ladda in från databasen.");
+                return;
             }
-
         }
 
         private void PopulateDataGridView()
@@ -154,17 +160,19 @@ namespace FreddansBokhandel
             db.Remove(selectedOrder);
             db.SaveChanges();
             LoadOrdersFromDatabase();
+            buttonCreateOrder.Enabled = false;
         }
 
         private void Form1_EnterOrdersTab(object sender, EventArgs e)
         {
             LoadOrdersFromDatabase();
             PopulateTreeNodeOrders(orders);
+            buttonCreateOrder.Enabled = true;
         }
 
         private void Form1_LeaveOrdersTab(object sender, EventArgs e)
         {
-            db.Dispose();
+            if (db != null) { db.Dispose(); }
         }
 
         private void buttonCreateOrder_Click(object sender, EventArgs e)
@@ -182,12 +190,12 @@ namespace FreddansBokhandel
         private void treeViewOrders_AfterSelect(object sender, TreeViewEventArgs e)
         {
             SelectingANode();
+            buttonCreateOrder.Enabled = true;
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             SearchOrders();
         }
-
     }
 }
