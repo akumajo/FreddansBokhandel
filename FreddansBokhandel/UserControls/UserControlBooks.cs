@@ -246,5 +246,11 @@ namespace FreddansBokhandel
             ClearBookInfo();
             db.Dispose();
         }
+
+        private void buttonLoadImage_Click(object sender, EventArgs e)
+        {
+            Class1 img = new Class1(selectedBook.Isbn);
+            img.yeah();
+        }
     }
 }

@@ -59,6 +59,7 @@
             this.Butik = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Antal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Lagervärde = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonLoadImage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -206,6 +207,7 @@
             // 
             // splitContainer3.Panel1
             // 
+            this.splitContainer3.Panel1.Controls.Add(this.buttonLoadImage);
             this.splitContainer3.Panel1.Controls.Add(this.textBoxAuthor);
             this.splitContainer3.Panel1.Controls.Add(this.textBoxTitle);
             this.splitContainer3.Panel1.Controls.Add(this.textBoxPublisher);
@@ -444,6 +446,16 @@
             this.Lagervärde.Name = "Lagervärde";
             this.Lagervärde.ReadOnly = true;
             // 
+            // buttonLoadImage
+            // 
+            this.buttonLoadImage.Location = new System.Drawing.Point(93, 204);
+            this.buttonLoadImage.Name = "buttonLoadImage";
+            this.buttonLoadImage.Size = new System.Drawing.Size(75, 23);
+            this.buttonLoadImage.TabIndex = 9;
+            this.buttonLoadImage.Text = "button1";
+            this.buttonLoadImage.UseVisualStyleBackColor = true;
+            this.buttonLoadImage.Click += new System.EventHandler(this.buttonLoadImage_Click);
+            // 
             // UserControlBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -507,5 +519,6 @@
         private System.Windows.Forms.TextBox textBoxAuthor;
         private System.Windows.Forms.TextBox textBoxTitle;
         private System.Windows.Forms.Button buttonDeleteBook;
+        private System.Windows.Forms.Button buttonLoadImage;
     }
 }
