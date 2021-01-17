@@ -170,9 +170,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(1, 1);
+            this.listBox1.Location = new System.Drawing.Point(1, 11);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(391, 394);
+            this.listBox1.Size = new System.Drawing.Size(391, 379);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -235,14 +235,14 @@
             // 
             this.splitContainer3.Panel2.Controls.Add(this.dataGridViewOverview);
             this.splitContainer3.Size = new System.Drawing.Size(572, 485);
-            this.splitContainer3.SplitterDistance = 360;
+            this.splitContainer3.SplitterDistance = 370;
             this.splitContainer3.TabIndex = 0;
             this.splitContainer3.Text = "splitContainer3";
             // 
             // buttonLoadImage
             // 
             this.buttonLoadImage.Enabled = false;
-            this.buttonLoadImage.Location = new System.Drawing.Point(4, 39);
+            this.buttonLoadImage.Location = new System.Drawing.Point(4, 48);
             this.buttonLoadImage.Name = "buttonLoadImage";
             this.buttonLoadImage.Size = new System.Drawing.Size(236, 318);
             this.buttonLoadImage.TabIndex = 9;
@@ -252,7 +252,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(4, 39);
+            this.pictureBox1.Location = new System.Drawing.Point(4, 48);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(236, 319);
             this.pictureBox1.TabIndex = 10;
@@ -262,10 +262,10 @@
             // 
             this.textBoxAuthor.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxAuthor.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxAuthor.Location = new System.Drawing.Point(246, 39);
+            this.textBoxAuthor.Location = new System.Drawing.Point(4, 30);
             this.textBoxAuthor.Name = "textBoxAuthor";
             this.textBoxAuthor.ReadOnly = true;
-            this.textBoxAuthor.Size = new System.Drawing.Size(300, 16);
+            this.textBoxAuthor.Size = new System.Drawing.Size(477, 16);
             this.textBoxAuthor.TabIndex = 8;
             // 
             // textBoxTitle
@@ -282,7 +282,7 @@
             // 
             this.textBoxPublisher.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxPublisher.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxPublisher.Location = new System.Drawing.Point(287, 245);
+            this.textBoxPublisher.Location = new System.Drawing.Point(287, 225);
             this.textBoxPublisher.Name = "textBoxPublisher";
             this.textBoxPublisher.Size = new System.Drawing.Size(180, 16);
             this.textBoxPublisher.TabIndex = 8;
@@ -290,7 +290,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(245, 245);
+            this.label1.Location = new System.Drawing.Point(245, 225);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 15);
             this.label1.TabIndex = 1;
@@ -322,7 +322,7 @@
             // 
             this.textBoxReleaseDate.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxReleaseDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxReleaseDate.Location = new System.Drawing.Point(290, 128);
+            this.textBoxReleaseDate.Location = new System.Drawing.Point(290, 108);
             this.textBoxReleaseDate.Name = "textBoxReleaseDate";
             this.textBoxReleaseDate.Size = new System.Drawing.Size(147, 16);
             this.textBoxReleaseDate.TabIndex = 8;
@@ -331,7 +331,7 @@
             // 
             this.textBoxISBN.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxISBN.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxISBN.Location = new System.Drawing.Point(279, 99);
+            this.textBoxISBN.Location = new System.Drawing.Point(279, 79);
             this.textBoxISBN.Name = "textBoxISBN";
             this.textBoxISBN.ReadOnly = true;
             this.textBoxISBN.Size = new System.Drawing.Size(147, 16);
@@ -341,7 +341,7 @@
             // 
             this.textBoxPages.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxPages.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxPages.Location = new System.Drawing.Point(281, 70);
+            this.textBoxPages.Location = new System.Drawing.Point(281, 50);
             this.textBoxPages.Name = "textBoxPages";
             this.textBoxPages.Size = new System.Drawing.Size(147, 16);
             this.textBoxPages.TabIndex = 8;
@@ -350,7 +350,7 @@
             // 
             this.textBoxLanguage.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxLanguage.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxLanguage.Location = new System.Drawing.Point(283, 216);
+            this.textBoxLanguage.Location = new System.Drawing.Point(283, 196);
             this.textBoxLanguage.Name = "textBoxLanguage";
             this.textBoxLanguage.Size = new System.Drawing.Size(147, 16);
             this.textBoxLanguage.TabIndex = 8;
@@ -359,7 +359,7 @@
             // 
             this.textBoxFormat.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxFormat.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxFormat.Location = new System.Drawing.Point(292, 187);
+            this.textBoxFormat.Location = new System.Drawing.Point(292, 167);
             this.textBoxFormat.Name = "textBoxFormat";
             this.textBoxFormat.Size = new System.Drawing.Size(147, 16);
             this.textBoxFormat.TabIndex = 8;
@@ -368,7 +368,7 @@
             // 
             this.textBoxPrice.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxPrice.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxPrice.Location = new System.Drawing.Point(273, 157);
+            this.textBoxPrice.Location = new System.Drawing.Point(273, 137);
             this.textBoxPrice.Name = "textBoxPrice";
             this.textBoxPrice.Size = new System.Drawing.Size(147, 16);
             this.textBoxPrice.TabIndex = 8;
@@ -376,7 +376,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(245, 99);
+            this.label7.Location = new System.Drawing.Point(245, 79);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(116, 15);
             this.label7.TabIndex = 6;
@@ -385,7 +385,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(245, 187);
+            this.label6.Location = new System.Drawing.Point(245, 167);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(71, 15);
             this.label6.TabIndex = 5;
@@ -394,7 +394,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(245, 70);
+            this.label5.Location = new System.Drawing.Point(245, 50);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 15);
             this.label5.TabIndex = 4;
@@ -403,7 +403,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(245, 128);
+            this.label4.Location = new System.Drawing.Point(245, 108);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(107, 15);
             this.label4.TabIndex = 3;
@@ -412,7 +412,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(245, 157);
+            this.label3.Location = new System.Drawing.Point(245, 137);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 15);
             this.label3.TabIndex = 2;
@@ -421,7 +421,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(245, 216);
+            this.label2.Location = new System.Drawing.Point(245, 196);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 15);
             this.label2.TabIndex = 1;
@@ -447,7 +447,7 @@
             this.dataGridViewOverview.ReadOnly = true;
             this.dataGridViewOverview.RowHeadersVisible = false;
             this.dataGridViewOverview.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewOverview.Size = new System.Drawing.Size(572, 121);
+            this.dataGridViewOverview.Size = new System.Drawing.Size(572, 111);
             this.dataGridViewOverview.TabIndex = 0;
             this.dataGridViewOverview.Text = "dataGridView1";
             // 

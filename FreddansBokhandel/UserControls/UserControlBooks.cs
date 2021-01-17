@@ -60,6 +60,7 @@ namespace FreddansBokhandel
         private void PopulateListBox()
         {
             selectedBook = null;
+            buttonLoadImage.BringToFront();
             listBox1.Items.Clear();
 
             foreach (var book in books)
@@ -144,6 +145,7 @@ namespace FreddansBokhandel
 
         private void ClearBookInfo()
         {
+            pictureBox1.Image = null;
             textBoxAuthor.Text = null;
             textBoxTitle.Text = null;
             textBoxPrice.Text = null;

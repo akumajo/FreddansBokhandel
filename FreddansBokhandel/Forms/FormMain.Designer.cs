@@ -117,6 +117,7 @@
             this.ClientSize = new System.Drawing.Size(1008, 537);
             this.Controls.Add(this.tabControl);
             this.Name = "FormMain";
+            this.ShowIcon = false;
             this.Text = "Freddans Bokhandel";
             this.tabControl.ResumeLayout(false);
             this.ResumeLayout(false);
