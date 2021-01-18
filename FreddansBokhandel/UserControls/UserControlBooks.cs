@@ -239,6 +239,8 @@ namespace FreddansBokhandel
                 else
                 {
                     MessageBox.Show($"Boken togs bort. {book.Isbn}");
+                    db.Remove(book.Image);
+                    db.SaveChanges();
                     db.Remove(book);
                     db.SaveChanges();
 
@@ -266,6 +268,8 @@ namespace FreddansBokhandel
         private void buttonUpdateBook_Click(object sender, EventArgs e)
         {
             UpdateBook();
+            LoadBooksFromDatabase();
+            PopulateListBox();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

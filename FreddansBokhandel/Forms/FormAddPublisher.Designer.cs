@@ -33,7 +33,7 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBoxPostNo = new System.Windows.Forms.TextBox();
+            this.textBoxZipCode = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxCountry = new System.Windows.Forms.TextBox();
@@ -85,10 +85,10 @@
             // 
             // textBoxPostNo
             // 
-            this.textBoxPostNo.Location = new System.Drawing.Point(93, 64);
-            this.textBoxPostNo.Name = "textBoxPostNo";
-            this.textBoxPostNo.Size = new System.Drawing.Size(80, 23);
-            this.textBoxPostNo.TabIndex = 3;
+            this.textBoxZipCode.Location = new System.Drawing.Point(93, 64);
+            this.textBoxZipCode.Name = "textBoxPostNo";
+            this.textBoxZipCode.Size = new System.Drawing.Size(80, 23);
+            this.textBoxZipCode.TabIndex = 3;
             // 
             // label6
             // 
@@ -141,7 +141,7 @@
             this.Controls.Add(this.textBoxCountry);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBoxPostNo);
+            this.Controls.Add(this.textBoxZipCode);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxName);
@@ -164,7 +164,7 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxPostNo;
+        private System.Windows.Forms.TextBox textBoxZipCode;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxCountry;

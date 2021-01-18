@@ -14,6 +14,7 @@ namespace FreddansBokhandel
     public partial class UserControlEmployees : UserControl
     {
         List<Employee> employees;
+        Employee selectedEmployee;
         public UserControlEmployees()
         {
             InitializeComponent();
@@ -66,7 +67,8 @@ namespace FreddansBokhandel
 
         private void CreateNewEmployee()
         {
-            FormAddEmployee newEmployee = new FormAddEmployee(employees.Count);
+            selectedEmployee = null;
+            FormAddorEditEmployee newEmployee = new FormAddorEditEmployee(selectedEmployee);
             newEmployee.ShowDialog();
         }
 
@@ -81,6 +83,32 @@ namespace FreddansBokhandel
         {
             LoadEmployeesFromDatabase();
             PopulateDataGridEmployees();
+        }
+
+        private void buttonEditEmployee_Click(object sender, EventArgs e)
+        {
+            EditEmployee();
+        }
+
+        private void EditEmployee()
+        {
+            FormAddorEditEmployee newEmployee = new FormAddorEditEmployee(selectedEmployee);
+            newEmployee.ShowDialog();
+        }
+
+        private void SelectingARow()
+        {
+            if (dataGridViewEmployees.CurrentCell == null) { return; }
+            if (dataGridViewEmployees.SelectedRows.Count < 1) { return; }
+
+            buttonEditEmployee.Enabled = true;
+            int selectedIndex = dataGridViewEmployees.SelectedRows[0].Index;
+            selectedEmployee = dataGridViewEmployees.Rows[selectedIndex].Tag as Employee;
+        }
+
+        private void dataGridViewEmployees_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            SelectingARow();
         }
     }
 }

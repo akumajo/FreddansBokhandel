@@ -1,6 +1,6 @@
 ﻿namespace FreddansBokhandel
 {
-    partial class FormAddEmployee
+    partial class FormAddorEditEmployee
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxAddress = new System.Windows.Forms.TextBox();
             this.buttonAddEmployee = new System.Windows.Forms.Button();
-            this.textBoxSurName = new System.Windows.Forms.TextBox();
+            this.textBoxFirstName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,7 +41,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBoxPostalNo = new System.Windows.Forms.TextBox();
+            this.textBoxZipCode = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -84,14 +84,14 @@
             this.buttonAddEmployee.TabIndex = 12;
             this.buttonAddEmployee.Text = "Lägg till";
             this.buttonAddEmployee.UseVisualStyleBackColor = true;
-            this.buttonAddEmployee.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAddEmployee.Click += new System.EventHandler(this.buttonAddEmployee_Click);
             // 
             // textBoxSurName
             // 
-            this.textBoxSurName.Location = new System.Drawing.Point(94, 6);
-            this.textBoxSurName.Name = "textBoxSurName";
-            this.textBoxSurName.Size = new System.Drawing.Size(204, 23);
-            this.textBoxSurName.TabIndex = 1;
+            this.textBoxFirstName.Location = new System.Drawing.Point(94, 6);
+            this.textBoxFirstName.Name = "textBoxSurName";
+            this.textBoxFirstName.Size = new System.Drawing.Size(204, 23);
+            this.textBoxFirstName.TabIndex = 1;
             // 
             // label2
             // 
@@ -165,10 +165,10 @@
             // 
             // textBoxPostalNo
             // 
-            this.textBoxPostalNo.Location = new System.Drawing.Point(94, 64);
-            this.textBoxPostalNo.Name = "textBoxPostalNo";
-            this.textBoxPostalNo.Size = new System.Drawing.Size(80, 23);
-            this.textBoxPostalNo.TabIndex = 5;
+            this.textBoxZipCode.Location = new System.Drawing.Point(94, 64);
+            this.textBoxZipCode.Name = "textBoxPostalNo";
+            this.textBoxZipCode.Size = new System.Drawing.Size(80, 23);
+            this.textBoxZipCode.TabIndex = 5;
             // 
             // label7
             // 
@@ -259,7 +259,7 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.textBoxEmail);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBoxPostalNo);
+            this.Controls.Add(this.textBoxZipCode);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.label5);
@@ -268,7 +268,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBoxSurName);
+            this.Controls.Add(this.textBoxFirstName);
             this.Controls.Add(this.buttonAddEmployee);
             this.Controls.Add(this.textBoxAddress);
             this.Controls.Add(this.label1);
@@ -291,7 +291,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.Button buttonAddEmployee;
-        private System.Windows.Forms.TextBox textBoxSurName;
+        private System.Windows.Forms.TextBox textBoxFirstName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label3;
@@ -300,7 +300,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBoxPostalNo;
+        private System.Windows.Forms.TextBox textBoxZipCode;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxEmail;
         private System.Windows.Forms.Label label8;

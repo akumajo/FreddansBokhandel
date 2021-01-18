@@ -13,10 +13,19 @@ namespace FreddansBokhandel
     public partial class UserControlAuthors : UserControl
     {
         List<Author> authors;
+        Author selectedAuthor;
 
-        public UserControlAuthors()
+        public UserControlAuthors(FormMain form)
         {
             InitializeComponent();
+            form.EnterAuthorsTab += Form_EnterAuthorsTab;
+        }
+
+        private void Form_EnterAuthorsTab(object sender, EventArgs e)
+        {
+            dataGridViewAuthors.CurrentCell = null;
+            LoadAuthorsFromDatabase();
+            PopulateDataGridAuthors();
         }
 
         private string ReturnAuthorBirthdate(Author author)
@@ -46,6 +55,7 @@ namespace FreddansBokhandel
         private void PopulateDataGridAuthors()
         {
             dataGridViewAuthors.Rows.Clear();
+
             foreach (var author in authors)
             {
                 int rowIndex = dataGridViewAuthors.Rows.Add();
@@ -55,6 +65,7 @@ namespace FreddansBokhandel
                 dataGridViewAuthors.Rows[rowIndex].Cells["Namn"].Value = $"{author.FirstName} {author.LastName}";
                 dataGridViewAuthors.Rows[rowIndex].Cells["Land"].Value = author.Country;
                 dataGridViewAuthors.Rows[rowIndex].Cells["Födelsedatum"].Value = ReturnAuthorBirthdate(author);
+                dataGridViewAuthors.Rows[rowIndex].Tag = author;
 
                 foreach (var book in author.BooksAuthors)
                 {
@@ -67,14 +78,9 @@ namespace FreddansBokhandel
 
         private void AddNewAuthor()
         {
-            FormAddNewAuthor newAuthor = new FormAddNewAuthor(authors);
+            selectedAuthor = null;
+            FormAddorEditNewAuthor newAuthor = new FormAddorEditNewAuthor(authors, selectedAuthor);
             newAuthor.ShowDialog();
-        }
-
-        private void UserControlAuthors_Load(object sender, EventArgs e)
-        {
-            LoadAuthorsFromDatabase();
-            PopulateDataGridAuthors();
         }
 
         private void buttonAddAuthor_Click(object sender, EventArgs e)
@@ -82,6 +88,35 @@ namespace FreddansBokhandel
             AddNewAuthor();
             LoadAuthorsFromDatabase();
             PopulateDataGridAuthors();
+        }
+
+        private void buttonEditAuthor_Click(object sender, EventArgs e)
+        {
+            EditAuthor();
+            LoadAuthorsFromDatabase();
+            PopulateDataGridAuthors();
+        }
+
+        private void EditAuthor()
+        {
+            FormAddorEditNewAuthor newAuthor = new FormAddorEditNewAuthor(authors, selectedAuthor);
+            newAuthor.ShowDialog();
+
+        }
+
+        private void SelectingARow()
+        {
+            if (dataGridViewAuthors.CurrentCell == null) { return; }
+            if (dataGridViewAuthors.SelectedRows.Count < 1) { return; }
+
+            buttonEditAuthor.Enabled = true;
+            int selectedIndex = dataGridViewAuthors.SelectedRows[0].Index;
+            selectedAuthor = dataGridViewAuthors.Rows[selectedIndex].Tag as Author;
+        }
+
+        private void dataGridViewAuthors_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            SelectingARow();
         }
     }
 }

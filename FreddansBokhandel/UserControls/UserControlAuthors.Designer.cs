@@ -35,6 +35,7 @@
             this.Födelsedatum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Land = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Böcker = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.buttonEditAuthor = new System.Windows.Forms.Button();
             this.buttonAddAuthor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -58,6 +59,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.buttonEditAuthor);
             this.splitContainer1.Panel2.Controls.Add(this.buttonAddAuthor);
             this.splitContainer1.Size = new System.Drawing.Size(1076, 585);
             this.splitContainer1.SplitterDistance = 540;
@@ -84,6 +86,7 @@
             this.dataGridViewAuthors.Size = new System.Drawing.Size(1076, 540);
             this.dataGridViewAuthors.TabIndex = 0;
             this.dataGridViewAuthors.Text = "dataGridView1";
+            this.dataGridViewAuthors.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewAuthors_RowStateChanged);
             // 
             // ID
             // 
@@ -120,6 +123,17 @@
             this.Böcker.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Böcker.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // buttonEditAuthor
+            // 
+            this.buttonEditAuthor.Enabled = false;
+            this.buttonEditAuthor.Location = new System.Drawing.Point(106, 4);
+            this.buttonEditAuthor.Name = "buttonEditAuthor";
+            this.buttonEditAuthor.Size = new System.Drawing.Size(100, 34);
+            this.buttonEditAuthor.TabIndex = 1;
+            this.buttonEditAuthor.Text = "Ändra";
+            this.buttonEditAuthor.UseVisualStyleBackColor = true;
+            this.buttonEditAuthor.Click += new System.EventHandler(this.buttonEditAuthor_Click);
+            // 
             // buttonAddAuthor
             // 
             this.buttonAddAuthor.Location = new System.Drawing.Point(0, 4);
@@ -137,7 +151,6 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "UserControlAuthors";
             this.Size = new System.Drawing.Size(1076, 585);
-            this.Load += new System.EventHandler(this.UserControlAuthors_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -157,5 +170,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Födelsedatum;
         private System.Windows.Forms.DataGridViewTextBoxColumn Land;
         private System.Windows.Forms.DataGridViewComboBoxColumn Böcker;
+        private System.Windows.Forms.Button buttonEditAuthor;
     }
 }

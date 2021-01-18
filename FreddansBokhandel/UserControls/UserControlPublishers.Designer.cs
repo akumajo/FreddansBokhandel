@@ -37,6 +37,7 @@
             this.Postort = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Land = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonAddPublisher = new System.Windows.Forms.Button();
+            this.buttonEditPublisher = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -59,13 +60,14 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.buttonEditPublisher);
             this.splitContainer1.Panel2.Controls.Add(this.buttonAddPublisher);
             this.splitContainer1.Size = new System.Drawing.Size(1076, 585);
             this.splitContainer1.SplitterDistance = 540;
             this.splitContainer1.TabIndex = 0;
             this.splitContainer1.Text = "splitContainer1";
             // 
-            // dataGridView1
+            // dataGridViewPublishers
             // 
             this.dataGridViewPublishers.AllowUserToAddRows = false;
             this.dataGridViewPublishers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -80,13 +82,14 @@
             this.dataGridViewPublishers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewPublishers.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewPublishers.MultiSelect = false;
-            this.dataGridViewPublishers.Name = "dataGridView1";
+            this.dataGridViewPublishers.Name = "dataGridViewPublishers";
             this.dataGridViewPublishers.ReadOnly = true;
             this.dataGridViewPublishers.RowHeadersVisible = false;
             this.dataGridViewPublishers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewPublishers.Size = new System.Drawing.Size(1076, 540);
             this.dataGridViewPublishers.TabIndex = 0;
             this.dataGridViewPublishers.Text = "dataGridView1";
+            this.dataGridViewPublishers.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewPublishers_RowStateChanged);
             // 
             // ID
             // 
@@ -134,6 +137,16 @@
             this.buttonAddPublisher.UseVisualStyleBackColor = true;
             this.buttonAddPublisher.Click += new System.EventHandler(this.buttonAddPublisher_Click);
             // 
+            // buttonEditPublisher
+            // 
+            this.buttonEditPublisher.Location = new System.Drawing.Point(107, 4);
+            this.buttonEditPublisher.Name = "buttonEditPublisher";
+            this.buttonEditPublisher.Size = new System.Drawing.Size(100, 34);
+            this.buttonEditPublisher.TabIndex = 1;
+            this.buttonEditPublisher.Text = "Ändra";
+            this.buttonEditPublisher.UseVisualStyleBackColor = true;
+            this.buttonEditPublisher.Click += new System.EventHandler(this.buttonEditPublisher_Click);
+            // 
             // UserControlPublishers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -162,5 +175,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Postort;
         private System.Windows.Forms.DataGridViewTextBoxColumn Land;
         private System.Windows.Forms.Button buttonAddPublisher;
+        private System.Windows.Forms.Button buttonEditPublisher;
     }
 }

@@ -13,6 +13,7 @@ namespace FreddansBokhandel
     public partial class UserControlPublishers : UserControl
     {
         List<Publisher> publishers;
+        Publisher selectedPublisher;
 
         public UserControlPublishers()
         {
@@ -48,12 +49,14 @@ namespace FreddansBokhandel
                 dataGridViewPublishers.Rows[rowIndex].Cells["Postnr"].Value = publisher.ZipCode;
                 dataGridViewPublishers.Rows[rowIndex].Cells["Postort"].Value = publisher.PostalAddress;
                 dataGridViewPublishers.Rows[rowIndex].Cells["Land"].Value = publisher.Country;
+                dataGridViewPublishers.Rows[rowIndex].Tag = publisher;
             }
         }
 
-        private void AddNewEmployee()
+        private void AddNewPublishers()
         {
-            FormAddPublisher newPublisher = new FormAddPublisher(publishers);
+            selectedPublisher = null;
+            FormAddPublisher newPublisher = new FormAddPublisher(publishers, selectedPublisher);
             newPublisher.ShowDialog();
         }
 
@@ -65,9 +68,36 @@ namespace FreddansBokhandel
 
         private void buttonAddPublisher_Click(object sender, EventArgs e)
         {
-            AddNewEmployee();
+            AddNewPublishers();
             LoadPublishersFromDatabase();
             PopulateDataGridPublishers();
+        }
+
+        private void buttonEditPublisher_Click(object sender, EventArgs e)
+        {
+            EditEmployee();
+            LoadPublishersFromDatabase();
+            PopulateDataGridPublishers();
+        }
+        private void EditEmployee()
+        {
+            FormAddPublisher newPublisher = new FormAddPublisher(publishers, selectedPublisher);
+            newPublisher.ShowDialog();
+        }
+
+        private void SelectingARow()
+        {
+            if (dataGridViewPublishers.CurrentCell == null) { return; }
+            if (dataGridViewPublishers.SelectedRows.Count < 1) { return; }
+
+            buttonEditPublisher.Enabled = true;
+            int selectedIndex = dataGridViewPublishers.SelectedRows[0].Index;
+            selectedPublisher = dataGridViewPublishers.Rows[selectedIndex].Tag as Publisher;
+        }
+
+        private void dataGridViewPublishers_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            SelectingARow();
         }
     }
 }

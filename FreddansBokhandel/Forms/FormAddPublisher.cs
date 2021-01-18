@@ -11,10 +11,28 @@ namespace FreddansBokhandel
     public partial class FormAddPublisher : Form
     {
         List<Publisher> publishers;
-        public FormAddPublisher(List<Publisher> _publishers)
+        Publisher selectedPublisher;
+
+        public FormAddPublisher(List<Publisher> _publishers, Publisher _selectedPublisher)
         {
             InitializeComponent();
             publishers = _publishers;
+            selectedPublisher = _selectedPublisher;
+
+            if(selectedPublisher != null)
+            {
+                Text = "Ändra förlag";
+                SetValuesOnEditMode();
+            }
+        }
+        private int SetPublisherID()
+        {
+            if (selectedPublisher == null)
+            {
+                return selectedPublisher.Id + 1;
+            }
+
+            return selectedPublisher.Id;
         }
 
         private bool DoesPublisherExists()
@@ -35,9 +53,18 @@ namespace FreddansBokhandel
             return true;
         }
 
-        private void AddPublishers()
+        private void SetValuesOnEditMode()
         {
-            if (DoesPublisherExists() == false) { MessageBox.Show("Författaren finns redan i systemet."); return; }
+            textBoxName.Text = selectedPublisher.Name;
+            textBoxAddress.Text = selectedPublisher.Address;
+            textBoxZipCode.Text = selectedPublisher.ZipCode;
+            textBoxPostalAdress.Text = selectedPublisher.PostalAddress;
+            textBoxCountry.Text = selectedPublisher.Country;
+        }
+
+        private void AddorEditPublishers()
+        {
+            if (DoesPublisherExists() == false && selectedPublisher == null) { MessageBox.Show("Författaren finns redan i systemet."); return; }
             if (CheckIfNameIsEmpty() == false) { MessageBox.Show("Namnfältet är tomt. Försök igen."); return; }
 
             using (var db = new FreddansBokhandelContext())
@@ -46,15 +73,17 @@ namespace FreddansBokhandel
                 {
                     var newPublisher = new Publisher
                     {
-                        Id = publishers.Count + 1,
+                        Id = SetPublisherID(),
                         Name = textBoxName.Text.Trim(),
                         Address = textBoxAddress.Text.Trim(),
-                        ZipCode = textBoxPostNo.Text.Trim(),
+                        ZipCode = textBoxZipCode.Text.Trim(),
                         PostalAddress = textBoxPostalAdress.Text.Trim(),
                         Country = textBoxCountry.Text.Trim()
                     };
 
-                    db.Add(newPublisher);
+                    if (selectedPublisher == null) { db.Add(newPublisher); }
+                    else { db.Update(newPublisher); }
+
                     db.SaveChanges();
                     Close();
                 }
@@ -63,7 +92,7 @@ namespace FreddansBokhandel
 
         private void buttonAddPublisher_Click(object sender, EventArgs e)
         {
-            AddPublishers();
+            AddorEditPublishers();
         }
     }
 }

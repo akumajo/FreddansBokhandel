@@ -11,25 +11,40 @@ using System.Windows.Forms;
 
 namespace FreddansBokhandel
 {
-    public partial class FormAddEmployee : Form
+    public partial class FormAddorEditEmployee : Form
     {
-        int numberOfEmployees = 0;
         List<Store> stores;
-        public FormAddEmployee(int _numberOfEmployees)
+        Employee selectedEmployee;
+        public FormAddorEditEmployee(Employee _selectedEmployee)
         {
             InitializeComponent();
-            numberOfEmployees = _numberOfEmployees;
+            selectedEmployee = _selectedEmployee;
+
+            if (selectedEmployee != null)
+            {
+                Text = "Ändra anställd";
+                SetValuesOnEditMode();
+            }
+        }
+        private int SetEmployeeID()
+        {
+            if (selectedEmployee == null)
+            {
+                return selectedEmployee.Id + 1;
+            }
+
+            return selectedEmployee.Id;
         }
 
         private bool CheckIfEmployeeCanBeAdded()
         {
             Regex reg = new Regex("^[0-9]+$");
 
-            if (textBoxSurName.Text.Trim() == "") { return false; }
+            if (textBoxFirstName.Text.Trim() == "") { return false; }
             if (textBoxLastName.Text.Trim() == "") { return false; }
             if (dateTimePicker1.Value == null) { return false; }
             if (textBoxAddress.Text.Trim() == "") { return false; }
-            if (textBoxPostalNo.Text.Trim() == "") { return false; }
+            if (textBoxZipCode.Text.Trim() == "") { return false; }
             if (textBoxPostAddress.Text.Trim() == "") { return false; }
             if (textBoxEmail.Text.Trim() == "") { return false; }
             if (textBoxTelephone.Text.Trim() == "" || reg.IsMatch(textBoxTelephone.Text) == false) { return false; }
@@ -75,9 +90,21 @@ namespace FreddansBokhandel
             }
         }
 
-        private void AddNewEmployee()
+        private void SetValuesOnEditMode()
         {
+            textBoxFirstName.Text = selectedEmployee.FirstName;
+            textBoxLastName.Text = selectedEmployee.LastName;
+            dateTimePicker1.Value = selectedEmployee.DateOfBirth;
+            textBoxAddress.Text = selectedEmployee.Address;
+            textBoxZipCode.Text = selectedEmployee.ZipCode;
+            textBoxPostAddress.Text = selectedEmployee.PostalAdress;
+            dateTimePicker2.Value = selectedEmployee.HireDate;
+            textBoxEmail.Text = selectedEmployee.Email;
+            textBoxTelephone.Text = selectedEmployee.Telephone;
+        }
 
+        private void AddOrEditEmployee()
+        {
             var store = comboBoxStores.SelectedItem as Store;
 
             if (CheckIfEmployeeCanBeAdded() == false) { MessageBox.Show("Ett eller flera fält är tomma eller i fel format. Försök igen."); return; }
@@ -89,12 +116,12 @@ namespace FreddansBokhandel
                 {
                     var newEmployee = new Employee
                     {
-                        Id = numberOfEmployees + 1,
-                        FirstName = textBoxSurName.Text.Trim(),
+                        Id = SetEmployeeID(),
+                        FirstName = textBoxFirstName.Text.Trim(),
                         LastName = textBoxLastName.Text.Trim(),
                         DateOfBirth = dateTimePicker1.Value,
                         Address = textBoxAddress.Text.Trim(),
-                        ZipCode = textBoxPostalNo.Text.Trim(),
+                        ZipCode = textBoxZipCode.Text.Trim(),
                         PostalAdress = textBoxPostAddress.Text.Trim(),
                         HireDate = dateTimePicker2.Value,
                         Email = textBoxEmail.Text.Trim(),
@@ -103,7 +130,9 @@ namespace FreddansBokhandel
                         Role = comboBoxRole.SelectedItem.ToString()
                     };
 
-                    db.Add(newEmployee);
+                    if (selectedEmployee == null) { db.Add(newEmployee); }
+                    else { db.Update(newEmployee); }
+
                     db.SaveChanges();
                     Close();
                 }
@@ -116,9 +145,9 @@ namespace FreddansBokhandel
             PopulateStoreComboBox();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonAddEmployee_Click(object sender, EventArgs e)
         {
-            AddNewEmployee();
+            AddOrEditEmployee();
         }
     }
 }

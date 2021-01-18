@@ -41,6 +41,7 @@
             this.Postnr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Postadress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonAddEmployee = new System.Windows.Forms.Button();
+            this.buttonEditEmployee = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -63,13 +64,14 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.buttonEditEmployee);
             this.splitContainer1.Panel2.Controls.Add(this.buttonAddEmployee);
             this.splitContainer1.Size = new System.Drawing.Size(1076, 585);
             this.splitContainer1.SplitterDistance = 540;
             this.splitContainer1.TabIndex = 0;
             this.splitContainer1.Text = "splitContainer1";
             // 
-            // dataGridView1
+            // dataGridViewEmployees
             // 
             this.dataGridViewEmployees.AllowUserToAddRows = false;
             this.dataGridViewEmployees.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -88,13 +90,14 @@
             this.dataGridViewEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewEmployees.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewEmployees.MultiSelect = false;
-            this.dataGridViewEmployees.Name = "dataGridView1";
+            this.dataGridViewEmployees.Name = "dataGridViewEmployees";
             this.dataGridViewEmployees.ReadOnly = true;
             this.dataGridViewEmployees.RowHeadersVisible = false;
             this.dataGridViewEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewEmployees.Size = new System.Drawing.Size(1076, 540);
             this.dataGridViewEmployees.TabIndex = 0;
             this.dataGridViewEmployees.Text = "dataGridView1";
+            this.dataGridViewEmployees.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewEmployees_RowStateChanged);
             // 
             // ID
             // 
@@ -186,6 +189,17 @@
             this.buttonAddEmployee.UseVisualStyleBackColor = true;
             this.buttonAddEmployee.Click += new System.EventHandler(this.buttonAddEmployee_Click);
             // 
+            // button1
+            // 
+            this.buttonEditEmployee.Enabled = false;
+            this.buttonEditEmployee.Location = new System.Drawing.Point(107, 4);
+            this.buttonEditEmployee.Name = "button1";
+            this.buttonEditEmployee.Size = new System.Drawing.Size(100, 34);
+            this.buttonEditEmployee.TabIndex = 1;
+            this.buttonEditEmployee.Text = "Ändra";
+            this.buttonEditEmployee.UseVisualStyleBackColor = true;
+            this.buttonEditEmployee.Click += new System.EventHandler(this.buttonEditEmployee_Click);
+            // 
             // UserControlEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -217,5 +231,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Postnr;
         private System.Windows.Forms.DataGridViewTextBoxColumn Postadress;
         private System.Windows.Forms.Button buttonAddEmployee;
+        private System.Windows.Forms.Button buttonEditEmployee;
     }
 }

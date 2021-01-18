@@ -533,7 +533,7 @@
         private System.Windows.Forms.TextBox textBoxAuthor;
         private System.Windows.Forms.TextBox textBoxTitle;
         private System.Windows.Forms.Button buttonDeleteBook;
-        private System.Windows.Forms.Button buttonLoadImage;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button buttonLoadImage;
     }
 }

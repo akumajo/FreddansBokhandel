@@ -1,6 +1,6 @@
 ﻿namespace FreddansBokhandel
 {
-    partial class FormAddNewAuthor
+    partial class FormAddorEditNewAuthor
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBoxSurName = new System.Windows.Forms.TextBox();
+            this.textBoxFirstName = new System.Windows.Forms.TextBox();
             this.buttonAddAuthor = new System.Windows.Forms.Button();
             this.textBoxCountry = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -77,10 +77,10 @@
             // 
             // textBoxSurName
             // 
-            this.textBoxSurName.Location = new System.Drawing.Point(101, 12);
-            this.textBoxSurName.Name = "textBoxSurName";
-            this.textBoxSurName.Size = new System.Drawing.Size(203, 23);
-            this.textBoxSurName.TabIndex = 1;
+            this.textBoxFirstName.Location = new System.Drawing.Point(101, 12);
+            this.textBoxFirstName.Name = "textBoxSurName";
+            this.textBoxFirstName.Size = new System.Drawing.Size(203, 23);
+            this.textBoxFirstName.TabIndex = 1;
             // 
             // buttonAddAuthor
             // 
@@ -135,7 +135,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxCountry);
             this.Controls.Add(this.buttonAddAuthor);
-            this.Controls.Add(this.textBoxSurName);
+            this.Controls.Add(this.textBoxFirstName);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label2);
@@ -158,7 +158,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBoxSurName;
+        private System.Windows.Forms.TextBox textBoxFirstName;
         private System.Windows.Forms.Button buttonAddAuthor;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxLastName;
