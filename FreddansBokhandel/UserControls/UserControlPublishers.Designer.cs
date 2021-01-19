@@ -30,19 +30,20 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridViewPublishers = new System.Windows.Forms.DataGridView();
+            this.buttonEditPublisher = new System.Windows.Forms.Button();
+            this.buttonAddPublisher = new System.Windows.Forms.Button();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Namn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Adress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Postnr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Postort = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Land = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonEditPublisher = new System.Windows.Forms.Button();
-            this.buttonAddPublisher = new System.Windows.Forms.Button();
+            this.Böcker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPublishers)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPublishers)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -56,16 +57,6 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewPublishers);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.buttonEditPublisher);
-            this.splitContainer1.Panel2.Controls.Add(this.buttonAddPublisher);
-            this.splitContainer1.Size = new System.Drawing.Size(1076, 585);
-            this.splitContainer1.SplitterDistance = 540;
-            this.splitContainer1.TabIndex = 0;
-            this.splitContainer1.Text = "splitContainer1";
             // 
             // dataGridViewPublishers
             // 
@@ -78,7 +69,8 @@
             this.Adress,
             this.Postnr,
             this.Postort,
-            this.Land});
+            this.Land,
+            this.Böcker});
             this.dataGridViewPublishers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewPublishers.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewPublishers.MultiSelect = false;
@@ -89,42 +81,16 @@
             this.dataGridViewPublishers.Size = new System.Drawing.Size(1076, 540);
             this.dataGridViewPublishers.TabIndex = 0;
             this.dataGridViewPublishers.Text = "dataGridView1";
+            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewPublishers);
             // 
-            // ID
+            // splitContainer1.Panel2
             // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // Namn
-            // 
-            this.Namn.HeaderText = "Namn";
-            this.Namn.Name = "Namn";
-            this.Namn.ReadOnly = true;
-            // 
-            // Adress
-            // 
-            this.Adress.HeaderText = "Adress";
-            this.Adress.Name = "Adress";
-            this.Adress.ReadOnly = true;
-            // 
-            // Postnr
-            // 
-            this.Postnr.HeaderText = "Postnr";
-            this.Postnr.Name = "Postnr";
-            this.Postnr.ReadOnly = true;
-            // 
-            // Postort
-            // 
-            this.Postort.HeaderText = "Postort";
-            this.Postort.Name = "Postort";
-            this.Postort.ReadOnly = true;
-            // 
-            // Land
-            // 
-            this.Land.HeaderText = "Land";
-            this.Land.Name = "Land";
-            this.Land.ReadOnly = true;
+            this.splitContainer1.Panel2.Controls.Add(this.buttonEditPublisher);
+            this.splitContainer1.Panel2.Controls.Add(this.buttonAddPublisher);
+            this.splitContainer1.Size = new System.Drawing.Size(1076, 585);
+            this.splitContainer1.SplitterDistance = 540;
+            this.splitContainer1.TabIndex = 0;
+            this.splitContainer1.Text = "splitContainer1";
             // 
             // buttonEditPublisher
             // 
@@ -147,6 +113,54 @@
             this.buttonAddPublisher.UseVisualStyleBackColor = true;
             this.buttonAddPublisher.Click += new System.EventHandler(this.buttonAddPublisher_Click);
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Namn
+            // 
+            this.Namn.HeaderText = "Namn";
+            this.Namn.Name = "Namn";
+            this.Namn.ReadOnly = true;
+            this.Namn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Adress
+            // 
+            this.Adress.HeaderText = "Adress";
+            this.Adress.Name = "Adress";
+            this.Adress.ReadOnly = true;
+            this.Adress.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Postnr
+            // 
+            this.Postnr.HeaderText = "Postnr";
+            this.Postnr.Name = "Postnr";
+            this.Postnr.ReadOnly = true;
+            this.Postnr.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Postort
+            // 
+            this.Postort.HeaderText = "Postort";
+            this.Postort.Name = "Postort";
+            this.Postort.ReadOnly = true;
+            this.Postort.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Land
+            // 
+            this.Land.HeaderText = "Land";
+            this.Land.Name = "Land";
+            this.Land.ReadOnly = true;
+            this.Land.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Böcker
+            // 
+            this.Böcker.HeaderText = "Böcker";
+            this.Böcker.Name = "Böcker";
+            this.Böcker.ReadOnly = true;
+            // 
             // UserControlPublishers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -154,11 +168,11 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "UserControlPublishers";
             this.Size = new System.Drawing.Size(1076, 585);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPublishers)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPublishers)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -167,13 +181,14 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView dataGridViewPublishers;
+        private System.Windows.Forms.Button buttonAddPublisher;
+        private System.Windows.Forms.Button buttonEditPublisher;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Namn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Adress;
         private System.Windows.Forms.DataGridViewTextBoxColumn Postnr;
         private System.Windows.Forms.DataGridViewTextBoxColumn Postort;
         private System.Windows.Forms.DataGridViewTextBoxColumn Land;
-        private System.Windows.Forms.Button buttonAddPublisher;
-        private System.Windows.Forms.Button buttonEditPublisher;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Böcker;
     }
 }

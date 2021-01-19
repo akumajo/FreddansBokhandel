@@ -27,7 +27,7 @@ namespace FreddansBokhandel
             {
                 if (db.Database.CanConnect())
                 {
-                    publishers = db.Förlag.ToList();
+                    publishers = db.Förlag.Include(b=>b.Books).ToList();
                 }
 
                 else
@@ -54,6 +54,7 @@ namespace FreddansBokhandel
                 dataGridViewPublishers.Rows[rowIndex].Cells["Postnr"].Value = publisher.ZipCode;
                 dataGridViewPublishers.Rows[rowIndex].Cells["Postort"].Value = publisher.PostalAddress;
                 dataGridViewPublishers.Rows[rowIndex].Cells["Land"].Value = publisher.Country;
+                dataGridViewPublishers.Rows[rowIndex].Cells["Böcker"].Value = publisher.Books.Count();
                 dataGridViewPublishers.Rows[rowIndex].Tag = publisher;
             }
 
