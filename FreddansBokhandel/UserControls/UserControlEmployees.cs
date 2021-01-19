@@ -15,10 +15,13 @@ namespace FreddansBokhandel
     {
         List<Employee> employees;
         Employee selectedEmployee;
-        public UserControlEmployees()
+        public UserControlEmployees(FormMain form)
         {
             InitializeComponent();
+            form.EnterEmployeesTab += Form_EnterEmployeesTab;
         }
+
+        
 
         private void LoadEmployeesFromDatabase()
         {
@@ -41,12 +44,16 @@ namespace FreddansBokhandel
                 {
                     return;
                 }
+
+                db.Dispose();
             }
         }
 
         private void PopulateDataGridEmployees()
         {
             dataGridViewEmployees.Rows.Clear();
+
+            if (employees == null) { return; }
 
             foreach (var employee in employees)
             {
@@ -63,23 +70,30 @@ namespace FreddansBokhandel
                 dataGridViewEmployees.Rows[rowIndex].Cells["Postadress"].Value = employee.PostalAdress;
                 dataGridViewEmployees.Rows[rowIndex].Tag = employee;
             }
+            buttonEditEmployee.Enabled = true;
         }
 
-        private void CreateNewEmployee()
+        private void AddNewEmployee()
         {
-            selectedEmployee = null;
             FormAddorEditEmployee newEmployee = new FormAddorEditEmployee(selectedEmployee);
             newEmployee.ShowDialog();
         }
 
         private void buttonAddEmployee_Click(object sender, EventArgs e)
         {
-            CreateNewEmployee();
+            AddNewEmployee();
             LoadEmployeesFromDatabase();
             PopulateDataGridEmployees();
         }
+        private void EditEmployee()
+        {
+            selectedEmployee = dataGridViewEmployees.SelectedRows[0].Tag as Employee;
+            FormAddorEditEmployee newEmployee = new FormAddorEditEmployee(selectedEmployee);
+            newEmployee.ShowDialog();
+            selectedEmployee = null;
+        }
 
-        private void UserControlEmployees_Load(object sender, EventArgs e)
+        private void Form_EnterEmployeesTab(object sender, EventArgs e)
         {
             LoadEmployeesFromDatabase();
             PopulateDataGridEmployees();
@@ -88,27 +102,8 @@ namespace FreddansBokhandel
         private void buttonEditEmployee_Click(object sender, EventArgs e)
         {
             EditEmployee();
-        }
-
-        private void EditEmployee()
-        {
-            FormAddorEditEmployee newEmployee = new FormAddorEditEmployee(selectedEmployee);
-            newEmployee.ShowDialog();
-        }
-
-        private void SelectingARow()
-        {
-            if (dataGridViewEmployees.CurrentCell == null) { return; }
-            if (dataGridViewEmployees.SelectedRows.Count < 1) { return; }
-
-            buttonEditEmployee.Enabled = true;
-            int selectedIndex = dataGridViewEmployees.SelectedRows[0].Index;
-            selectedEmployee = dataGridViewEmployees.Rows[selectedIndex].Tag as Employee;
-        }
-
-        private void dataGridViewEmployees_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
-        {
-            SelectingARow();
+            LoadEmployeesFromDatabase();
+            PopulateDataGridEmployees();
         }
     }
 }

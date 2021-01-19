@@ -48,6 +48,7 @@ namespace FreddansBokhandel
                 {
                     MessageBox.Show("Kunde inte koppla upp mot databasen.");
                 }
+
                 db.Dispose();
             }
         }
@@ -55,6 +56,8 @@ namespace FreddansBokhandel
         private void PopulateDataGridAuthors()
         {
             dataGridViewAuthors.Rows.Clear();
+
+            if (authors == null) { return; }
 
             foreach (var author in authors)
             {
@@ -74,13 +77,21 @@ namespace FreddansBokhandel
 
                 comboBoxCell.ToolTipText = $"{comboBoxCell.Items.Count} stycken böcker i sortimentet";
             }
+            buttonEditAuthor.Enabled = true;
         }
 
         private void AddNewAuthor()
         {
-            selectedAuthor = null;
             FormAddorEditNewAuthor newAuthor = new FormAddorEditNewAuthor(authors, selectedAuthor);
             newAuthor.ShowDialog();
+        }
+
+        private void EditAuthor()
+        {
+            selectedAuthor = dataGridViewAuthors.SelectedRows[0].Tag as Author;
+            FormAddorEditNewAuthor newAuthor = new FormAddorEditNewAuthor(authors, selectedAuthor);
+            newAuthor.ShowDialog();
+            selectedAuthor = null;
         }
 
         private void buttonAddAuthor_Click(object sender, EventArgs e)
@@ -97,26 +108,6 @@ namespace FreddansBokhandel
             PopulateDataGridAuthors();
         }
 
-        private void EditAuthor()
-        {
-            FormAddorEditNewAuthor newAuthor = new FormAddorEditNewAuthor(authors, selectedAuthor);
-            newAuthor.ShowDialog();
-
-        }
-
-        private void SelectingARow()
-        {
-            if (dataGridViewAuthors.CurrentCell == null) { return; }
-            if (dataGridViewAuthors.SelectedRows.Count < 1) { return; }
-
-            buttonEditAuthor.Enabled = true;
-            int selectedIndex = dataGridViewAuthors.SelectedRows[0].Index;
-            selectedAuthor = dataGridViewAuthors.Rows[selectedIndex].Tag as Author;
-        }
-
-        private void dataGridViewAuthors_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
-        {
-            SelectingARow();
-        }
+        
     }
 }

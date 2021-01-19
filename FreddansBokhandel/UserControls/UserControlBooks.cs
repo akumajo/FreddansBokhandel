@@ -27,7 +27,7 @@ namespace FreddansBokhandel
             form1.EnterBooksTab += Form1_EnterBooksTab;
         }
 
-        private void LoadBooksFromDatabase()
+        private async Task LoadBooksFromDatabase()
         {
             db = new FreddansBokhandelContext();
 
@@ -35,7 +35,7 @@ namespace FreddansBokhandel
             {
                 if (db.Database.CanConnect())
                 {
-                    books = db.Böcker
+                    books = await db.Böcker
                          .Include(a => a.BooksAuthors)
                          .ThenInclude(b => b.Author)
                          .Include(b => b.StockBalance)
@@ -43,7 +43,7 @@ namespace FreddansBokhandel
                          .Include(b => b.Publisher)
                          .Include(o => o.OrderDetails)
                          .Include(i => i.Image)
-                         .ToList();
+                         .ToListAsync();
                 }
                 else
                 {
@@ -59,6 +59,8 @@ namespace FreddansBokhandel
 
         private void PopulateListBox()
         {
+            if (books == null) return;
+
             selectedBook = null;
             buttonLoadImage.BringToFront();
             listBox1.Items.Clear();
@@ -224,7 +226,7 @@ namespace FreddansBokhandel
             }
         }
 
-        private void DeleteBook()
+        private async Task DeleteBook()
         {
             DialogResult dr = MessageBox.Show("Vill du ta bort den här boken ur systemet?\nObservera att det inte går att ta bort böcker som redan har sålts.", "Ta bort bok", MessageBoxButtons.YesNo);
 
@@ -244,15 +246,15 @@ namespace FreddansBokhandel
                     db.Remove(book);
                     db.SaveChanges();
 
-                    LoadBooksFromDatabase();
+                    await LoadBooksFromDatabase();
                     PopulateListBox();
                 }
             }
         }
 
-        private void buttonDeleteBook_Click(object sender, EventArgs e)
+        private async void buttonDeleteBook_Click(object sender, EventArgs e)
         {
-            DeleteBook();
+            await DeleteBook();
         }
 
         private void buttonFilterBooks_Click(object sender, EventArgs e)
@@ -265,10 +267,10 @@ namespace FreddansBokhandel
             AddBookToStock();
         }
 
-        private void buttonUpdateBook_Click(object sender, EventArgs e)
+        private async void buttonUpdateBook_Click(object sender, EventArgs e)
         {
             UpdateBook();
-            LoadBooksFromDatabase();
+            await LoadBooksFromDatabase();
             PopulateListBox();
         }
 
@@ -277,18 +279,18 @@ namespace FreddansBokhandel
             BookIsSelected();
         }
 
-        private void buttonAddBook_Click(object sender, EventArgs e)
+        private async void buttonAddBook_Click(object sender, EventArgs e)
         {
             AddNewBook();
-            LoadBooksFromDatabase();
+            await LoadBooksFromDatabase();
             PopulateListBox();
         }
 
-        private void Form1_EnterBooksTab(object sender, EventArgs e)
+        private async void Form1_EnterBooksTab(object sender, EventArgs e)
         {
             selectedBookIndex = 0;
-
-            LoadBooksFromDatabase();
+            listBox1.Items.Clear();
+            await LoadBooksFromDatabase();
             PopulateListBox();
         }
 
@@ -299,11 +301,11 @@ namespace FreddansBokhandel
             if (db != null) { db.Dispose(); }
         }
 
-        private void buttonLoadImage_Click(object sender, EventArgs e)
+        private async void buttonLoadImage_Click(object sender, EventArgs e)
         {
             FetchImageFromWeb();
             buttonLoadImage.Enabled = false;
-            LoadBooksFromDatabase();
+            await LoadBooksFromDatabase();
             PopulateListBox();
             AfterAddedImage();
             ShowBookInfo();

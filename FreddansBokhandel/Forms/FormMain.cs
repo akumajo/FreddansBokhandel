@@ -11,15 +11,14 @@ namespace FreddansBokhandel
 {
     public partial class FormMain : Form
     {
-        public event EventHandler EnterBooksTab;
-        public event EventHandler LeaveBooksTab;
-
         public event EventHandler EnterOrdersTab;
-        public event EventHandler LeaveOrdersTab;
-
+        public event EventHandler EnterBooksTab;
         public event EventHandler EnterAuthorsTab;
         public event EventHandler EnterPublishersTab;
         public event EventHandler EnterEmployeesTab;
+
+        public event EventHandler LeaveBooksTab;
+        public event EventHandler LeaveOrdersTab;
 
         public FormMain()
         {
@@ -42,14 +41,14 @@ namespace FreddansBokhandel
 
         private void tabPageEmployees_Enter(object sender, EventArgs e)
         {
-            var employees = new UserControlEmployees() { Dock = DockStyle.Fill };
+            var employees = new UserControlEmployees(this) { Dock = DockStyle.Fill };
             tabPageEmployees.Controls.Add(employees);
             EnterEmployeesTab?.Invoke(this, null);
         }
 
         private void tabPagePublishers_Enter(object sender, EventArgs e)
         {
-            var publisher = new UserControlPublishers() { Dock = DockStyle.Fill };
+            var publisher = new UserControlPublishers(this) { Dock = DockStyle.Fill };
             tabPagePublishers.Controls.Add(publisher);
             EnterPublishersTab?.Invoke(this, null);
         }

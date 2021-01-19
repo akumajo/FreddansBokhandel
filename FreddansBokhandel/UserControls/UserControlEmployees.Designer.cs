@@ -97,7 +97,6 @@
             this.dataGridViewEmployees.Size = new System.Drawing.Size(1076, 540);
             this.dataGridViewEmployees.TabIndex = 0;
             this.dataGridViewEmployees.Text = "dataGridView1";
-            this.dataGridViewEmployees.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewEmployees_RowStateChanged);
             // 
             // ID
             // 
@@ -207,7 +206,6 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "UserControlEmployees";
             this.Size = new System.Drawing.Size(1076, 585);
-            this.Load += new System.EventHandler(this.UserControlEmployees_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

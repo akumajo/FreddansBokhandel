@@ -86,7 +86,6 @@
             this.dataGridViewAuthors.Size = new System.Drawing.Size(1076, 540);
             this.dataGridViewAuthors.TabIndex = 0;
             this.dataGridViewAuthors.Text = "dataGridView1";
-            this.dataGridViewAuthors.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewAuthors_RowStateChanged);
             // 
             // ID
             // 

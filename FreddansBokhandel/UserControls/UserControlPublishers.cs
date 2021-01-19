@@ -15,9 +15,10 @@ namespace FreddansBokhandel
         List<Publisher> publishers;
         Publisher selectedPublisher;
 
-        public UserControlPublishers()
+        public UserControlPublishers(FormMain form)
         {
             InitializeComponent();
+            form.EnterPublishersTab += Form_EnterPublishersTab;
         }
 
         private void LoadPublishersFromDatabase()
@@ -33,12 +34,16 @@ namespace FreddansBokhandel
                 {
                     MessageBox.Show("Kunde inte koppla upp mot databasen.");
                 }
+
+                db.Dispose();
             }
         }
 
         private void PopulateDataGridPublishers()
         {
             dataGridViewPublishers.Rows.Clear();
+
+            if (publishers == null) { return; }
 
             foreach (var publisher in publishers)
             {
@@ -51,16 +56,25 @@ namespace FreddansBokhandel
                 dataGridViewPublishers.Rows[rowIndex].Cells["Land"].Value = publisher.Country;
                 dataGridViewPublishers.Rows[rowIndex].Tag = publisher;
             }
+
+            buttonEditPublisher.Enabled = true;
         }
 
-        private void AddNewPublishers()
+        private void AddNewPublisher()
         {
-            selectedPublisher = null;
             FormAddPublisher newPublisher = new FormAddPublisher(publishers, selectedPublisher);
             newPublisher.ShowDialog();
         }
 
-        private void UserControlPublishers_Load(object sender, EventArgs e)
+        private void EditPublisher()
+        {
+            selectedPublisher = dataGridViewPublishers.SelectedRows[0].Tag as Publisher;
+            FormAddPublisher newPublisher = new FormAddPublisher(publishers, selectedPublisher);
+            newPublisher.ShowDialog();
+            selectedPublisher = null;
+        }
+
+        private void Form_EnterPublishersTab(object sender, EventArgs e)
         {
             LoadPublishersFromDatabase();
             PopulateDataGridPublishers();
@@ -68,36 +82,16 @@ namespace FreddansBokhandel
 
         private void buttonAddPublisher_Click(object sender, EventArgs e)
         {
-            AddNewPublishers();
+            AddNewPublisher();
             LoadPublishersFromDatabase();
             PopulateDataGridPublishers();
         }
 
         private void buttonEditPublisher_Click(object sender, EventArgs e)
         {
-            EditEmployee();
+            EditPublisher();
             LoadPublishersFromDatabase();
             PopulateDataGridPublishers();
-        }
-        private void EditEmployee()
-        {
-            FormAddPublisher newPublisher = new FormAddPublisher(publishers, selectedPublisher);
-            newPublisher.ShowDialog();
-        }
-
-        private void SelectingARow()
-        {
-            if (dataGridViewPublishers.CurrentCell == null) { return; }
-            if (dataGridViewPublishers.SelectedRows.Count < 1) { return; }
-
-            buttonEditPublisher.Enabled = true;
-            int selectedIndex = dataGridViewPublishers.SelectedRows[0].Index;
-            selectedPublisher = dataGridViewPublishers.Rows[selectedIndex].Tag as Publisher;
-        }
-
-        private void dataGridViewPublishers_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
-        {
-            SelectingARow();
         }
     }
 }

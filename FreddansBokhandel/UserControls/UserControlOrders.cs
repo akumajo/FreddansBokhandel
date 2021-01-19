@@ -18,6 +18,7 @@ namespace FreddansBokhandel
         FreddansBokhandelContext db;
         Order selectedOrder;
         List<Order> orders;
+
         public UserControlOrders(FormMain form1)
         {
             InitializeComponent();
@@ -25,7 +26,7 @@ namespace FreddansBokhandel
             form1.EnterOrdersTab += Form1_EnterOrdersTab;
         }
 
-        private void LoadOrdersFromDatabase()
+        private async Task LoadOrdersFromDatabase()
         {
             db = new FreddansBokhandelContext();
 
@@ -33,14 +34,14 @@ namespace FreddansBokhandel
             {
                 if (db.Database.CanConnect())
                 {
-                    orders = db.Ordrar
+                    orders = await db.Ordrar
                           .Include(o => o.OrderDetails)
                           .Include(a => a.EmployeeIDs)
                           .Include(b => b.Stores)
                           .ThenInclude(ls => ls.StockBalance)
                           .ThenInclude(i => i.IsbnNavigation)
                           .OrderBy(b => b.OrderDate)
-                          .ToList();
+                          .ToListAsync();
 
                     foreach (var date in orders)
                     {
@@ -65,6 +66,7 @@ namespace FreddansBokhandel
             dataGridView2.Rows.Clear();
             var orderDetails = treeViewOrders.SelectedNode.Tag as Order;
             int totalPris = 0;
+            
 
             foreach (var book in orderDetails.OrderDetails)
             {
@@ -80,23 +82,26 @@ namespace FreddansBokhandel
 
         private void PopulateTreeNodeOrders(List<Order> orders)
         {
+            if (orderDates == null) { return; }
+
             treeViewOrders.Nodes.Clear();
-
-            foreach (var date in orderDates)
             {
-                TreeNode orderDate = new TreeNode(date.ToString("yyyy-MM-dd"));
-
-                foreach (var order in orders)
+                foreach (var date in orderDates)
                 {
-                    if (orderDate.Text == order.OrderDate.ToString("yyyy-MM-dd"))
+                    TreeNode orderDate = new TreeNode(date.ToString("yyyy-MM-dd"));
+
+                    foreach (var order in orders)
                     {
-                        var orderNode = orderDate.Nodes.Add(order.Id.ToString());
-                        orderNode.Tag = order;
-                        orderNode.Name = order.Id.ToString();
+                        if (orderDate.Text == order.OrderDate.ToString("yyyy-MM-dd"))
+                        {
+                            var orderNode = orderDate.Nodes.Add(order.Id.ToString());
+                            orderNode.Tag = order;
+                            orderNode.Name = order.Id.ToString();
+                        }
                     }
+                    orderDate.Text = $"{orderDate.Text} ({orderDate.Nodes.Count})";
+                    treeViewOrders.Nodes.Add(orderDate);
                 }
-                orderDate.Text = $"{orderDate.Text} ({orderDate.Nodes.Count})";
-                treeViewOrders.Nodes.Add(orderDate);
             }
         }
 
@@ -148,24 +153,24 @@ namespace FreddansBokhandel
             }
         }
 
-        private void CreateNewOrder()
+        private async Task CreateNewOrder()
         {
             FormAddNewOrder order = new FormAddNewOrder();
             order.ShowDialog();
-            LoadOrdersFromDatabase();
+            await LoadOrdersFromDatabase();
         }
 
-        private void RemoveSelectedOrder()
+        private async Task RemoveSelectedOrder()
         {
             db.Remove(selectedOrder);
             db.SaveChanges();
-            LoadOrdersFromDatabase();
+            await LoadOrdersFromDatabase();
             buttonCreateOrder.Enabled = false;
         }
 
-        private void Form1_EnterOrdersTab(object sender, EventArgs e)
+        private async void Form1_EnterOrdersTab(object sender, EventArgs e)
         {
-            LoadOrdersFromDatabase();
+            await LoadOrdersFromDatabase();
             PopulateTreeNodeOrders(orders);
             buttonCreateOrder.Enabled = true;
         }
@@ -175,15 +180,15 @@ namespace FreddansBokhandel
             if (db != null) { db.Dispose(); }
         }
 
-        private void buttonCreateOrder_Click(object sender, EventArgs e)
+        private async void buttonCreateOrder_Click(object sender, EventArgs e)
         {
-            CreateNewOrder();
+            await CreateNewOrder();
             PopulateTreeNodeOrders(orders);
         }
 
-        private void buttonRemoveOrder_Click(object sender, EventArgs e)
+        private async void buttonRemoveOrder_Click(object sender, EventArgs e)
         {
-            RemoveSelectedOrder();
+            await RemoveSelectedOrder();
             PopulateTreeNodeOrders(orders);
         }
 

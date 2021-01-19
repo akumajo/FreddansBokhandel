@@ -36,8 +36,8 @@
             this.Postnr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Postort = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Land = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonAddPublisher = new System.Windows.Forms.Button();
             this.buttonEditPublisher = new System.Windows.Forms.Button();
+            this.buttonAddPublisher = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -89,7 +89,6 @@
             this.dataGridViewPublishers.Size = new System.Drawing.Size(1076, 540);
             this.dataGridViewPublishers.TabIndex = 0;
             this.dataGridViewPublishers.Text = "dataGridView1";
-            this.dataGridViewPublishers.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewPublishers_RowStateChanged);
             // 
             // ID
             // 
@@ -127,6 +126,17 @@
             this.Land.Name = "Land";
             this.Land.ReadOnly = true;
             // 
+            // buttonEditPublisher
+            // 
+            this.buttonEditPublisher.Enabled = false;
+            this.buttonEditPublisher.Location = new System.Drawing.Point(107, 4);
+            this.buttonEditPublisher.Name = "buttonEditPublisher";
+            this.buttonEditPublisher.Size = new System.Drawing.Size(100, 34);
+            this.buttonEditPublisher.TabIndex = 0;
+            this.buttonEditPublisher.Text = "Ändra";
+            this.buttonEditPublisher.UseVisualStyleBackColor = true;
+            this.buttonEditPublisher.Click += new System.EventHandler(this.buttonEditPublisher_Click);
+            // 
             // buttonAddPublisher
             // 
             this.buttonAddPublisher.Location = new System.Drawing.Point(0, 4);
@@ -137,16 +147,6 @@
             this.buttonAddPublisher.UseVisualStyleBackColor = true;
             this.buttonAddPublisher.Click += new System.EventHandler(this.buttonAddPublisher_Click);
             // 
-            // buttonEditPublisher
-            // 
-            this.buttonEditPublisher.Location = new System.Drawing.Point(107, 4);
-            this.buttonEditPublisher.Name = "buttonEditPublisher";
-            this.buttonEditPublisher.Size = new System.Drawing.Size(100, 34);
-            this.buttonEditPublisher.TabIndex = 1;
-            this.buttonEditPublisher.Text = "Ändra";
-            this.buttonEditPublisher.UseVisualStyleBackColor = true;
-            this.buttonEditPublisher.Click += new System.EventHandler(this.buttonEditPublisher_Click);
-            // 
             // UserControlPublishers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -154,7 +154,6 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "UserControlPublishers";
             this.Size = new System.Drawing.Size(1076, 585);
-            this.Load += new System.EventHandler(this.UserControlPublishers_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
