@@ -40,8 +40,10 @@
             this.Adress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Postnr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Postadress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonAddEmployee = new System.Windows.Forms.Button();
+            this.Ordrar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonRemoveEmployee = new System.Windows.Forms.Button();
             this.buttonEditEmployee = new System.Windows.Forms.Button();
+            this.buttonAddEmployee = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -64,6 +66,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.buttonRemoveEmployee);
             this.splitContainer1.Panel2.Controls.Add(this.buttonEditEmployee);
             this.splitContainer1.Panel2.Controls.Add(this.buttonAddEmployee);
             this.splitContainer1.Size = new System.Drawing.Size(1076, 585);
@@ -86,7 +89,8 @@
             this.Roll,
             this.Adress,
             this.Postnr,
-            this.Postadress});
+            this.Postadress,
+            this.Ordrar});
             this.dataGridViewEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewEmployees.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewEmployees.MultiSelect = false;
@@ -178,6 +182,34 @@
             this.Postadress.ReadOnly = true;
             this.Postadress.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // Ordrar
+            // 
+            this.Ordrar.HeaderText = "Ordrar";
+            this.Ordrar.Name = "Ordrar";
+            this.Ordrar.ReadOnly = true;
+            // 
+            // buttonRemoveEmployee
+            // 
+            this.buttonRemoveEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRemoveEmployee.Location = new System.Drawing.Point(973, 4);
+            this.buttonRemoveEmployee.Name = "buttonRemoveEmployee";
+            this.buttonRemoveEmployee.Size = new System.Drawing.Size(100, 34);
+            this.buttonRemoveEmployee.TabIndex = 2;
+            this.buttonRemoveEmployee.Text = "Ta bort";
+            this.buttonRemoveEmployee.UseVisualStyleBackColor = true;
+            this.buttonRemoveEmployee.Click += new System.EventHandler(this.buttonRemoveEmployee_Click);
+            // 
+            // buttonEditEmployee
+            // 
+            this.buttonEditEmployee.Enabled = false;
+            this.buttonEditEmployee.Location = new System.Drawing.Point(107, 4);
+            this.buttonEditEmployee.Name = "buttonEditEmployee";
+            this.buttonEditEmployee.Size = new System.Drawing.Size(100, 34);
+            this.buttonEditEmployee.TabIndex = 1;
+            this.buttonEditEmployee.Text = "Ändra";
+            this.buttonEditEmployee.UseVisualStyleBackColor = true;
+            this.buttonEditEmployee.Click += new System.EventHandler(this.buttonEditEmployee_Click);
+            // 
             // buttonAddEmployee
             // 
             this.buttonAddEmployee.Location = new System.Drawing.Point(0, 4);
@@ -187,17 +219,6 @@
             this.buttonAddEmployee.Text = "Lägg till";
             this.buttonAddEmployee.UseVisualStyleBackColor = true;
             this.buttonAddEmployee.Click += new System.EventHandler(this.buttonAddEmployee_Click);
-            // 
-            // button1
-            // 
-            this.buttonEditEmployee.Enabled = false;
-            this.buttonEditEmployee.Location = new System.Drawing.Point(107, 4);
-            this.buttonEditEmployee.Name = "button1";
-            this.buttonEditEmployee.Size = new System.Drawing.Size(100, 34);
-            this.buttonEditEmployee.TabIndex = 1;
-            this.buttonEditEmployee.Text = "Ändra";
-            this.buttonEditEmployee.UseVisualStyleBackColor = true;
-            this.buttonEditEmployee.Click += new System.EventHandler(this.buttonEditEmployee_Click);
             // 
             // UserControlEmployees
             // 
@@ -218,6 +239,8 @@
         #endregion
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView dataGridViewEmployees;
+        private System.Windows.Forms.Button buttonAddEmployee;
+        private System.Windows.Forms.Button buttonEditEmployee;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Namn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Butik;
@@ -228,7 +251,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Adress;
         private System.Windows.Forms.DataGridViewTextBoxColumn Postnr;
         private System.Windows.Forms.DataGridViewTextBoxColumn Postadress;
-        private System.Windows.Forms.Button buttonAddEmployee;
-        private System.Windows.Forms.Button buttonEditEmployee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ordrar;
+        private System.Windows.Forms.Button buttonRemoveEmployee;
     }
 }

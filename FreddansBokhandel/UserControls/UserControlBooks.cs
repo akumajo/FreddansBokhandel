@@ -234,7 +234,7 @@ namespace FreddansBokhandel
             {
                 var book = listBox1.SelectedItem as Book;
 
-                if (book.OrderDetails.Count > 1)
+                if (book.OrderDetails.Count > 0)
                 {
                     MessageBox.Show($"Boken fanns bland ordrar och kunde inte tas bort.");
                 }

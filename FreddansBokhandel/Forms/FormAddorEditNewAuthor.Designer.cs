@@ -90,7 +90,7 @@
             this.buttonAddAuthor.TabIndex = 6;
             this.buttonAddAuthor.Text = "Lägg till";
             this.buttonAddAuthor.UseVisualStyleBackColor = true;
-            this.buttonAddAuthor.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAddAuthor.Click += new System.EventHandler(this.buttonAddAuthor_Click);
             // 
             // textBoxCountry
             // 

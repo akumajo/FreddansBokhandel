@@ -31,7 +31,7 @@ namespace FreddansBokhandel
                 {
                     if (db.Database.CanConnect())
                     {
-                        employees = db.Anställda.Include(b => b.Stores).ToList();
+                        employees = db.Anställda.Include(b => b.Stores).Include(o => o.Orders).ToList();
                     }
 
                     else
@@ -68,6 +68,7 @@ namespace FreddansBokhandel
                 dataGridViewEmployees.Rows[rowIndex].Cells["Adress"].Value = employee.Address;
                 dataGridViewEmployees.Rows[rowIndex].Cells["Postnr"].Value = employee.ZipCode;
                 dataGridViewEmployees.Rows[rowIndex].Cells["Postadress"].Value = employee.PostalAdress;
+                dataGridViewEmployees.Rows[rowIndex].Cells["Ordrar"].Value = employee.Orders.Count();
                 dataGridViewEmployees.Rows[rowIndex].Tag = employee;
             }
             buttonEditEmployee.Enabled = true;
@@ -75,7 +76,7 @@ namespace FreddansBokhandel
 
         private void AddNewEmployee()
         {
-            FormAddorEditEmployee newEmployee = new FormAddorEditEmployee(selectedEmployee);
+            FormAddorEditEmployee newEmployee = new FormAddorEditEmployee(employees, selectedEmployee);
             newEmployee.ShowDialog();
         }
 
@@ -88,7 +89,7 @@ namespace FreddansBokhandel
         private void EditEmployee()
         {
             selectedEmployee = dataGridViewEmployees.SelectedRows[0].Tag as Employee;
-            FormAddorEditEmployee newEmployee = new FormAddorEditEmployee(selectedEmployee);
+            FormAddorEditEmployee newEmployee = new FormAddorEditEmployee(employees, selectedEmployee);
             newEmployee.ShowDialog();
             selectedEmployee = null;
         }
@@ -104,6 +105,46 @@ namespace FreddansBokhandel
             EditEmployee();
             LoadEmployeesFromDatabase();
             PopulateDataGridEmployees();
+        }
+
+        private void buttonRemoveEmployee_Click(object sender, EventArgs e)
+        {
+            RemoveEmployee();
+            LoadEmployeesFromDatabase();
+            PopulateDataGridEmployees();
+        }
+
+        private void RemoveEmployee()
+        {
+            DialogResult dr = MessageBox.Show("Vill du ta bort den här anställda ur systemet?\nObservera att det inte går att ta bort anställda som har sålt böcker.", "Ta bort anställd", MessageBoxButtons.YesNo);
+
+            if (dr == DialogResult.Yes)
+            {
+                var employee = dataGridViewEmployees.SelectedRows[0].Tag as Employee;
+
+                if (employee.Orders.Count > 0)
+                {
+                    MessageBox.Show($"Den anställde har ordrar kopplade till sig och kunde inte tas bort.");
+                }
+                else
+                {
+                    using (var db = new FreddansBokhandelContext())
+                    {
+                        if (db.Database.CanConnect())
+                        {
+                            db.Remove(employee);
+                            db.SaveChanges();
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("Kunde inte koppla upp mot databasen.");
+                        }
+
+                        db.Dispose();
+                    }
+                }
+            }
         }
     }
 }

@@ -15,10 +15,13 @@ namespace FreddansBokhandel
     {
         List<Store> stores;
         Employee selectedEmployee;
-        public FormAddorEditEmployee(Employee _selectedEmployee)
+        int employeeCount;
+
+        public FormAddorEditEmployee(List<Employee> employees, Employee _selectedEmployee)
         {
             InitializeComponent();
             selectedEmployee = _selectedEmployee;
+            employeeCount = employees.Count;
 
             if (selectedEmployee != null)
             {
@@ -30,7 +33,7 @@ namespace FreddansBokhandel
         {
             if (selectedEmployee == null)
             {
-                return selectedEmployee.Id + 1;
+                return employeeCount + 1;
             }
 
             return selectedEmployee.Id;

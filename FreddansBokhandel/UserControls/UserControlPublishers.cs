@@ -94,5 +94,45 @@ namespace FreddansBokhandel
             LoadPublishersFromDatabase();
             PopulateDataGridPublishers();
         }
+
+        private void buttonRemovePublisher_Click(object sender, EventArgs e)
+        {
+            RemovePublisher();
+            LoadPublishersFromDatabase();
+            PopulateDataGridPublishers();
+        }
+
+        private void RemovePublisher()
+        {
+            DialogResult dr = MessageBox.Show("Vill du ta bort det här förlaget ur systemet?\nObservera att det inte går att ta bort förlag som har böcker i sortimentet.", "Ta bort förlag", MessageBoxButtons.YesNo);
+
+            if (dr == DialogResult.Yes)
+            {
+                var publisher = dataGridViewPublishers.SelectedRows[0].Tag as Publisher;
+
+                if (publisher.Books.Count > 0)
+                {
+                    MessageBox.Show($"Förlaget har böcker i sortimentet och kunde inte tas bort.");
+                }
+                else
+                {
+                    using (var db = new FreddansBokhandelContext())
+                    {
+                        if (db.Database.CanConnect())
+                        {
+                            db.Remove(publisher);
+                            db.SaveChanges();
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("Kunde inte koppla upp mot databasen.");
+                        }
+
+                        db.Dispose();
+                    }
+                }
+            }
+        }
     }
 }

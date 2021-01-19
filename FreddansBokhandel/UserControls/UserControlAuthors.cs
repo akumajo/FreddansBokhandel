@@ -108,6 +108,44 @@ namespace FreddansBokhandel
             PopulateDataGridAuthors();
         }
 
-        
+        private void buttonRemoveAuthor_Click(object sender, EventArgs e)
+        {
+            RemoveAuthor();
+            LoadAuthorsFromDatabase();
+            PopulateDataGridAuthors();
+        }
+
+        private void RemoveAuthor()
+        {
+            DialogResult dr = MessageBox.Show("Vill du ta bort den här författaren ur systemet?\nObservera att det inte går att ta bort författare som har böcker i systemet.", "Ta bort anställd", MessageBoxButtons.YesNo);
+
+            if (dr == DialogResult.Yes)
+            {
+                var author = dataGridViewAuthors.SelectedRows[0].Tag as Author;
+
+                if (author.BooksAuthors.Count > 0)
+                {
+                    MessageBox.Show($"Författaren har böcker i sortimentet och kunde inte tas bort.");
+                }
+                else
+                {
+                    using (var db = new FreddansBokhandelContext())
+                    {
+                        if (db.Database.CanConnect())
+                        {
+                            db.Remove(author);
+                            db.SaveChanges();
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("Kunde inte koppla upp mot databasen.");
+                        }
+
+                        db.Dispose();
+                    }
+                }
+            }
+        }
     }
 }

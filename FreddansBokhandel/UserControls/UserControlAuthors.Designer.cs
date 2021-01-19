@@ -35,6 +35,7 @@
             this.Födelsedatum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Land = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Böcker = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.buttonRemoveAuthor = new System.Windows.Forms.Button();
             this.buttonEditAuthor = new System.Windows.Forms.Button();
             this.buttonAddAuthor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -59,6 +60,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.buttonRemoveAuthor);
             this.splitContainer1.Panel2.Controls.Add(this.buttonEditAuthor);
             this.splitContainer1.Panel2.Controls.Add(this.buttonAddAuthor);
             this.splitContainer1.Size = new System.Drawing.Size(1076, 585);
@@ -122,6 +124,17 @@
             this.Böcker.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Böcker.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // buttonRemoveAuthor
+            // 
+            this.buttonRemoveAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRemoveAuthor.Location = new System.Drawing.Point(973, 4);
+            this.buttonRemoveAuthor.Name = "buttonRemoveAuthor";
+            this.buttonRemoveAuthor.Size = new System.Drawing.Size(100, 34);
+            this.buttonRemoveAuthor.TabIndex = 2;
+            this.buttonRemoveAuthor.Text = "Ta bort";
+            this.buttonRemoveAuthor.UseVisualStyleBackColor = true;
+            this.buttonRemoveAuthor.Click += new System.EventHandler(this.buttonRemoveAuthor_Click);
+            // 
             // buttonEditAuthor
             // 
             this.buttonEditAuthor.Enabled = false;
@@ -170,5 +183,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Land;
         private System.Windows.Forms.DataGridViewComboBoxColumn Böcker;
         private System.Windows.Forms.Button buttonEditAuthor;
+        private System.Windows.Forms.Button buttonRemoveAuthor;
     }
 }

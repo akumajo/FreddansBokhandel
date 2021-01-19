@@ -29,7 +29,7 @@ namespace FreddansBokhandel
         {
             if (selectedPublisher == null)
             {
-                return selectedPublisher.Id + 1;
+                return publishers.Count + 1;
             }
 
             return selectedPublisher.Id;

@@ -20,6 +20,15 @@ namespace FreddansBokhandel
                 SetValuesOnEditMode();
             }
         }
+        private int SetAuthorID()
+        {
+            if (selectedAuthor == null)
+            {
+                return authors.Count + 1;
+            }
+
+            return selectedAuthor.Id;
+        }
 
         public void SetValuesOnEditMode()
         {
@@ -64,49 +73,25 @@ namespace FreddansBokhandel
                 {
                     var newAuthor = new Author
                     {
-                        Id = authors.Count + 1,
+                        Id = SetAuthorID(),
                         FirstName = textBoxFirstName.Text.Trim(),
                         LastName = textBoxLastName.Text.Trim(),
                         DateOfBirth = CheckAuthorBirthday(),
                         Country = textBoxCountry.Text.Trim()
                     };
 
-                    db.Add(newAuthor);
+                    if (selectedAuthor == null) { db.Add(newAuthor); }
+                    else { db.Update(newAuthor); }
+
                     db.SaveChanges();
                     Close();
                 }
             }
         }
 
-        private void EditAuthor()
+        private void buttonAddAuthor_Click(object sender, EventArgs e)
         {
-            using (var db = new FreddansBokhandelContext())
-            {
-                if (db.Database.CanConnect())
-                {
-                    var newAuthor = new Author
-                    {
-                        Id = selectedAuthor.Id,
-                        FirstName = textBoxFirstName.Text.Trim(),
-                        LastName = textBoxLastName.Text.Trim(),
-                        DateOfBirth = CheckAuthorBirthday(),
-                        Country = textBoxCountry.Text.Trim()
-                    };
-
-                    db.Update(newAuthor);
-                    db.SaveChanges();
-                    Close();
-                }
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (selectedAuthor == null)
-            {
-                AddAuthor();
-            }
-            EditAuthor();
+            AddAuthor();
         }
     }
 }
