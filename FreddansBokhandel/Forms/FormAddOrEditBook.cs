@@ -157,14 +157,6 @@ namespace FreddansBokhandel
                 var authors = ComboboxAuthors();
                 var newBook = CreateBook();
 
-                //for (int i = 0; i < stores.Count; i++)
-                //{
-                //    var saldo = new StockBalance { StoreID = i + 1, Balance = 0, Isbn = newBook.Isbn };
-
-                //    if (selectedBook == null) { db.Add(saldo); }
-                //    else { db.Update(saldo); }
-                //}
-
                 if (selectedBook != null)
                 {
                     UpdateBookAndAuthorJT(authors, newBook, selectedBook);
