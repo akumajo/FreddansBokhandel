@@ -14,6 +14,7 @@ namespace FreddansBokhandel
         }
 
         public int Id { get; set; }
+
         [Column("Namn")]
         public string Name { get; set; }
 

@@ -47,6 +47,14 @@ namespace FreddansBokhandel
             return dateTimePicker1.Value;
         }
 
+        private void CreateNewOrderID()
+        {
+            foreach (var item in orders)
+            {
+                textBoxOrderID.Text = $"{item.Id + 1}";
+            }
+        }
+
         private bool CheckIfBookIsInStock()
         {
             foreach (var balance in SelectedBook().StockBalance)
@@ -66,12 +74,12 @@ namespace FreddansBokhandel
 
             if (SelectedStore().Id == 1)
             {
-                if (textBoxSurName.Text.Trim() == null) { return false; }
-                if (textBoxLastName.Text.Trim() == null) { return false; }
-                if (textBoxAdress.Text.Trim() == null) { return false; }
-                if (textBoxPostalAdress.Text.Trim() == null) { return false; }
-                if (textBoxCountry.Text.Trim() == null) { return false; }
-                if (textBoxPostalNumber.Text.Trim() == null) { return false; }
+                if (textBoxFirstName.Text.Trim() == "") { return false; }
+                if (textBoxLastName.Text.Trim() == "") { return false; }
+                if (textBoxAdress.Text.Trim() == "") { return false; }
+                if (textBoxPostalAddress.Text.Trim() == "") { return false; }
+                if (textBoxCountry.Text.Trim() == "") { return false; }
+                if (textBoxZipCode.Text.Trim() == "") { return false; }
             }
             return true;
         }
@@ -88,11 +96,11 @@ namespace FreddansBokhandel
                     StoreID = SelectedStore().Id,
                     OrderDate = dateTimePicker1.Value,
                     SentDate = SetShippingDate(),
-                    RecipientFirstName = textBoxSurName.Text.Trim(),
+                    RecipientFirstName = textBoxFirstName.Text.Trim(),
                     RecipientLastName = textBoxLastName.Text.Trim(),
-                    RecipientZipCode = textBoxPostalNumber.Text.Trim(),
+                    RecipientZipCode = textBoxZipCode.Text.Trim(),
                     RecipientAddress = textBoxAdress.Text.Trim(),
-                    RecipientPostalAddress = textBoxPostalAdress.Text.Trim(),
+                    RecipientPostalAddress = textBoxPostalAddress.Text.Trim(),
                     RecipientCountry = textBoxCountry.Text.Trim()
                 };
             }
@@ -145,27 +153,30 @@ namespace FreddansBokhandel
         {
             textBoxAdress.Enabled = true;
             textBoxLastName.Enabled = true;
-            textBoxPostalAdress.Enabled = true;
-            textBoxSurName.Enabled = true;
-            textBoxPostalNumber.Enabled = true;
+            textBoxPostalAddress.Enabled = true;
+            textBoxFirstName.Enabled = true;
+            textBoxZipCode.Enabled = true;
+            textBoxCountry.Enabled = true;
         }
 
         private void DisableCustomerDetails()
         {
             textBoxAdress.Enabled = false;
             textBoxLastName.Enabled = false;
-            textBoxPostalAdress.Enabled = false;
-            textBoxSurName.Enabled = false;
-            textBoxPostalNumber.Enabled = false;
+            textBoxPostalAddress.Enabled = false;
+            textBoxFirstName.Enabled = false;
+            textBoxZipCode.Enabled = false;
+            textBoxCountry.Enabled = false;
         }
 
         private void ClearCustomerDetails()
         {
             textBoxAdress.Text = null;
             textBoxLastName.Text = null;
-            textBoxPostalAdress.Text = null;
-            textBoxSurName.Text = null;
-            textBoxPostalNumber.Text = null;
+            textBoxPostalAddress.Text = null;
+            textBoxFirstName.Text = null;
+            textBoxZipCode.Text = null;
+            textBoxCountry.Text = null;
         }
 
         private void LoadFromDatabase()
@@ -231,14 +242,6 @@ namespace FreddansBokhandel
                 {
                     labelAmount.Text = balance.Balance.ToString();
                 }
-            }
-        }
-
-        private void CreateNewOrderID()
-        {
-            foreach (var item in orders)
-            {
-                textBoxOrderID.Text = $"{item.Id + 1}";
             }
         }
 

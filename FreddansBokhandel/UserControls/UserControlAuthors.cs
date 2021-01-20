@@ -94,27 +94,6 @@ namespace FreddansBokhandel
             selectedAuthor = null;
         }
 
-        private void buttonAddAuthor_Click(object sender, EventArgs e)
-        {
-            AddNewAuthor();
-            LoadAuthorsFromDatabase();
-            PopulateDataGridAuthors();
-        }
-
-        private void buttonEditAuthor_Click(object sender, EventArgs e)
-        {
-            EditAuthor();
-            LoadAuthorsFromDatabase();
-            PopulateDataGridAuthors();
-        }
-
-        private void buttonRemoveAuthor_Click(object sender, EventArgs e)
-        {
-            RemoveAuthor();
-            LoadAuthorsFromDatabase();
-            PopulateDataGridAuthors();
-        }
-
         private void RemoveAuthor()
         {
             DialogResult dr = MessageBox.Show("Vill du ta bort den här författaren ur systemet?\nObservera att det inte går att ta bort författare som har böcker i systemet.", "Ta bort anställd", MessageBoxButtons.YesNo);
@@ -147,5 +126,27 @@ namespace FreddansBokhandel
                 }
             }
         }
+
+        private void buttonAddAuthor_Click(object sender, EventArgs e)
+        {
+            AddNewAuthor();
+            LoadAuthorsFromDatabase();
+            PopulateDataGridAuthors();
+        }
+
+        private void buttonEditAuthor_Click(object sender, EventArgs e)
+        {
+            EditAuthor();
+            LoadAuthorsFromDatabase();
+            PopulateDataGridAuthors();
+        }
+
+        private void buttonRemoveAuthor_Click(object sender, EventArgs e)
+        {
+            RemoveAuthor();
+            LoadAuthorsFromDatabase();
+            PopulateDataGridAuthors();
+        }
+
     }
 }

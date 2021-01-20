@@ -21,8 +21,6 @@ namespace FreddansBokhandel
             form.EnterEmployeesTab += Form_EnterEmployeesTab;
         }
 
-        
-
         private void LoadEmployeesFromDatabase()
         {
             using (var db = new FreddansBokhandelContext())
@@ -80,38 +78,12 @@ namespace FreddansBokhandel
             newEmployee.ShowDialog();
         }
 
-        private void buttonAddEmployee_Click(object sender, EventArgs e)
-        {
-            AddNewEmployee();
-            LoadEmployeesFromDatabase();
-            PopulateDataGridEmployees();
-        }
         private void EditEmployee()
         {
             selectedEmployee = dataGridViewEmployees.SelectedRows[0].Tag as Employee;
             FormAddorEditEmployee newEmployee = new FormAddorEditEmployee(employees, selectedEmployee);
             newEmployee.ShowDialog();
             selectedEmployee = null;
-        }
-
-        private void Form_EnterEmployeesTab(object sender, EventArgs e)
-        {
-            LoadEmployeesFromDatabase();
-            PopulateDataGridEmployees();
-        }
-
-        private void buttonEditEmployee_Click(object sender, EventArgs e)
-        {
-            EditEmployee();
-            LoadEmployeesFromDatabase();
-            PopulateDataGridEmployees();
-        }
-
-        private void buttonRemoveEmployee_Click(object sender, EventArgs e)
-        {
-            RemoveEmployee();
-            LoadEmployeesFromDatabase();
-            PopulateDataGridEmployees();
         }
 
         private void RemoveEmployee()
@@ -146,5 +118,33 @@ namespace FreddansBokhandel
                 }
             }
         }
+
+        private void buttonAddEmployee_Click(object sender, EventArgs e)
+        {
+            AddNewEmployee();
+            LoadEmployeesFromDatabase();
+            PopulateDataGridEmployees();
+        }
+
+        private void Form_EnterEmployeesTab(object sender, EventArgs e)
+        {
+            LoadEmployeesFromDatabase();
+            PopulateDataGridEmployees();
+        }
+
+        private void buttonEditEmployee_Click(object sender, EventArgs e)
+        {
+            EditEmployee();
+            LoadEmployeesFromDatabase();
+            PopulateDataGridEmployees();
+        }
+
+        private void buttonRemoveEmployee_Click(object sender, EventArgs e)
+        {
+            RemoveEmployee();
+            LoadEmployeesFromDatabase();
+            PopulateDataGridEmployees();
+        }
+
     }
 }

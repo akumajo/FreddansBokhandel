@@ -16,6 +16,7 @@ namespace FreddansBokhandel
         }
 
         public string Isbn { get; set; }
+
         [Column("Titel")]
         public string Title { get; set; }
 

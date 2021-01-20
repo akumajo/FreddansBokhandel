@@ -14,6 +14,7 @@ namespace FreddansBokhandel
         }
 
         public int Id { get; set; }
+
         [Column("AnställningsId")]
         public int EmployeeID { get; set; }
 

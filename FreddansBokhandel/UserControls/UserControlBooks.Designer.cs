@@ -275,6 +275,7 @@
             this.textBoxTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxTitle.Location = new System.Drawing.Point(4, 5);
             this.textBoxTitle.Name = "textBoxTitle";
+            this.textBoxTitle.ReadOnly = true;
             this.textBoxTitle.Size = new System.Drawing.Size(477, 22);
             this.textBoxTitle.TabIndex = 8;
             // 
@@ -284,6 +285,7 @@
             this.textBoxPublisher.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxPublisher.Location = new System.Drawing.Point(287, 225);
             this.textBoxPublisher.Name = "textBoxPublisher";
+            this.textBoxPublisher.ReadOnly = true;
             this.textBoxPublisher.Size = new System.Drawing.Size(180, 16);
             this.textBoxPublisher.TabIndex = 8;
             // 
@@ -324,6 +326,7 @@
             this.textBoxReleaseDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxReleaseDate.Location = new System.Drawing.Point(290, 108);
             this.textBoxReleaseDate.Name = "textBoxReleaseDate";
+            this.textBoxReleaseDate.ReadOnly = true;
             this.textBoxReleaseDate.Size = new System.Drawing.Size(147, 16);
             this.textBoxReleaseDate.TabIndex = 8;
             // 
@@ -343,6 +346,7 @@
             this.textBoxPages.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxPages.Location = new System.Drawing.Point(281, 50);
             this.textBoxPages.Name = "textBoxPages";
+            this.textBoxPages.ReadOnly = true;
             this.textBoxPages.Size = new System.Drawing.Size(147, 16);
             this.textBoxPages.TabIndex = 8;
             // 
@@ -352,6 +356,7 @@
             this.textBoxLanguage.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxLanguage.Location = new System.Drawing.Point(283, 196);
             this.textBoxLanguage.Name = "textBoxLanguage";
+            this.textBoxLanguage.ReadOnly = true;
             this.textBoxLanguage.Size = new System.Drawing.Size(147, 16);
             this.textBoxLanguage.TabIndex = 8;
             // 
@@ -361,6 +366,7 @@
             this.textBoxFormat.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxFormat.Location = new System.Drawing.Point(292, 167);
             this.textBoxFormat.Name = "textBoxFormat";
+            this.textBoxFormat.ReadOnly = true;
             this.textBoxFormat.Size = new System.Drawing.Size(147, 16);
             this.textBoxFormat.TabIndex = 8;
             // 
@@ -370,6 +376,7 @@
             this.textBoxPrice.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxPrice.Location = new System.Drawing.Point(273, 137);
             this.textBoxPrice.Name = "textBoxPrice";
+            this.textBoxPrice.ReadOnly = true;
             this.textBoxPrice.Size = new System.Drawing.Size(147, 16);
             this.textBoxPrice.TabIndex = 8;
             // 

@@ -9,6 +9,7 @@ namespace FreddansBokhandel
     public partial class BooksAuthors
     {
         public string Isbn { get; set; }
+
         [Column("FörfattarId")]
         public int AuthorId { get; set; }
 

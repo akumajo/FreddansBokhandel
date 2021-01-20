@@ -25,6 +25,7 @@ namespace FreddansBokhandel
                 SetValuesOnEditMode();
             }
         }
+
         private int SetPublisherID()
         {
             if (selectedPublisher == null)

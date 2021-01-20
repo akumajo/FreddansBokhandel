@@ -27,6 +27,7 @@ namespace FreddansBokhandel
 
             using (var db = new FreddansBokhandelContext())
             {
+               
                 if (db.Database.CanConnect())
                 {
                     var newImage = new Image

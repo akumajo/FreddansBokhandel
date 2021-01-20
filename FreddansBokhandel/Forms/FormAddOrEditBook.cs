@@ -65,6 +65,64 @@ namespace FreddansBokhandel
             }
         }
 
+        private bool CheckIfBookCanBeAdded()
+        {
+            Regex reg = new Regex("^[0-9]+$");
+
+            if (textBoxISBN.TextLength != 13 || reg.IsMatch(textBoxISBN.Text) == false)
+            {
+                MessageBox.Show("ISBN är inte ett giltigt format.");
+                return false;
+            }
+            if (selectedBook == null)
+            {
+                foreach (var book in books)
+                {
+                    if (book.Isbn == textBoxISBN.Text)
+                    {
+                        MessageBox.Show($"En bok med ISBN {textBoxISBN.Text} existerar redan i databasen.");
+                        return false;
+                    }
+                }
+            }
+            if (comboBoxFormat.SelectedItem == null)
+            {
+                MessageBox.Show("Du måste välja ett format.");
+                return false;
+            }
+            if (comboBoxLanguage.SelectedItem == null)
+            {
+                MessageBox.Show("Du måste välja ett språk.");
+                return false;
+            }
+            if (comboBoxPublisher.SelectedItem == null)
+            {
+                MessageBox.Show("Du måste välja ett förlag.");
+                return false;
+            }
+            if (textBoxTitle.Text.Trim() == "")
+            {
+                MessageBox.Show("Boken måste ha en titel.");
+                return false;
+            }
+            if (textBoxPrice.Text == null || reg.IsMatch(textBoxPrice.Text) == false)
+            {
+                MessageBox.Show("'Pris' har felaktigt format.");
+                return false;
+            }
+            if (textBoxPages.Text == null || reg.IsMatch(textBoxPages.Text) == false)
+            {
+                MessageBox.Show("'Sidor' har felaktigt format.");
+                return false;
+            }
+            if (comboBoxAuthor.SelectedItem == null && comboBoxAuthor2.SelectedItem == null && comboBoxAuthor3.SelectedItem == null)
+            {
+                MessageBox.Show("Du måste välja minst en författare.");
+                return false;
+            }
+            return true;
+        }
+
         private void PopulateComboboxes()
         {
             string[] bookFormat = { "Häftad", "Inbunden", "Pocket", "Spiral" };
@@ -153,64 +211,6 @@ namespace FreddansBokhandel
             else { db.Update(newBook); }
 
             return newBook;
-        }
-
-        private bool CheckIfBookCanBeAdded()
-        {
-            Regex reg = new Regex("^[0-9]+$");
-
-            if (textBoxISBN.TextLength != 13 || reg.IsMatch(textBoxISBN.Text) == false)
-            {
-                MessageBox.Show("ISBN är inte ett giltigt format.");
-                return false;
-            }
-            if (selectedBook == null)
-            {
-                foreach (var book in books)
-                {
-                    if (book.Isbn == textBoxISBN.Text)
-                    {
-                        MessageBox.Show($"En bok med ISBN {textBoxISBN.Text} existerar redan i databasen.");
-                        return false;
-                    }
-                }
-            }
-            if (comboBoxFormat.SelectedItem == null)
-            {
-                MessageBox.Show("Du måste välja ett format.");
-                return false;
-            }
-            if (comboBoxLanguage.SelectedItem == null)
-            {
-                MessageBox.Show("Du måste välja ett språk.");
-                return false;
-            }
-            if (comboBoxPublisher.SelectedItem == null)
-            {
-                MessageBox.Show("Du måste välja ett förlag.");
-                return false;
-            }
-            if (textBoxTitle.Text.Trim() == "")
-            {
-                MessageBox.Show("Boken måste ha en titel.");
-                return false;
-            }
-            if (textBoxPrice.Text == null || reg.IsMatch(textBoxPrice.Text) == false)
-            {
-                MessageBox.Show("'Pris' har felaktigt format.");
-                return false;
-            }
-            if (textBoxPages.Text == null || reg.IsMatch(textBoxPages.Text) == false)
-            {
-                MessageBox.Show("'Sidor' har felaktigt format.");
-                return false;
-            }
-            if (comboBoxAuthor.SelectedItem == null && comboBoxAuthor2.SelectedItem == null && comboBoxAuthor3.SelectedItem == null)
-            {
-                MessageBox.Show("Du måste välja minst en författare.");
-                return false;
-            }
-            return true;
         }
 
         private void AddBook_Load(object sender, EventArgs e)

@@ -75,33 +75,6 @@ namespace FreddansBokhandel
             selectedPublisher = null;
         }
 
-        private void Form_EnterPublishersTab(object sender, EventArgs e)
-        {
-            LoadPublishersFromDatabase();
-            PopulateDataGridPublishers();
-        }
-
-        private void buttonAddPublisher_Click(object sender, EventArgs e)
-        {
-            AddNewPublisher();
-            LoadPublishersFromDatabase();
-            PopulateDataGridPublishers();
-        }
-
-        private void buttonEditPublisher_Click(object sender, EventArgs e)
-        {
-            EditPublisher();
-            LoadPublishersFromDatabase();
-            PopulateDataGridPublishers();
-        }
-
-        private void buttonRemovePublisher_Click(object sender, EventArgs e)
-        {
-            RemovePublisher();
-            LoadPublishersFromDatabase();
-            PopulateDataGridPublishers();
-        }
-
         private void RemovePublisher()
         {
             DialogResult dr = MessageBox.Show("Vill du ta bort det här förlaget ur systemet?\nObservera att det inte går att ta bort förlag som har böcker i sortimentet.", "Ta bort förlag", MessageBoxButtons.YesNo);
@@ -134,5 +107,33 @@ namespace FreddansBokhandel
                 }
             }
         }
+
+        private void Form_EnterPublishersTab(object sender, EventArgs e)
+        {
+            LoadPublishersFromDatabase();
+            PopulateDataGridPublishers();
+        }
+
+        private void buttonAddPublisher_Click(object sender, EventArgs e)
+        {
+            AddNewPublisher();
+            LoadPublishersFromDatabase();
+            PopulateDataGridPublishers();
+        }
+
+        private void buttonEditPublisher_Click(object sender, EventArgs e)
+        {
+            EditPublisher();
+            LoadPublishersFromDatabase();
+            PopulateDataGridPublishers();
+        }
+
+        private void buttonRemovePublisher_Click(object sender, EventArgs e)
+        {
+            RemovePublisher();
+            LoadPublishersFromDatabase();
+            PopulateDataGridPublishers();
+        }
+
     }
 }

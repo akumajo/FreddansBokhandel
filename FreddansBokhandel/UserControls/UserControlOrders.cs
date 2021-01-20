@@ -26,7 +26,7 @@ namespace FreddansBokhandel
             form1.EnterOrdersTab += Form1_EnterOrdersTab;
         }
 
-        private async Task LoadOrdersFromDatabase()
+        private async Task LoadOrdersFromDatabaseAsync()
         {
             db = new FreddansBokhandelContext();
 
@@ -42,6 +42,8 @@ namespace FreddansBokhandel
                           .ThenInclude(i => i.IsbnNavigation)
                           .OrderBy(b => b.OrderDate)
                           .ToListAsync();
+
+                    orderDates.Clear();
 
                     foreach (var date in orders)
                     {
@@ -124,6 +126,18 @@ namespace FreddansBokhandel
             SelectingANode();
         }
 
+        private void ClearSelectedOrder()
+        {
+            buttonRemoveOrder.Enabled = false;
+            textBoxOrderID.Text = null;
+            textBoxOrderDate.Text = null;
+            textBoxOrderSent.Text = null;
+            textBoxButik.Text = null;
+            textBoxSeller.Text = null;
+            textBoxBuyerInfo.Text = null;
+            dataGridView2.Rows.Clear();
+        }
+
         private void SelectingANode()
         {
             selectedOrder = null;
@@ -151,26 +165,29 @@ namespace FreddansBokhandel
             {
                 textBoxBuyerInfo.Text = "-";
             }
+
+            buttonRemoveOrder.Enabled = true;
         }
 
-        private async Task CreateNewOrder()
+        private async Task CreateNewOrderAsync()
         {
             FormAddNewOrder order = new FormAddNewOrder();
             order.ShowDialog();
-            await LoadOrdersFromDatabase();
+            await LoadOrdersFromDatabaseAsync();
         }
 
-        private async Task RemoveSelectedOrder()
+        private async Task RemoveSelectedOrderAsync()
         {
             db.Remove(selectedOrder);
             db.SaveChanges();
-            await LoadOrdersFromDatabase();
-            buttonCreateOrder.Enabled = false;
+            await LoadOrdersFromDatabaseAsync();
         }
 
         private async void Form1_EnterOrdersTab(object sender, EventArgs e)
         {
-            await LoadOrdersFromDatabase();
+            treeViewOrders.Nodes.Clear();
+            ClearSelectedOrder();
+            await LoadOrdersFromDatabaseAsync();
             PopulateTreeNodeOrders(orders);
             buttonCreateOrder.Enabled = true;
         }
@@ -182,20 +199,20 @@ namespace FreddansBokhandel
 
         private async void buttonCreateOrder_Click(object sender, EventArgs e)
         {
-            await CreateNewOrder();
+            await CreateNewOrderAsync();
             PopulateTreeNodeOrders(orders);
         }
 
         private async void buttonRemoveOrder_Click(object sender, EventArgs e)
         {
-            await RemoveSelectedOrder();
+            await RemoveSelectedOrderAsync();
             PopulateTreeNodeOrders(orders);
+            ClearSelectedOrder();
         }
 
         private void treeViewOrders_AfterSelect(object sender, TreeViewEventArgs e)
         {
             SelectingANode();
-            buttonCreateOrder.Enabled = true;
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)

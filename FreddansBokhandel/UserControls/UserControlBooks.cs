@@ -27,7 +27,7 @@ namespace FreddansBokhandel
             form1.EnterBooksTab += Form1_EnterBooksTab;
         }
 
-        private async Task LoadBooksFromDatabase()
+        private async Task LoadBooksFromDatabaseAsync()
         {
             db = new FreddansBokhandelContext();
 
@@ -71,11 +71,10 @@ namespace FreddansBokhandel
             }
         }
 
-        private void AddNewBook()
+        private void FetchImageFromWeb()
         {
-            selectedBook = null;
-            var addBook = new FormAddOrEditBook(books, selectedBook);
-            addBook.ShowDialog();
+            WebScraperLite img = new WebScraperLite(selectedBook.Isbn);
+            img.SaveImageToDatabase();
         }
 
         private void BookIsSelected()
@@ -98,6 +97,7 @@ namespace FreddansBokhandel
 
             byte[] imageSource = selectedBook.Image.ImageArray;
             Bitmap image;
+
             using (MemoryStream stream = new MemoryStream(imageSource))
             {
                 image = new Bitmap(stream);
@@ -175,20 +175,55 @@ namespace FreddansBokhandel
             dataGridViewOverview.CurrentCell = dataGridViewOverview[0, selectedStoreRow];
         }
 
-        private void AfterAddedImage()
+        private void SetSelectedBookAfterAddingImage()
         {
             selectedBook = listBox1.Items[selectedBookIndex] as Book;
             listBox1.SelectedItem = listBox1.Items[selectedBookIndex];
         }
 
-        private void UpdateBook()
+        private void AddNewBook()
+        {
+            selectedBook = null;
+            var addBook = new FormAddOrEditBook(books, selectedBook);
+            addBook.ShowDialog();
+        }
+
+        private void EditBook()
         {
             var updateBook = new FormAddOrEditBook(books, selectedBook);
             updateBook.ShowDialog();
         }
 
+        private async Task DeleteBookAsync()
+        {
+            DialogResult dr = MessageBox.Show("Vill du ta bort den här boken ur systemet?\nObservera att det inte går att ta bort böcker som redan har sålts.", "Ta bort bok", MessageBoxButtons.YesNo);
+
+            if (dr == DialogResult.Yes)
+            {
+                var book = listBox1.SelectedItem as Book;
+
+                if (book.OrderDetails.Count > 0)
+                {
+                    MessageBox.Show($"Boken fanns bland ordrar och kunde inte tas bort.");
+                }
+                else
+                {
+                    MessageBox.Show($"Boken togs bort. {book.Isbn}");
+                    db.Remove(book.Image);
+                    db.SaveChanges();
+                    db.Remove(book);
+                    db.SaveChanges();
+
+                    await LoadBooksFromDatabaseAsync();
+                    PopulateListBox();
+                }
+            }
+        }
+
         private void AddBookToStock()
         {
+            if (selectedBook == null) { return; }
+
             selectedStoreRow = dataGridViewOverview.CurrentCell.RowIndex;
             var selectedStore = dataGridViewOverview[0, selectedStoreRow].Value as Store;
 
@@ -226,35 +261,9 @@ namespace FreddansBokhandel
             }
         }
 
-        private async Task DeleteBook()
-        {
-            DialogResult dr = MessageBox.Show("Vill du ta bort den här boken ur systemet?\nObservera att det inte går att ta bort böcker som redan har sålts.", "Ta bort bok", MessageBoxButtons.YesNo);
-
-            if (dr == DialogResult.Yes)
-            {
-                var book = listBox1.SelectedItem as Book;
-
-                if (book.OrderDetails.Count > 0)
-                {
-                    MessageBox.Show($"Boken fanns bland ordrar och kunde inte tas bort.");
-                }
-                else
-                {
-                    MessageBox.Show($"Boken togs bort. {book.Isbn}");
-                    db.Remove(book.Image);
-                    db.SaveChanges();
-                    db.Remove(book);
-                    db.SaveChanges();
-
-                    await LoadBooksFromDatabase();
-                    PopulateListBox();
-                }
-            }
-        }
-
         private async void buttonDeleteBook_Click(object sender, EventArgs e)
         {
-            await DeleteBook();
+            await DeleteBookAsync();
         }
 
         private void buttonFilterBooks_Click(object sender, EventArgs e)
@@ -269,9 +278,11 @@ namespace FreddansBokhandel
 
         private async void buttonUpdateBook_Click(object sender, EventArgs e)
         {
-            UpdateBook();
-            await LoadBooksFromDatabase();
+            EditBook();
+            await LoadBooksFromDatabaseAsync();
             PopulateListBox();
+            ClearBookInfo();
+            DisableButtons();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -282,15 +293,17 @@ namespace FreddansBokhandel
         private async void buttonAddBook_Click(object sender, EventArgs e)
         {
             AddNewBook();
-            await LoadBooksFromDatabase();
+            await LoadBooksFromDatabaseAsync();
             PopulateListBox();
+            ClearBookInfo();
+            DisableButtons();
         }
 
         private async void Form1_EnterBooksTab(object sender, EventArgs e)
         {
             selectedBookIndex = 0;
             listBox1.Items.Clear();
-            await LoadBooksFromDatabase();
+            await LoadBooksFromDatabaseAsync();
             PopulateListBox();
         }
 
@@ -303,18 +316,12 @@ namespace FreddansBokhandel
 
         private async void buttonLoadImage_Click(object sender, EventArgs e)
         {
-            FetchImageFromWeb();
             buttonLoadImage.Enabled = false;
-            await LoadBooksFromDatabase();
+            FetchImageFromWeb();
+            await LoadBooksFromDatabaseAsync();
             PopulateListBox();
-            AfterAddedImage();
+            SetSelectedBookAfterAddingImage();
             ShowBookInfo();
-        }
-
-        private void FetchImageFromWeb()
-        {
-            WebScraperLite img = new WebScraperLite(selectedBook.Isbn);
-            img.SaveImageToDatabase();
         }
     }
 }

@@ -29,6 +29,7 @@ namespace FreddansBokhandel
                 SetValuesOnEditMode();
             }
         }
+
         private int SetEmployeeID()
         {
             if (selectedEmployee == null)

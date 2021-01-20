@@ -10,6 +10,7 @@ namespace FreddansBokhandel
     {
         [Column("ButikId")]
         public int StoreID { get; set; }
+
         public string Isbn { get; set; }
 
         [Column("Antal")]

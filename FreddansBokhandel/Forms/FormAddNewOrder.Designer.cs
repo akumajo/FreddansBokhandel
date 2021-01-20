@@ -44,11 +44,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBoxPostalAdress = new System.Windows.Forms.TextBox();
-            this.textBoxPostalNumber = new System.Windows.Forms.TextBox();
+            this.textBoxPostalAddress = new System.Windows.Forms.TextBox();
+            this.textBoxZipCode = new System.Windows.Forms.TextBox();
             this.textBoxAdress = new System.Windows.Forms.TextBox();
             this.textBoxLastName = new System.Windows.Forms.TextBox();
-            this.textBoxSurName = new System.Windows.Forms.TextBox();
+            this.textBoxFirstName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxOrderID = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -177,11 +177,11 @@
             this.splitContainer2.Panel1.Controls.Add(this.label9);
             this.splitContainer2.Panel1.Controls.Add(this.label8);
             this.splitContainer2.Panel1.Controls.Add(this.label7);
-            this.splitContainer2.Panel1.Controls.Add(this.textBoxPostalAdress);
-            this.splitContainer2.Panel1.Controls.Add(this.textBoxPostalNumber);
+            this.splitContainer2.Panel1.Controls.Add(this.textBoxPostalAddress);
+            this.splitContainer2.Panel1.Controls.Add(this.textBoxZipCode);
             this.splitContainer2.Panel1.Controls.Add(this.textBoxAdress);
             this.splitContainer2.Panel1.Controls.Add(this.textBoxLastName);
-            this.splitContainer2.Panel1.Controls.Add(this.textBoxSurName);
+            this.splitContainer2.Panel1.Controls.Add(this.textBoxFirstName);
             this.splitContainer2.Panel1.Controls.Add(this.label6);
             this.splitContainer2.Panel1.Controls.Add(this.textBoxOrderID);
             this.splitContainer2.Panel1.Controls.Add(this.dateTimePicker1);
@@ -265,19 +265,19 @@
             // 
             // textBoxPostalAdress
             // 
-            this.textBoxPostalAdress.Enabled = false;
-            this.textBoxPostalAdress.Location = new System.Drawing.Point(248, 160);
-            this.textBoxPostalAdress.Name = "textBoxPostalAdress";
-            this.textBoxPostalAdress.Size = new System.Drawing.Size(168, 23);
-            this.textBoxPostalAdress.TabIndex = 9;
+            this.textBoxPostalAddress.Enabled = false;
+            this.textBoxPostalAddress.Location = new System.Drawing.Point(248, 160);
+            this.textBoxPostalAddress.Name = "textBoxPostalAdress";
+            this.textBoxPostalAddress.Size = new System.Drawing.Size(168, 23);
+            this.textBoxPostalAddress.TabIndex = 9;
             // 
             // textBoxPostalNumber
             // 
-            this.textBoxPostalNumber.Enabled = false;
-            this.textBoxPostalNumber.Location = new System.Drawing.Point(76, 160);
-            this.textBoxPostalNumber.Name = "textBoxPostalNumber";
-            this.textBoxPostalNumber.Size = new System.Drawing.Size(81, 23);
-            this.textBoxPostalNumber.TabIndex = 8;
+            this.textBoxZipCode.Enabled = false;
+            this.textBoxZipCode.Location = new System.Drawing.Point(76, 160);
+            this.textBoxZipCode.Name = "textBoxPostalNumber";
+            this.textBoxZipCode.Size = new System.Drawing.Size(81, 23);
+            this.textBoxZipCode.TabIndex = 8;
             // 
             // textBoxAdress
             // 
@@ -297,11 +297,11 @@
             // 
             // textBoxSurName
             // 
-            this.textBoxSurName.Enabled = false;
-            this.textBoxSurName.Location = new System.Drawing.Point(76, 102);
-            this.textBoxSurName.Name = "textBoxSurName";
-            this.textBoxSurName.Size = new System.Drawing.Size(127, 23);
-            this.textBoxSurName.TabIndex = 5;
+            this.textBoxFirstName.Enabled = false;
+            this.textBoxFirstName.Location = new System.Drawing.Point(76, 102);
+            this.textBoxFirstName.Name = "textBoxSurName";
+            this.textBoxFirstName.Size = new System.Drawing.Size(127, 23);
+            this.textBoxFirstName.TabIndex = 5;
             // 
             // label6
             // 
@@ -457,11 +457,11 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBoxPostalAdress;
-        private System.Windows.Forms.TextBox textBoxPostalNumber;
+        private System.Windows.Forms.TextBox textBoxPostalAddress;
+        private System.Windows.Forms.TextBox textBoxZipCode;
         private System.Windows.Forms.TextBox textBoxAdress;
         private System.Windows.Forms.TextBox textBoxLastName;
-        private System.Windows.Forms.TextBox textBoxSurName;
+        private System.Windows.Forms.TextBox textBoxFirstName;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBoxCountry;
