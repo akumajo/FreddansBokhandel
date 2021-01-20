@@ -86,10 +86,10 @@
             this.buttonAddEmployee.UseVisualStyleBackColor = true;
             this.buttonAddEmployee.Click += new System.EventHandler(this.buttonAddEmployee_Click);
             // 
-            // textBoxSurName
+            // textBoxFirstName
             // 
             this.textBoxFirstName.Location = new System.Drawing.Point(94, 6);
-            this.textBoxFirstName.Name = "textBoxSurName";
+            this.textBoxFirstName.Name = "textBoxFirstName";
             this.textBoxFirstName.Size = new System.Drawing.Size(204, 23);
             this.textBoxFirstName.TabIndex = 1;
             // 
@@ -135,6 +135,7 @@
             this.comboBoxStores.Location = new System.Drawing.Point(94, 122);
             this.comboBoxStores.Name = "comboBoxStores";
             this.comboBoxStores.Size = new System.Drawing.Size(121, 23);
+            this.comboBoxStores.Sorted = true;
             this.comboBoxStores.TabIndex = 9;
             // 
             // label5
@@ -163,10 +164,10 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Anställd:";
             // 
-            // textBoxPostalNo
+            // textBoxZipCode
             // 
             this.textBoxZipCode.Location = new System.Drawing.Point(94, 64);
-            this.textBoxZipCode.Name = "textBoxPostalNo";
+            this.textBoxZipCode.Name = "textBoxZipCode";
             this.textBoxZipCode.Size = new System.Drawing.Size(80, 23);
             this.textBoxZipCode.TabIndex = 5;
             // 
@@ -234,6 +235,7 @@
             this.comboBoxRole.Location = new System.Drawing.Point(94, 152);
             this.comboBoxRole.Name = "comboBoxRole";
             this.comboBoxRole.Size = new System.Drawing.Size(121, 23);
+            this.comboBoxRole.Sorted = true;
             this.comboBoxRole.TabIndex = 11;
             // 
             // label11
@@ -245,7 +247,7 @@
             this.label11.TabIndex = 10;
             this.label11.Text = "Roll:";
             // 
-            // FormAddEmployee
+            // FormAddorEditEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -276,7 +278,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormAddEmployee";
+            this.Name = "FormAddorEditEmployee";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lägg till anställd";

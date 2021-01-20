@@ -157,28 +157,58 @@ namespace FreddansBokhandel
                 var authors = ComboboxAuthors();
                 var newBook = CreateBook();
 
-                for (int i = 0; i < stores.Count; i++)
-                {
-                    var saldo = new StockBalance { StoreID = i + 1, Balance = 0, Isbn = newBook.Isbn };
+                //for (int i = 0; i < stores.Count; i++)
+                //{
+                //    var saldo = new StockBalance { StoreID = i + 1, Balance = 0, Isbn = newBook.Isbn };
 
-                    if (selectedBook == null) { db.Add(saldo); }
-                    else { db.Update(saldo); }
+                //    if (selectedBook == null) { db.Add(saldo); }
+                //    else { db.Update(saldo); }
+                //}
+
+                if (selectedBook != null)
+                {
+                    UpdateBookAndAuthorJT(authors, newBook, selectedBook);
                 }
-
-                for (int i = 0; i < 3; i++)
+                else
                 {
-                    if (authors[i] != null)
-                    {
-                        var bookAndAuthor = new BooksAuthors { Isbn = newBook.Isbn, AuthorId = authors[i].Id };
-
-                        if (selectedBook == null) { db.Add(bookAndAuthor); }
-                        else { db.Update(bookAndAuthor); }
-                    }
+                    AddBookAndAuthorJT(authors, newBook);
                 }
 
                 db.SaveChanges();
                 db.Dispose();
                 Close();
+            }
+        }
+
+        private void AddBookAndAuthorJT(List<Author> authors, Book newBook)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (authors[i] != null)
+                {
+                    var bookAndAuthor = new BooksAuthors { Isbn = newBook.Isbn, AuthorId = authors[i].Id };
+                    db.Add(bookAndAuthor);
+                }
+            }
+        }
+
+        private void UpdateBookAndAuthorJT(List<Author> authors, Book newBook, Book selectedBook)
+        {
+
+            foreach (var book in selectedBook.BooksAuthors)
+            {
+                var bookAndAuthor = new BooksAuthors { Isbn = book.Isbn, AuthorId = book.AuthorId};
+                db.Remove(bookAndAuthor);
+                db.SaveChanges();
+            }
+            
+            for (int i = 0; i < 3; i++)
+            {
+                if (authors[i] != null)
+                {
+                    var bookAndAuthor = new BooksAuthors { Isbn = newBook.Isbn, AuthorId = authors[i].Id };
+                    db.Add(bookAndAuthor);
+                }
             }
         }
 

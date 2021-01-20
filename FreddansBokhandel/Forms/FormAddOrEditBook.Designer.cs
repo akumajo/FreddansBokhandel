@@ -292,7 +292,7 @@
             this.buttonRemoveAuthor2.TabIndex = 6;
             this.buttonRemoveAuthor2.Text = "Ta bort";
             this.buttonRemoveAuthor2.UseVisualStyleBackColor = true;
-            this.buttonRemoveAuthor2.Click += new System.EventHandler(this.buttonRemoveAuthor1_Click);
+            this.buttonRemoveAuthor2.Click += new System.EventHandler(this.buttonRemoveAuthor2_Click);
             // 
             // FormAddOrEditBook
             // 

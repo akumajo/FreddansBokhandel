@@ -26,7 +26,6 @@ namespace FreddansBokhandel
             if (selectedEmployee != null)
             {
                 Text = "Ändra anställd";
-                SetValuesOnEditMode();
             }
         }
 
@@ -105,6 +104,8 @@ namespace FreddansBokhandel
             dateTimePicker2.Value = selectedEmployee.HireDate;
             textBoxEmail.Text = selectedEmployee.Email;
             textBoxTelephone.Text = selectedEmployee.Telephone;
+            comboBoxRole.SelectedIndex = comboBoxRole.FindString(selectedEmployee.Role);
+            comboBoxStores.SelectedIndex = comboBoxStores.FindString(selectedEmployee.Stores.Name);
         }
 
         private void AddOrEditEmployee()
@@ -147,6 +148,11 @@ namespace FreddansBokhandel
         {
             PopulateRoleComboBox();
             PopulateStoreComboBox();
+
+            if (selectedEmployee != null)
+            {
+                SetValuesOnEditMode();
+            }
         }
 
         private void buttonAddEmployee_Click(object sender, EventArgs e)
