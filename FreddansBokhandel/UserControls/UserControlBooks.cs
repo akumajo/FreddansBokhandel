@@ -18,7 +18,6 @@ namespace FreddansBokhandel
         private List<Book> books;
         Book selectedBook;
         FreddansBokhandelContext db;
-        int selectedBookIndex = 0;
 
         public UserControlBooks(FormMain form1)
         {
@@ -81,7 +80,6 @@ namespace FreddansBokhandel
         {
             selectedStoreRow = 0;
             selectedBook = listBox1.SelectedItem as Book;
-            selectedBookIndex = listBox1.SelectedIndex;
             EnableButtons();
             ShowBookInfo();
         }
@@ -171,14 +169,6 @@ namespace FreddansBokhandel
                 dataGridViewOverview.Rows[rowIndex].Cells["Antal"].Value = balance.Balance;
                 dataGridViewOverview.Rows[rowIndex].Cells["Lagervärde"].Value = (balance.Balance * book.Price).ToString("C");
             }
-
-            dataGridViewOverview.CurrentCell = dataGridViewOverview[0, selectedStoreRow];
-        }
-
-        private void SetSelectedBookAfterAddingImage()
-        {
-            selectedBook = listBox1.Items[selectedBookIndex] as Book;
-            listBox1.SelectedItem = listBox1.Items[selectedBookIndex];
         }
 
         private void AddNewBook()
@@ -301,7 +291,6 @@ namespace FreddansBokhandel
 
         private async void Form1_EnterBooksTab(object sender, EventArgs e)
         {
-            selectedBookIndex = 0;
             listBox1.Items.Clear();
             await LoadBooksFromDatabaseAsync();
             PopulateListBox();
@@ -320,7 +309,6 @@ namespace FreddansBokhandel
             FetchImageFromWeb();
             await LoadBooksFromDatabaseAsync();
             PopulateListBox();
-            SetSelectedBookAfterAddingImage();
             ShowBookInfo();
         }
     }

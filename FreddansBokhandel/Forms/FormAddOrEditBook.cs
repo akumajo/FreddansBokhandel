@@ -186,7 +186,6 @@ namespace FreddansBokhandel
 
         private void UpdateBookAndAuthorJT(List<Author> authors, Book newBook, Book selectedBook)
         {
-
             foreach (var book in selectedBook.BooksAuthors)
             {
                 var bookAndAuthor = new BooksAuthors { Isbn = book.Isbn, AuthorId = book.AuthorId};
