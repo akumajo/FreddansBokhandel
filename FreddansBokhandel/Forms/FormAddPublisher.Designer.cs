@@ -44,6 +44,7 @@
             // textBoxAddress
             // 
             this.textBoxAddress.Location = new System.Drawing.Point(93, 35);
+            this.textBoxAddress.MaxLength = 100;
             this.textBoxAddress.Name = "textBoxAddress";
             this.textBoxAddress.Size = new System.Drawing.Size(361, 23);
             this.textBoxAddress.TabIndex = 2;
@@ -61,6 +62,7 @@
             // textBoxName
             // 
             this.textBoxName.Location = new System.Drawing.Point(93, 6);
+            this.textBoxName.MaxLength = 50;
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(361, 23);
             this.textBoxName.TabIndex = 1;
@@ -83,10 +85,11 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Namn:";
             // 
-            // textBoxPostNo
+            // textBoxZipCode
             // 
             this.textBoxZipCode.Location = new System.Drawing.Point(93, 64);
-            this.textBoxZipCode.Name = "textBoxPostNo";
+            this.textBoxZipCode.MaxLength = 20;
+            this.textBoxZipCode.Name = "textBoxZipCode";
             this.textBoxZipCode.Size = new System.Drawing.Size(80, 23);
             this.textBoxZipCode.TabIndex = 3;
             // 
@@ -111,6 +114,7 @@
             // textBoxCountry
             // 
             this.textBoxCountry.Location = new System.Drawing.Point(93, 93);
+            this.textBoxCountry.MaxLength = 20;
             this.textBoxCountry.Name = "textBoxCountry";
             this.textBoxCountry.Size = new System.Drawing.Size(152, 23);
             this.textBoxCountry.TabIndex = 5;
@@ -118,6 +122,7 @@
             // textBoxPostalAdress
             // 
             this.textBoxPostalAdress.Location = new System.Drawing.Point(251, 64);
+            this.textBoxPostalAdress.MaxLength = 50;
             this.textBoxPostalAdress.Name = "textBoxPostalAdress";
             this.textBoxPostalAdress.Size = new System.Drawing.Size(203, 23);
             this.textBoxPostalAdress.TabIndex = 4;

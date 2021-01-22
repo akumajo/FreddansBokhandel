@@ -68,6 +68,7 @@
             // textBoxTitle
             // 
             this.textBoxTitle.Location = new System.Drawing.Point(66, 12);
+            this.textBoxTitle.MaxLength = 100;
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.Size = new System.Drawing.Size(526, 23);
             this.textBoxTitle.TabIndex = 1;
@@ -183,6 +184,7 @@
             // textBoxPages
             // 
             this.textBoxPages.Location = new System.Drawing.Point(388, 128);
+            this.textBoxPages.MaxLength = 9;
             this.textBoxPages.Name = "textBoxPages";
             this.textBoxPages.Size = new System.Drawing.Size(80, 23);
             this.textBoxPages.TabIndex = 4;
@@ -260,6 +262,7 @@
             // textBoxPrice
             // 
             this.textBoxPrice.Location = new System.Drawing.Point(66, 157);
+            this.textBoxPrice.MaxLength = 9;
             this.textBoxPrice.Name = "textBoxPrice";
             this.textBoxPrice.Size = new System.Drawing.Size(80, 23);
             this.textBoxPrice.TabIndex = 4;

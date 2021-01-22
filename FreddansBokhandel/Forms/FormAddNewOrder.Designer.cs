@@ -205,6 +205,7 @@
             // 
             this.textBoxCountry.Enabled = false;
             this.textBoxCountry.Location = new System.Drawing.Point(76, 189);
+            this.textBoxCountry.MaxLength = 20;
             this.textBoxCountry.Name = "textBoxCountry";
             this.textBoxCountry.Size = new System.Drawing.Size(127, 23);
             this.textBoxCountry.TabIndex = 10;
@@ -263,19 +264,21 @@
             this.label7.TabIndex = 7;
             this.label7.Text = "Förnamn:";
             // 
-            // textBoxPostalAdress
+            // textBoxPostalAddress
             // 
             this.textBoxPostalAddress.Enabled = false;
             this.textBoxPostalAddress.Location = new System.Drawing.Point(248, 160);
-            this.textBoxPostalAddress.Name = "textBoxPostalAdress";
+            this.textBoxPostalAddress.MaxLength = 50;
+            this.textBoxPostalAddress.Name = "textBoxPostalAddress";
             this.textBoxPostalAddress.Size = new System.Drawing.Size(168, 23);
             this.textBoxPostalAddress.TabIndex = 9;
             // 
-            // textBoxPostalNumber
+            // textBoxZipCode
             // 
             this.textBoxZipCode.Enabled = false;
             this.textBoxZipCode.Location = new System.Drawing.Point(76, 160);
-            this.textBoxZipCode.Name = "textBoxPostalNumber";
+            this.textBoxZipCode.MaxLength = 20;
+            this.textBoxZipCode.Name = "textBoxZipCode";
             this.textBoxZipCode.Size = new System.Drawing.Size(81, 23);
             this.textBoxZipCode.TabIndex = 8;
             // 
@@ -283,6 +286,7 @@
             // 
             this.textBoxAdress.Enabled = false;
             this.textBoxAdress.Location = new System.Drawing.Point(76, 131);
+            this.textBoxAdress.MaxLength = 50;
             this.textBoxAdress.Name = "textBoxAdress";
             this.textBoxAdress.Size = new System.Drawing.Size(340, 23);
             this.textBoxAdress.TabIndex = 7;
@@ -291,15 +295,17 @@
             // 
             this.textBoxLastName.Enabled = false;
             this.textBoxLastName.Location = new System.Drawing.Point(289, 102);
+            this.textBoxLastName.MaxLength = 50;
             this.textBoxLastName.Name = "textBoxLastName";
             this.textBoxLastName.Size = new System.Drawing.Size(127, 23);
             this.textBoxLastName.TabIndex = 6;
             // 
-            // textBoxSurName
+            // textBoxFirstName
             // 
             this.textBoxFirstName.Enabled = false;
             this.textBoxFirstName.Location = new System.Drawing.Point(76, 102);
-            this.textBoxFirstName.Name = "textBoxSurName";
+            this.textBoxFirstName.MaxLength = 50;
+            this.textBoxFirstName.Name = "textBoxFirstName";
             this.textBoxFirstName.Size = new System.Drawing.Size(127, 23);
             this.textBoxFirstName.TabIndex = 5;
             // 

@@ -75,10 +75,11 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Land:";
             // 
-            // textBoxSurName
+            // textBoxFirstName
             // 
             this.textBoxFirstName.Location = new System.Drawing.Point(101, 12);
-            this.textBoxFirstName.Name = "textBoxSurName";
+            this.textBoxFirstName.MaxLength = 50;
+            this.textBoxFirstName.Name = "textBoxFirstName";
             this.textBoxFirstName.Size = new System.Drawing.Size(203, 23);
             this.textBoxFirstName.TabIndex = 1;
             // 
@@ -95,6 +96,7 @@
             // textBoxCountry
             // 
             this.textBoxCountry.Location = new System.Drawing.Point(101, 79);
+            this.textBoxCountry.MaxLength = 50;
             this.textBoxCountry.Name = "textBoxCountry";
             this.textBoxCountry.Size = new System.Drawing.Size(80, 23);
             this.textBoxCountry.TabIndex = 5;
@@ -111,6 +113,7 @@
             // textBoxLastName
             // 
             this.textBoxLastName.Location = new System.Drawing.Point(381, 12);
+            this.textBoxLastName.MaxLength = 50;
             this.textBoxLastName.Name = "textBoxLastName";
             this.textBoxLastName.Size = new System.Drawing.Size(203, 23);
             this.textBoxLastName.TabIndex = 2;
@@ -125,7 +128,7 @@
             this.checkBoxUnknownBirthDate.Text = "Okänt födelsedatum";
             this.checkBoxUnknownBirthDate.UseVisualStyleBackColor = true;
             // 
-            // FormAddNewAuthor
+            // FormAddorEditNewAuthor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -143,7 +146,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormAddNewAuthor";
+            this.Name = "FormAddorEditNewAuthor";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lägg till författare";
