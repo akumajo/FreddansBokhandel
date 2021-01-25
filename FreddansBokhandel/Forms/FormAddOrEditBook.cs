@@ -182,17 +182,23 @@ namespace FreddansBokhandel
                     db.Add(bookAndAuthor);
                 }
             }
+
+            for (int i = 0; i < stores.Count; i++)
+            {
+                var saldo = new StockBalance { StoreID = i + 1, Balance = 0, Isbn = newBook.Isbn };
+                db.Add(saldo);
+            }
         }
 
         private void UpdateBookAndAuthorJT(List<Author> authors, Book newBook, Book selectedBook)
         {
             foreach (var book in selectedBook.BooksAuthors)
             {
-                var bookAndAuthor = new BooksAuthors { Isbn = book.Isbn, AuthorId = book.AuthorId};
+                var bookAndAuthor = new BooksAuthors { Isbn = book.Isbn, AuthorId = book.AuthorId };
                 db.Remove(bookAndAuthor);
                 db.SaveChanges();
             }
-            
+
             for (int i = 0; i < 3; i++)
             {
                 if (authors[i] != null)

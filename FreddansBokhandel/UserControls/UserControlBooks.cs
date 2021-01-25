@@ -60,7 +60,6 @@ namespace FreddansBokhandel
         private void PopulateListBox()
         {
             if (books == null) return;
-
             selectedBook = null;
             buttonLoadImage.BringToFront();
             listBox1.Items.Clear();
@@ -194,7 +193,7 @@ namespace FreddansBokhandel
             updateBook.ShowDialog();
         }
 
-        private async Task DeleteBookAsync()
+        private void DeleteBook()
         {
             DialogResult dr = MessageBox.Show("Vill du ta bort den här boken ur systemet?\nObservera att det inte går att ta bort böcker som redan har sålts.", "Ta bort bok", MessageBoxButtons.YesNo);
 
@@ -213,9 +212,6 @@ namespace FreddansBokhandel
                     db.SaveChanges();
                     db.Remove(book);
                     db.SaveChanges();
-
-                    await LoadBooksFromDatabaseAsync();
-                    PopulateListBox();
                 }
             }
         }
@@ -263,7 +259,11 @@ namespace FreddansBokhandel
 
         private async void buttonDeleteBook_Click(object sender, EventArgs e)
         {
-            await DeleteBookAsync();
+            DeleteBook();
+            ClearBookInfo();
+            DisableButtons();
+            await LoadBooksFromDatabaseAsync();
+            PopulateListBox();
         }
 
         private void buttonFilterBooks_Click(object sender, EventArgs e)
