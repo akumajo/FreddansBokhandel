@@ -332,7 +332,7 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(204, 23);
             this.dateTimePicker1.TabIndex = 4;
-            this.dateTimePicker1.Value = new System.DateTime(2020, 12, 26, 0, 0, 0, 0);
+            this.dateTimePicker1.Value = new System.DateTime(2021, 1, 25, 0, 0, 0, 0);
             // 
             // comboBoxSeller
             // 

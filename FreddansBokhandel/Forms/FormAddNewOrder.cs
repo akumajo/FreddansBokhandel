@@ -21,6 +21,7 @@ namespace FreddansBokhandel
         public FormAddNewOrder()
         {
             InitializeComponent();
+            dateTimePicker1.Value = DateTime.Now;
         }
 
         private Store SelectedStore()
