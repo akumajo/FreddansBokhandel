@@ -65,61 +65,71 @@ namespace FreddansBokhandel
             }
         }
 
-        private bool CheckIfBookCanBeAdded()
+        private bool CheckTextBoxesWithRegex()
         {
             Regex reg = new Regex("^[0-9]+$");
 
-            if (textBoxISBN.TextLength != 13 || reg.IsMatch(textBoxISBN.Text) == false)
-            {
-                MessageBox.Show("ISBN är inte ett giltigt format.");
-                return false;
-            }
+            if (textBoxISBN.TextLength != 13 || reg.IsMatch(textBoxISBN.Text) == false) { return false; }
+            if (reg.IsMatch(textBoxPrice.Text) == false) { return false; }
+            if (reg.IsMatch(textBoxPages.Text) == false) { return false; }
+
+            return true;
+        }
+
+        private bool CheckIfTextBoxesAreEmpty()
+        {
+            if (this.Controls.OfType<TextBox>().Any(t => string.IsNullOrEmpty(t.Text))) { return false; }
+            return true;
+        }
+
+        private bool CheckIfComboBoxesAreNull()
+        {
+            if (comboBoxFormat.SelectedItem == null) { return false; }
+            if (comboBoxLanguage.SelectedItem == null) { return false; }
+            if (comboBoxPublisher.SelectedItem == null) { return false; }
+            if (comboBoxAuthor.SelectedItem == null && comboBoxAuthor2.SelectedItem == null
+                && comboBoxAuthor3.SelectedItem == null) { return false; }
+            return true;
+        }
+
+        private bool CheckIfISBNExists()
+        {
             if (selectedBook == null)
             {
                 foreach (var book in books)
                 {
-                    if (book.Isbn == textBoxISBN.Text)
-                    {
-                        MessageBox.Show($"En bok med ISBN {textBoxISBN.Text} existerar redan i databasen.");
-                        return false;
-                    }
+                    if (book.Isbn == textBoxISBN.Text) { return false; }
                 }
             }
-            if (comboBoxFormat.SelectedItem == null)
+            return true;
+        }
+
+        private bool CheckIfBookCanBeAdded()
+        {
+            if (CheckIfISBNExists() == false)
             {
-                MessageBox.Show("Du måste välja ett format.");
+                MessageBox.Show($"En bok med ISBN {textBoxISBN.Text} existerar redan i databasen.");
                 return false;
             }
-            if (comboBoxLanguage.SelectedItem == null)
+
+            if (CheckIfComboBoxesAreNull() == false)
             {
-                MessageBox.Show("Du måste välja ett språk.");
+                MessageBox.Show($"Ett eller flera fält är tomma.");
                 return false;
             }
-            if (comboBoxPublisher.SelectedItem == null)
+
+            if (CheckIfTextBoxesAreEmpty() == false)
             {
-                MessageBox.Show("Du måste välja ett förlag.");
+                MessageBox.Show($"Ett eller flera fält är tomma.");
                 return false;
             }
-            if (textBoxTitle.Text.Trim() == "")
+
+            if (CheckTextBoxesWithRegex() == false)
             {
-                MessageBox.Show("Boken måste ha en titel.");
+                MessageBox.Show($"Ett eller flera fält är inte korrekt ifyllda.");
                 return false;
             }
-            if (textBoxPrice.Text == null || reg.IsMatch(textBoxPrice.Text) == false)
-            {
-                MessageBox.Show("'Pris' har felaktigt format.");
-                return false;
-            }
-            if (textBoxPages.Text == null || reg.IsMatch(textBoxPages.Text) == false)
-            {
-                MessageBox.Show("'Sidor' har felaktigt format.");
-                return false;
-            }
-            if (comboBoxAuthor.SelectedItem == null && comboBoxAuthor2.SelectedItem == null && comboBoxAuthor3.SelectedItem == null)
-            {
-                MessageBox.Show("Du måste välja minst en författare.");
-                return false;
-            }
+
             return true;
         }
 

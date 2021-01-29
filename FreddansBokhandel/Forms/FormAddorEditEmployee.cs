@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -13,9 +9,9 @@ namespace FreddansBokhandel
 {
     public partial class FormAddorEditEmployee : Form
     {
-        List<Store> stores;
-        Employee selectedEmployee;
-        int employeeCount;
+        private List<Store> stores;
+        private Employee selectedEmployee;
+        private int employeeCount;
 
         public FormAddorEditEmployee(List<Employee> employees, Employee _selectedEmployee)
         {
@@ -41,28 +37,45 @@ namespace FreddansBokhandel
 
         private bool CheckIfEmployeeCanBeAdded()
         {
-            Regex reg = new Regex("^[0-9]+$");
-
-            if (textBoxFirstName.Text.Trim() == "") { return false; }
-            if (textBoxLastName.Text.Trim() == "") { return false; }
-            if (dateTimePicker1.Value == null) { return false; }
-            if (textBoxAddress.Text.Trim() == "") { return false; }
-            if (textBoxZipCode.Text.Trim() == "") { return false; }
-            if (textBoxPostAddress.Text.Trim() == "") { return false; }
-            if (textBoxEmail.Text.Trim() == "") { return false; }
-            if (textBoxTelephone.Text.Trim() == "" || reg.IsMatch(textBoxTelephone.Text) == false) { return false; }
-            if (comboBoxRole.SelectedItem == null) { return false; }
-            if (comboBoxStores.SelectedItem == null) { return false; }
-            if (EmailIsValid(textBoxEmail.Text.Trim()) == false) { return false; }
+            if (CheckIfTextBoxesAreEmpty() == false) { return false; }
+            if (CheckIfPhoneNumberIsValid() == false) { return false; }
+            if (CheckIfComboBoxesAndDateAreEmpty() == false) { return false; }
+            if (CheckIfEmailIsValid() == false) { return false; }
 
             return true;
         }
 
-        private bool EmailIsValid(string email)
+        private bool CheckIfTextBoxesAreEmpty()
+        {
+            if (this.Controls.OfType<TextBox>().Any(t => string.IsNullOrEmpty(t.Text)))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool CheckIfPhoneNumberIsValid()
+        {
+            Regex reg = new Regex("^[0-9]+$");
+            if (reg.IsMatch(textBoxTelephone.Text) == false) { return false; }
+
+            return true;
+        }
+
+        private bool CheckIfComboBoxesAndDateAreEmpty()
+        {
+            if (comboBoxRole.SelectedItem == null) { return false; }
+            if (comboBoxStores.SelectedItem == null) { return false; }
+            if (dateTimePicker1.Value == null) { return false; }
+            return true;
+        }
+
+        private bool CheckIfEmailIsValid()
         {
             try
             {
-                MailAddress m = new MailAddress(email);
+                MailAddress m = new MailAddress(textBoxEmail.Text.Trim());
 
                 return true;
             }

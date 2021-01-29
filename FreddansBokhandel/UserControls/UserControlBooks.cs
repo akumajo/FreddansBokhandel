@@ -156,6 +156,7 @@ namespace FreddansBokhandel
             textBoxFormat.Text = null;
             textBoxPublisher.Text = null;
             textBoxReleaseDate.Text = null;
+
             dataGridViewOverview.Rows.Clear();
         }
 
@@ -195,7 +196,9 @@ namespace FreddansBokhandel
 
         private void DeleteBook()
         {
-            DialogResult dr = MessageBox.Show("Vill du ta bort den här boken ur systemet?\nObservera att det inte går att ta bort böcker som redan har sålts.", "Ta bort bok", MessageBoxButtons.YesNo);
+            DialogResult dr = MessageBox.Show("Vill du ta bort den här boken ur systemet?" +
+                "\nObservera att det inte går att ta bort böcker som redan har sålts.", 
+                "Ta bort bok", MessageBoxButtons.YesNo);
 
             if (dr == DialogResult.Yes)
             {
@@ -208,7 +211,7 @@ namespace FreddansBokhandel
                 else
                 {
                     MessageBox.Show($"Boken togs bort. {book.Isbn}");
-                    db.Remove(book.Image);
+                    if (book.Image != null) { db.Remove(book.Image); }
                     db.SaveChanges();
                     db.Remove(book);
                     db.SaveChanges();
@@ -238,6 +241,7 @@ namespace FreddansBokhandel
         {
             string filter = textBoxFilter.Text;
             listBox1.Items.Clear();
+
             if (filter != null)
             {
                 foreach (var book in books)
@@ -279,10 +283,11 @@ namespace FreddansBokhandel
         private async void buttonUpdateBook_Click(object sender, EventArgs e)
         {
             EditBook();
-            await LoadBooksFromDatabaseAsync();
-            PopulateListBox();
             ClearBookInfo();
             DisableButtons();
+            await LoadBooksFromDatabaseAsync();
+            PopulateListBox();
+            
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -293,10 +298,10 @@ namespace FreddansBokhandel
         private async void buttonAddBook_Click(object sender, EventArgs e)
         {
             AddNewBook();
-            await LoadBooksFromDatabaseAsync();
-            PopulateListBox();
             ClearBookInfo();
             DisableButtons();
+            await LoadBooksFromDatabaseAsync();
+            PopulateListBox();
         }
 
         private async void Form1_EnterBooksTab(object sender, EventArgs e)

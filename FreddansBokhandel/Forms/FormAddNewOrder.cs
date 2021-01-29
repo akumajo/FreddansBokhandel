@@ -75,12 +75,7 @@ namespace FreddansBokhandel
 
             if (SelectedStore().Id == 1)
             {
-                if (textBoxFirstName.Text.Trim() == "") { return false; }
-                if (textBoxLastName.Text.Trim() == "") { return false; }
-                if (textBoxAdress.Text.Trim() == "") { return false; }
-                if (textBoxPostalAddress.Text.Trim() == "") { return false; }
-                if (textBoxCountry.Text.Trim() == "") { return false; }
-                if (textBoxZipCode.Text.Trim() == "") { return false; }
+                if (this.Controls.OfType<TextBox>().Any(t => string.IsNullOrEmpty(t.Text))) { return false; }
             }
             return true;
         }
