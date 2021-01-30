@@ -35,8 +35,16 @@ namespace FreddansBokhandel
             Text = "Ändra författare";
             textBoxFirstName.Text = selectedAuthor.FirstName;
             textBoxLastName.Text = selectedAuthor.LastName;
-            dateTimePicker1.Value = selectedAuthor.DateOfBirth.Value;
             textBoxCountry.Text = selectedAuthor.Country;
+
+            if (selectedAuthor.DateOfBirth == null)
+            {
+                checkBoxUnknownBirthDate.CheckState = CheckState.Checked;
+            }
+            else
+            {
+                dateTimePicker1.Value = selectedAuthor.DateOfBirth.Value;
+            }
         }
 
         private DateTime? CheckAuthorBirthday()
